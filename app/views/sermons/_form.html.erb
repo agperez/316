@@ -1,0 +1,53 @@
+<%= form_for(@sermon) do |f| %>
+  <% if @sermon.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sermon.errors.count, "error") %> prohibited this sermon from being saved:</h2>
+
+      <ul>
+      <% @sermon.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :book %><br>
+    <%= f.text_field :book %>
+  </div>
+  <div class="field">
+    <%= f.label :chapter %><br>
+    <%= f.text_field :chapter %>
+  </div>
+   <div class="field">
+    <%= f.label :verse_first %><br>
+    <%= f.number_field :verse_first %>
+  </div>
+  <div class="field">
+    <%= f.label :verse_last %><br>
+    <%= f.number_field :verse_last %>
+  </div>
+  <div class="field">
+    <%= f.label :video %><br>
+    <%= f.text_field :video %>
+  </div>
+  <div class="field">
+    <%= f.label :audio %><br>
+    <%= f.text_field :audio %>
+  </div>
+  <div class="field">
+    <%= f.label :speaker %><br>
+    <%= f.text_field :speaker %>
+  </div>
+  <div class="field">
+    <%= f.label :s_date %><br>
+    <%= f.date_select :s_date %>
+  </div>
+  <div class="field">
+    <%= f.label :outline %><br>
+    <%= f.text_area :outline %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
