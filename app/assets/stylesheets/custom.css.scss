@@ -70,7 +70,7 @@ h1 {
 }
 
 h1 .book-title {
-  font-size: 3.5em;
+  font-size: 3.0em;
 
 }
 
@@ -7014,6 +7014,9 @@ td.hidden-md {
   th.hidden-md.hidden-xs,
   td.hidden-md.hidden-xs {
     display: none !important;
+  }
+  h1 .book-title {
+    font-size: 2em;
   }
 }
 

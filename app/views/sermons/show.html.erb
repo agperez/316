@@ -1,8 +1,8 @@
 <!--<p id="notice"><%= notice %></p>-->
 <div class="container">
   <h1>
-    <div class="book-title"><strong><center><%= @sermon.book %> <%= @sermon.chapter %>:<%= @sermon.verse_first %>-<%= @sermon.verse_last %></center></strong></div>
-    <em><center><%= @sermon.s_date.strftime("%b %d, %Y") %></center></em>
+    <div class="book-title"><strong><center><%= @sermon.s_date.strftime("%b %d, %Y") %></center></strong></div>
+    <em><center><%= @sermon.book %> <%= @sermon.chapter %>:<%= @sermon.verse_first %>-<%= @sermon.verse_last %></center></em>
   </h1>
   <p>
     <div class="video">
@@ -11,48 +11,22 @@
       
     </div>
   </p>
+  
+  <br>
+  <h2>
+    <center>
+      <em>Download Audio:</em><br>
+    </center>
+  </h2>
+  <h4>
+    <center><%= link_to @sermon.audio, @sermon.audio %></center>
+  </h4>
+  <br>
+  <h2>
+    <center><em>Outline:</em></center>
+  </h2>
+  <br>
   <p>
-    <strong>Book:</strong>
-    <%= @sermon.book %>
-  </p>
-
-  <p>
-    <strong>Chapter:</strong>
-    <%= @sermon.chapter %>
-  </p>
-
-  <p>
-    <strong>First Verse:</strong>
-    <%= @sermon.verse_first %>
-  </p>
-
-  <p>
-    <strong>Last Verse:</strong>
-    <%= @sermon.verse_last %>
-  </p>
-
-  <p>
-    <strong>Video:</strong>
-    <%= @sermon.video %>
-  </p>
-
-  <p>
-    <strong>Audio:</strong>
-    <%= @sermon.audio %>
-  </p>
-
-  <p>
-    <strong>Speaker:</strong>
-    <%= @sermon.speaker %>
-  </p>
-
-  <p>
-    <strong>S date:</strong>
-    <%= @sermon.s_date %>
-  </p>
-
-  <p>
-    <strong>Outline:</strong>
     <%= simple_format(@sermon.outline) %>
   </p>
 
