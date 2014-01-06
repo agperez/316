@@ -1,9 +1,9 @@
-<p id="notice"><%= notice %></p>
+<!--<p id="notice"><%= notice %></p>-->
 <div class="container">
-  <p>
-    <%= @sermon.s_date.strftime("%b %d, %Y") %><br>
-    <%= @sermon.book %> <%= @sermon.chapter %>:<%= @sermon.verse_first %>-<%= @sermon.verse_last %>
-  </p>
+  <h1>
+    <div class="book-title"><strong><center><%= @sermon.book %> <%= @sermon.chapter %>:<%= @sermon.verse_first %>-<%= @sermon.verse_last %></center></strong></div>
+    <em><center><%= @sermon.s_date.strftime("%b %d, %Y") %></center></em>
+  </h1>
   <p>
     <div class="video">
       
