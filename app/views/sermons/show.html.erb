@@ -1,49 +1,62 @@
 <p id="notice"><%= notice %></p>
+<div class="container">
+  <p>
+    <%= @sermon.s_date.strftime("%b %d, %Y") %><br>
+    <%= @sermon.book %> <%= @sermon.chapter %>:<%= @sermon.verse_first %>-<%= @sermon.verse_last %>
+  </p>
+  <p>
+    <div class="video">
+      
+      <iframe src="http://player.vimeo.com/video/<%= @sermon.video %>?title=0&amp;byline=0&amp;portrait=0" width="400" height="225" frameborder="0"></iframe>
+      
+    </div>
+  </p>
+  <p>
+    <strong>Book:</strong>
+    <%= @sermon.book %>
+  </p>
 
-<p>
-  <strong>Book:</strong>
-  <%= @sermon.book %>
-</p>
+  <p>
+    <strong>Chapter:</strong>
+    <%= @sermon.chapter %>
+  </p>
 
-<p>
-  <strong>Chapter:</strong>
-  <%= @sermon.chapter %>
-</p>
+  <p>
+    <strong>First Verse:</strong>
+    <%= @sermon.verse_first %>
+  </p>
 
-<p>
-  <strong>First Verse:</strong>
-  <%= @sermon.verse_first %>
-</p>
+  <p>
+    <strong>Last Verse:</strong>
+    <%= @sermon.verse_last %>
+  </p>
 
-<p>
-  <strong>Last Verse:</strong>
-  <%= @sermon.verse_last %>
-</p>
+  <p>
+    <strong>Video:</strong>
+    <%= @sermon.video %>
+  </p>
 
-<p>
-  <strong>Video:</strong>
-  <%= @sermon.video %>
-</p>
+  <p>
+    <strong>Audio:</strong>
+    <%= @sermon.audio %>
+  </p>
 
-<p>
-  <strong>Audio:</strong>
-  <%= @sermon.audio %>
-</p>
+  <p>
+    <strong>Speaker:</strong>
+    <%= @sermon.speaker %>
+  </p>
 
-<p>
-  <strong>Speaker:</strong>
-  <%= @sermon.speaker %>
-</p>
+  <p>
+    <strong>S date:</strong>
+    <%= @sermon.s_date %>
+  </p>
 
-<p>
-  <strong>S date:</strong>
-  <%= @sermon.s_date %>
-</p>
+  <p>
+    <strong>Outline:</strong>
+    <%= simple_format(@sermon.outline) %>
+  </p>
 
-<p>
-  <strong>Outline:</strong>
-  <%= simple_format(@sermon.outline) %>
-</p>
+  <%= link_to 'Edit', edit_sermon_path(@sermon) %> |
+  <%= link_to 'Back', sermons_path %>
 
-<%= link_to 'Edit', edit_sermon_path(@sermon) %> |
-<%= link_to 'Back', sermons_path %>
+</div>
