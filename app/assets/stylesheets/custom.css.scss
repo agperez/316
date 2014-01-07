@@ -7042,16 +7042,34 @@ th.hidden-md,
 td.hidden-md {
   display: table-cell !important;
 }
+@media (max-width: 372px) {
+  h1 .book-title {
+    font-size: 1.0em;
+  }
+}
 
-@media (max-width: 767px) {
+@media (min-width: 373px) and (max-width: 767px) {
+    h1 .book-title {
+    font-size: 2em;
+  }
+}
+
+
+@media (max-width: 372px) {
   .hidden-md.hidden-xs,
   tr.hidden-md.hidden-xs,
   th.hidden-md.hidden-xs,
   td.hidden-md.hidden-xs {
     display: none !important;
   }
-  h1 .book-title {
-    font-size: 1.2em;
+}
+
+@media (min-width: 373px) and (max-width: 767px) {
+  .hidden-md.hidden-xs,
+  tr.hidden-md.hidden-xs,
+  th.hidden-md.hidden-xs,
+  td.hidden-md.hidden-xs {
+    display: none !important;
   }
 }
 
