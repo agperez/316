@@ -1,36 +1,33 @@
-<h1>Listing sermons</h1>
+<% provide(:title, "Sermon Archive") %>
+<% provide(:bodyid, "front_page") %>
+<div class="container">
+  <div class="logo316"></div>
+  <h1 id="archive_title">Calvary 316 Media</h1>
 
-<%= link_to 'Create New Sermon', new_sermon_path %>
+  
 
-<br>
-<br>
+  <br>
+  <br>
 
-<table>
-  <thead>
-    <tr class="sermon_list">
-      <th>Date</th>
-      <th>Title</th>
-      <th>Video</th>
-      <th>Audio?</th>
-      <th>Speaker</th>
-      <th>Outline?</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @sermons.each do |sermon| %>
-      <tr>
-        <td><%= link_to sermon.s_date.strftime("%b %d, %Y"), sermon %></td>
-        <td><%= sermon.book %> <%= sermon.chapter %>:<%= sermon.verse_first %>-<%= sermon.verse_last %></td>
-        <td><%= sermon.video %></td>
-        <td><%= "Yes" unless sermon.audio == nil %></td>
-        <td><%= sermon.speaker %></td>
-        <td><%= "Yes" unless sermon.outline == nil %></td>
-        <td><%= link_to 'Show', sermon %> / <%= link_to 'Edit', edit_sermon_path(sermon) %> / <%= link_to 'Destroy', sermon, method: :delete, data: { confirm: 'You serious, bro?' } %></td>
+  <table class="sermon_table">
+    <thead>
+      <tr class="sermon_list">
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @sermons.each do |sermon| %>
+        <tr>
+          <td class="s_elements"><%= link_to sermon.s_date.strftime("%b %d, %Y"), sermon %></td>
+          <td class="s_elements"><%= sermon.book %> <%= sermon.chapter %>:<%= sermon.verse_first %>-<%= sermon.verse_last %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <center><%= link_to 'Create New Sermon', new_sermon_path %></center>
+  <br>
+  <br>
+  <br>
+
+</div>

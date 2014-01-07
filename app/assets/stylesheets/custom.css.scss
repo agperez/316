@@ -6,7 +6,40 @@
 
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
 
+#front_page {
+  background-image: url(textures-seamless-68.lt.jpg);
+}
 
+.logo316 {
+  background-image: url(316-logo.png);
+  height: 200px;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  
+}
+
+#archive_title {
+  text-align: center;
+  color: white;
+}
+
+
+.sermon_table {
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+}
+
+.s_elements {
+  padding: 0 10px 0 10px;
+  font-size: 2em;
+  text-align: center;
+}
+
+.s_elements a {
+  color: white;
+}
 article,
 aside,
 details,
@@ -7021,7 +7054,7 @@ td.hidden-md {
     display: none !important;
   }
   h1 .book-title {
-    font-size: 2em;
+    font-size: 1.5em;
   }
 }
 

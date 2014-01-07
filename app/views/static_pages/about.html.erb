@@ -1,5 +1,24 @@
 <% provide(:title, 'About') %>
 
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Recent Sermons <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <% @sermons_recent.each do |sermon| %>
+                  <li><a href="<%= sermon_path(sermon) %>"><%= sermon.s_date.strftime("%m/%d/%Y") %> | <%= @sermon.book %> <%= @sermon.chapter %>:<%= @sermon.verse_first %>-<%= @sermon.verse_last %></a></li><br>
+                <% end %> 
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+
+
+                <% @sermons.each do |sermon| %>
+                  <li><a href="<%= sermon_path(sermon) %>"><%= sermon.s_date.strftime("%m/%d/%Y") %> | <%= @sermon.book %> <%= @sermon.chapter %>:<%= @sermon.verse_first %>-<%= @sermon.verse_last %></a></li><br>
+                <% end %> 
+
     <div class="container">
       <h3>Three equal columns</h3>
       <p>Get three equal-width columns <strong>starting at desktops and scaling to large desktops</strong>. On mobile devices, tablets and below, the columns will automatically stack.</p>
