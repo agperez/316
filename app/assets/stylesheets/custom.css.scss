@@ -31,7 +31,7 @@
 .s_elements {
   padding: 0 10px 0 10px;
   font-size: 2em;
-  text-align: center;
+  text-align: center; 
 }
 
 .s_elements a {
@@ -43,8 +43,12 @@
   text-align: center;
 }
 
-#social img {
+#social .icons {
   height: 40px;
+}
+
+#social #icon316 {
+  height: 38px;
 }
 
 
