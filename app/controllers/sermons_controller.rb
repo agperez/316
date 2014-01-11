@@ -14,18 +14,18 @@ class SermonsController < ApplicationController
   # GET /sermons/1
   # GET /sermons/1.json
   def show
-    @sermons_recent = Sermon.order("created_at DESC").limit(3)
+    @sermons_recent = Sermon.order("s_date DESC").limit(3)
   end
 
   # GET /sermons/new
   def new
     @sermon = Sermon.new
-    @sermons_recent = Sermon.order("created_at DESC").limit(3)
+    @sermons_recent = Sermon.order("s_date DESC").limit(3)
   end
 
   # GET /sermons/1/edit
   def edit
-    @sermons_recent = Sermon.order("created_at DESC").limit(3)
+    @sermons_recent = Sermon.order("s_date DESC").limit(3)
   end
 
   # POST /sermons
