@@ -35,8 +35,10 @@ class SermonsController < ApplicationController
 
     respond_to do |format|
       if @sermon.save
-        format.html { redirect_to @sermon, notice: 'Sermon was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @sermon }
+        format.html { redirect_to @sermon }
+        format.json { render action: 'show' }
+        flash[:success] = "Sermon successfully created"
+
       else
         format.html { render action: 'new' }
         format.json { render json: @sermon.errors, status: :unprocessable_entity }
@@ -49,8 +51,9 @@ class SermonsController < ApplicationController
   def update
     respond_to do |format|
       if @sermon.update(sermon_params)
-        format.html { redirect_to @sermon, notice: 'Sermon was successfully updated.' }
+        format.html { redirect_to @sermon }
         format.json { head :no_content }
+        flash[:success] = "Sermon successfully updated"
       else
         format.html { render action: 'edit' }
         format.json { render json: @sermon.errors, status: :unprocessable_entity }
