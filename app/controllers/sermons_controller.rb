@@ -1,7 +1,7 @@
 class SermonsController < ApplicationController
   before_action :set_sermon,      only: [:show, :edit, :update, :destroy]
-  before_action :signed_in_user,  only: [:new, :create, :edit, :update, :destroy]
-  before_action :admin_user,      only: [:new, :create, :edit, :update, :destroy]
+  before_action :signed_in_user,  only: [:archive, :new, :create, :edit, :update, :destroy]
+  before_action :admin_user,      only: [:archive, :new, :create, :edit, :update, :destroy]
 
   # GET /sermons
   # GET /sermons.json
@@ -10,6 +10,11 @@ class SermonsController < ApplicationController
     # @sermons = Sermon.all
     @sermons = Sermon.all
   end
+
+  def archive
+    @sermons = Sermon.all.order("s_date DESC")
+  end
+
 
   # GET /sermons/1
   # GET /sermons/1.json
