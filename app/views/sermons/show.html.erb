@@ -48,7 +48,9 @@
     <%= simple_format(@sermon.outline) %>
   </p>
 
-  <%= link_to 'Edit', edit_sermon_path(@sermon) %> |
-  <%= link_to 'Back', sermons_path %>
-
+  <% if signed_in? %>
+    <% if current_user.admin?  %>
+      <%= link_to 'Edit', edit_sermon_path(@sermon) %>
+    <% end %>
+  <% end %>
 </div>

@@ -1,5 +1,7 @@
 class SermonsController < ApplicationController
-  before_action :set_sermon, only: [:show, :edit, :update, :destroy]
+  before_action :set_sermon,      only: [:show, :edit, :update, :destroy]
+  before_action :signed_in_user,  only: [:new, :create, :edit, :update, :destroy]
+  before_action :admin_user,      only: [:new, :create, :edit, :update, :destroy]
 
   # GET /sermons
   # GET /sermons.json
@@ -75,5 +77,16 @@ class SermonsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def sermon_params
       params.require(:sermon).permit(:book, :chapter, :verse_first, :verse_last, :video, :audio, :speaker, :s_date, :outline)
+    end
+
+    def signed_in_user
+      unless signed_in?
+        store_location
+        redirect_to signin_url, notice: "Please sign in to view this page." 
+      end
+    end
+
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
     end
 end
