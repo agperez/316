@@ -2,32 +2,25 @@
 <% provide(:bodyid, "front_page") %>
 <div class="container">
   <div class="logo316"></div>
-  <h1 id="archive_title">Calvary316 Media</h1>
-
-  
-
   <br>
   <br>
+  <h1 id="archive_title">C316.<em>tv</em></h1>
 
-  <table class="sermon_table">
-    <thead>
-      <tr class="sermon_list">
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @sermons.each do |sermon| %>
-        <tr>
-          <td class="s_elements"><%= link_to sermon.s_date.strftime("%b %d, %Y"), sermon %></td>
-          <td class="s_elements"><%= sermon.book %> <%= sermon.chapter %>:<%= sermon.verse_first %>-<%= sermon.verse_last %></td>
-        </tr>
+  <div class="row">
+    <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+      <h2 id="index_heading"><center><em>Latest Sermon:</em></center><h2>
+      <%= link_to(@sermons_recent.first) do %>
+      <button type="button" class="btn btn-primary btn-lg btn-block"><%= @sermons_recent.first.s_date.strftime("%B %d") %><span id="arch_list_date"><em>, <%= @sermons_recent.first.book %> <%= @sermons_recent.first.chapter %>:<%= @sermons_recent.first.verse_first %>-<%= @sermons_recent.first.verse_last %></em></span></button>
       <% end %>
-    </tbody>
-  </table>
-  <br>
-  <center><%= link_to 'Create New Sermon', new_sermon_path %></center>
-  <br>
-  <br>
-  <br>
-
+      <h2 id="index_heading"><center><em>Recent Sermons:</em></center><h2>
+      <% @sermons_recent.drop(1).each do |sermon| %>
+        <%= link_to(sermon) do %>
+          <button type="button" class="btn btn-default btn-lg btn-block"><%= sermon.s_date.strftime("%B %d") %><span id="arch_list_date"><em>, <%= sermon.book %> <%= sermon.chapter %>:<%= sermon.verse_first %>-<%= sermon.verse_last %></em></span></button>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <center><button type="button" class="btn btn-default btn-sm" id="create_sermon">
+    <%= link_to 'Create New Sermon', new_sermon_path %>
+  </button></center>
 </div>

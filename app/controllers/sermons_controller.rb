@@ -4,7 +4,7 @@ class SermonsController < ApplicationController
   # GET /sermons
   # GET /sermons.json
   def index
-    @sermons_recent = Sermon.order("created_at DESC").limit(3)
+    @sermons_recent = Sermon.order("s_date DESC").limit(5)
     # @sermons = Sermon.all
     @sermons = Sermon.all
   end

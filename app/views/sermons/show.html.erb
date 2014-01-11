@@ -19,11 +19,20 @@
       <em>Download Audio:</em><br>
     </center>
   </h2>
-  <h4>
-    <div class="audio">
-      <center><%= link_to @sermon.audio, @sermon.audio %></center>
-    </div>
-  </h4>
+
+  <% if Time.now.strftime("%Y-%m-%d") <= @sermon.s_date.strftime("%Y-%m-%d") %>
+    <h4>
+      <div class="audio">
+        <center>(Audio and Video are posted here on Sunday evening)</center>
+      </div>
+    </h4>
+  <% else %>
+    <h4>
+      <div class="audio">
+        <center><%= link_to @sermon.audio, @sermon.audio %></center>
+      </div>
+    </h4>
+  <% end %>
   <div id="social">
     <a href="http://twitter.com/calvary316"><img class="icons" src="http://www.curehr.com/graphics/twitter.png"></a>
     <a href="http://facebook.com/calvary316"><img class="icons" src="http://www.curehr.com/graphics/facebook.png"></a>

@@ -7,20 +7,33 @@
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
 
 #front_page {
+  background-image: url(textures-seamless-68.lt.jpg);
 }
 
 .logo316 {
   background-repeat: no-repeat;
-  background-position: center;
-
-  
+  background-position: center; 
 }
 
+#create_sermon {
+  display: none !important
+}
 #archive_title {
   text-align: center;
   color: #333;
+  font-family: "Century Gothic", "Arial", "sans-serif";
+  font-size: 8em;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px #999;
 }
 
+tr:nth-child(odd), tr:nth-child(odd) a {
+  color: #666;
+}
+
+tr:nth-child(even), tr:nth-child(even) a {
+  color: #333;
+}
 
 .sermon_table {
   margin-left: auto;
@@ -30,12 +43,13 @@
 
 .s_elements {
   padding: 0 10px 0 10px;
-  font-size: 2em;
-  text-align: center; 
+  font-size: 4em;
+  text-align: center;
+ 
 }
 
 .s_elements a {
-  color: #333;
+
 }
 
 #social {
@@ -4550,6 +4564,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
   padding: 15px 15px;
   font-size: 18px;
   line-height: 20px;
+  font-family: "Century Gothic";
+  font-weight: bold;
 }
 
 .navbar-brand:hover,
@@ -7064,32 +7080,70 @@ td.hidden-md {
   h4 .audio {
     font-size: 0.5em;
   }
+  .s_elements {
+    font-size: 2.2em;
+  }
+  #archive_title {
+    font-size: 4.5em;
+  }
+  #index_heading {
+    font-size: 1.8em;
+  }
 }
 
 @media (min-width: 322px) and (max-width: 383px) {
-    h1 .book-title {
+  h1 .book-title {
     font-size: 1.0em;
   }
-    h4 .audio {
+  h4 .audio {
     font-size: 0.6em;
+  }
+      .s_elements {
+    font-size: 2.3em;
+  }
+  #archive_title {
+    font-size: 4.8em;
+  }
+  #index_heading {
+    font-size: 2.0em;
   }
 }
 
 @media (min-width: 384px) and (max-width: 550px) {
-    h1 .book-title {
+  h1 .book-title {
     font-size: 1.2em;
   }
-      h4 .audio {
+  h4 .audio {
     font-size: 0.8em;
+  }
+    .s_elements {
+    font-size: 3em;
+  }
+  #archive_title {
+    font-size: 6em;
   }
 }
 
 @media (min-width: 551px) and (max-width: 767px) {
-    h1 .book-title {
+  h1 .book-title {
     font-size: 2em;
+  }
+  .s_elements {
+    font-size: 2.2em;
   }
 }
 
+@media (min-width: 767px) and (max-width: 995px) {
+  .s_elements {
+    font-size: 3em;
+  }
+}
+
+@media (max-width: 550px) {
+  #arch_list_date {
+    display: none;
+  }
+}
 
 @media (max-width: 372px) {
   .hidden-md.hidden-xs,
