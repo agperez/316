@@ -7,7 +7,13 @@
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
 
 #front_page {
-  background-image: url(textures-seamless-68.lt.jpg);
+  background-image: url(68.jpg);
+}
+
+@media (max-width: 550px) {
+  #front_page {
+    background-image: url(68sm.jpg);
+  }
 }
 
 .logo316 {
@@ -7134,7 +7140,7 @@ td.hidden-md {
   }
 }
 
-@media (min-width: 767px) and (max-width: 995px) {
+@media (min-width: 768px) and (max-width: 995px) {
   .s_elements {
     font-size: 3em;
   }
