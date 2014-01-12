@@ -7,7 +7,7 @@
     <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
       <h2 id="index_heading"><center><em>
         <% if Time.now.strftime("%Y-%m-%d") == @sermons_recent.first.s_date.strftime("%Y-%m-%d")%>
-          Today's Sermon:<%=Time.now.strftime("%Y-%m-%d")%> <%= @sermons_recent.first.s_date.strftime("%Y-%m-%d") %>
+          Today's Sermon:
         <% elsif Time.now.strftime("%Y-%m-%d") < @sermons_recent.first.s_date.strftime("%Y-%m-%d") %>
           Next Sermon:
         <% else %>
