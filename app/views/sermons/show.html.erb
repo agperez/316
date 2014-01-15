@@ -36,7 +36,7 @@
     <br>
     <h2>
       <div class="audio">
-        <center><em><a href="http://us6.campaign-archive1.com/?u=0fdc6b5d25acfb7a21b115653&id=d6194ffe5d&e=">Announcements</a></em></center>
+        <center><em><a href="http://us6.campaign-archive1.com/?u=0fdc6b5d25acfb7a21b115653&id=6837bb8338&e=">Announcements</a></em></center>
       </div>
     </h2>
   <% else %>
@@ -60,7 +60,12 @@
   <p>
     <%= simple_format(@sermon.outline) %>
   </p>
-
+  <h2>
+    <center><em>Links:</em></center>
+  </h2>
+  <p>
+    <%= simple_format(@sermon.link) %>
+  </p>
   <% if signed_in? %>
     <% if current_user.admin?  %>
       <%= link_to 'Edit', edit_sermon_path(@sermon) %>
