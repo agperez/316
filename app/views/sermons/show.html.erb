@@ -63,9 +63,9 @@
   <h2>
     <center><em>Links:</em></center>
   </h2>
-  <p>
+ <h3><center>
     <%= simple_format(@sermon.link) %>
-  </p>
+</h3></center>
   <% if signed_in? %>
     <% if current_user.admin?  %>
       <%= link_to 'Edit', edit_sermon_path(@sermon) %>
