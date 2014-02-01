@@ -6,6 +6,7 @@ SampleApp::Application.routes.draw do
   root 'sermons#index'
 
   match '/archive', to: 'sermons#archive', via: 'get'
+  match '/manage', to: 'sermons#manage', via: 'get'
   
   match '/signup', to: 'users#new', via: 'get'
   match '/signin', to: 'sessions#new', via: 'get'

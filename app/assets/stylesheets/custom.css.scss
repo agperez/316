@@ -36,6 +36,11 @@
   text-shadow: 1px 1px 2px #999;
 }
 
+#index_list_date, #arch_list_date {
+    margin-left: -5px;
+    
+}
+
 tr:nth-child(odd), tr:nth-child(odd) a {
   color: #666;
 }
@@ -74,6 +79,22 @@ tr:nth-child(even), tr:nth-child(even) a {
   height: 38px;
 }
 
+.hr_icon {
+  width: 18px;
+  height: 18px;
+  overflow: hidden;
+  zoom: 1; cursor: pointer;
+  background-image: url(http://localhost:3000/assets/nicEditorIcons.gif);
+  background-position: -72px 0px;
+  display: inline-block;
+  margin-bottom: -6px;
+}
+
+/*
+button.arch-btn  {
+  color: #7272a3;  
+}
+*/
 
 article,
 aside,
@@ -7149,8 +7170,9 @@ td.hidden-md {
 }
 
 @media (max-width: 550px) {
-  #arch_list_date {
+  #arch_list_date, #index_list_date {
     display: none;
+
   }
 }
 

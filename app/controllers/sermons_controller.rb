@@ -1,40 +1,31 @@
 class SermonsController < ApplicationController
   before_action :set_sermon,      only: [:show, :edit, :update, :destroy]
-  before_action :signed_in_user,  only: [:archive, :new, :create, :edit, :update, :destroy]
-  before_action :admin_user,      only: [:archive, :new, :create, :edit, :update, :destroy]
+  before_action :all_sermons,     only: [:archive, :manage]
+  before_action :recent_sermons,  only: [:archive, :new, :create, :edit, :update, :destroy, :index]
+  before_action :signed_in_user,  only: [:manage, :new, :create, :edit, :update, :destroy]
+  before_action :admin_user,      only: [:manage, :new, :create, :edit, :update, :destroy]
+  
 
-  # GET /sermons
-  # GET /sermons.json
   def index
-    @sermons_recent = Sermon.order("s_date DESC").limit(5)
-    # @sermons = Sermon.all
     @sermons = Sermon.all
   end
 
   def archive
-    @sermons = Sermon.all.order("s_date DESC")
   end
 
+  def manage
+  end
 
-  # GET /sermons/1
-  # GET /sermons/1.json
   def show
-    @sermons_recent = Sermon.order("s_date DESC").limit(5)
   end
 
-  # GET /sermons/new
   def new
     @sermon = Sermon.new
-    @sermons_recent = Sermon.order("s_date DESC").limit(5)
   end
 
-  # GET /sermons/1/edit
   def edit
-    @sermons_recent = Sermon.order("s_date DESC").limit(5)
   end
 
-  # POST /sermons
-  # POST /sermons.json
   def create
     @sermon = Sermon.new(sermon_params)
 
@@ -51,8 +42,6 @@ class SermonsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /sermons/1
-  # PATCH/PUT /sermons/1.json
   def update
     respond_to do |format|
       if @sermon.update(sermon_params)
@@ -66,8 +55,6 @@ class SermonsController < ApplicationController
     end
   end
 
-  # DELETE /sermons/1
-  # DELETE /sermons/1.json
   def destroy
     @sermon.destroy
     respond_to do |format|
@@ -82,9 +69,17 @@ class SermonsController < ApplicationController
       @sermon = Sermon.find(params[:id])
     end
 
+    def recent_sermons
+      @sermons_recent = Sermon.all.order("s_date DESC").limit(5)
+    end
+
+    def all_sermons
+      @sermons = Sermon.all.order("s_date DESC")
+    end
+    
     # Never trust parameters from the scary internet, only allow the white list through.
     def sermon_params
-      params.require(:sermon).permit(:book, :chapter, :verse_first, :verse_last, :video, :audio, :speaker, :s_date, :outline, :link)
+      params.require(:sermon).permit(:book, :chapter, :chapter_last, :verse_first, :verse_last, :video, :audio, :speaker, :s_date, :outline, :link, :announcements)
     end
 
     def signed_in_user

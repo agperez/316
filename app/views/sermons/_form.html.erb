@@ -11,47 +11,70 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :book %><br>
-    <%= f.text_field :book %>
+    <%= f.text_field :book, class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :chapter %><br>
-    <%= f.text_field :chapter %>
+  <br>
+  <div class="form-group">
+    <%= f.label "First Chapter" %><br>
+    <%= f.select :chapter, (1..150), class: "form-control"  %>
   </div>
-   <div class="field">
-    <%= f.label :verse_first %><br>
-    <%= f.number_field :verse_first %>
+  <br>
+   <div class="form-group">
+    <%= f.label "First Verse" %><br>
+    <%= f.number_field :verse_first, class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :verse_last %><br>
-    <%= f.number_field :verse_last %>
+  <br>
+  <div class="form-group">
+    <%= f.label "Last Chapter" %> <div style="font-size: 10px;">(Choose "None" if there's only one chapter)</div>
+    <%= f.select :chapter_last, ((1..150).map {|i| [i,i]}).insert(0, ["None",nil]), class: "form-control" %>
   </div>
-  <div class="field">
+  <br>
+  <div class="form-group">
+    <%= f.label "Last Verse" %><br>
+    <%= f.number_field :verse_last, class: "form-control" %>
+  </div>
+  <br>
+  <div class="form-group">
     <%= f.label :video %><br>
-    <%= f.text_field :video %>
+    <%= f.text_field :video, class: "form-control" %>
   </div>
-  <div class="field">
+  <br>
+  <div class="form-group">
     <%= f.label :audio %><br>
-    <%= f.text_field :audio %>
+    <%= f.text_field :audio, class: "form-control" %>
   </div>
-  <div class="field">
+  <br>
+  <div class="form-group">
     <%= f.label :speaker %><br>
-    <%= f.text_field :speaker %>
+    <%= f.text_field :speaker, class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :s_date %><br>
-    <%= f.date_select :s_date %>
+  <br>
+  <div class="form-group">
+    <%= f.label "Sermon Date" %><br>
+    <%= f.date_select :s_date, class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :outline %><br>
-    <%= f.text_area :outline %>
+  <br>
+  <div class="form-group">
+    <%= f.label :outline %><div style="font-size: 10px;">*Tip: Use <div class="hr_icon"></div> to create breaks between sections.</div>
+    <%= f.text_area :outline, rows: "20", class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :link %><br>
-    <%= f.text_area :link %>
+  <br>
+  <div class="form-group">
+    <%= f.label "Links" %><br>
+    <%= f.text_area :link, rows: "2", class: "form-control" %>
   </div>
+  <br>
+  <div class="form-group">
+    <%= f.label "Announcement Link" %><br>
+    <%= f.text_field :announcements, class: "form-control" %>
+  </div>
+  <br>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+
+<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>

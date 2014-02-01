@@ -1,74 +1,77 @@
 <!--<p id="notice"><%= notice %></p>-->
 <% provide(:title, @sermon.s_date.strftime("%b %d, %Y")) %>
-<div class="container">
-  <h1>
-    <div class="book-title"><strong><center><%= @sermon.s_date.strftime("%b %d, %Y") %></center></strong></div>
-    <em><center><%= @sermon.book %> <%= @sermon.chapter %>:<%= @sermon.verse_first %>-<%= @sermon.verse_last %></center></em>
-  </h1>
-  <p>
-    <div class="video">
-      
-      <iframe src="http://player.vimeo.com/video/<%= @sermon.video %>?title=0&amp;byline=0&amp;portrait=0" width="400" height="225" frameborder="0"></iframe>
-      
-    </div>
-  </p>
-  
-  <br>
-  <h2>
-    <center>
-      <em>Download Audio:</em><br>
-    </center>
-  </h2>
+<h1>
+  <div class="book-title"><strong><center><%= @sermon.s_date.strftime("%b %d, %Y") %></center></strong></div>
+  <em><center>
+    <%= sermon_title(@sermon) %>
+  </center></em>
+</h1>
+<p>
+  <div class="video">
+    
+    <iframe src="http://player.vimeo.com/video/<%= @sermon.video %>?title=0&amp;byline=0&amp;portrait=0" width="400" height="225" frameborder="0"></iframe>
+    
+  </div>
+</p>
 
-  <% if Time.now.strftime("%Y-%m-%d") <= @sermon.s_date.strftime("%Y-%m-%d") %>
-    <h4>
-      <div class="audio">
-        <center>(Audio and Video are posted here on Sunday evening)</center>
-      </div>
-    </h4>
-    <br>
-    <div id="social">
-      <a href="http://twitter.com/calvary316"><img class="icons" src="http://www.curehr.com/graphics/twitter.png"></a>
-      <a href="http://facebook.com/calvary316"><img class="icons" src="http://www.curehr.com/graphics/facebook.png"></a>
-      <a href="https://squareup.com/market/calvary316"><img class="icons" src="http://www.curehr.com/graphics/square.png"></a>
-      <a href="http://calvary316.net"><img id="icon316" src="http://www.curehr.com/graphics/316icon2.png"></a>
+<br>
+<h2>
+  <center>
+    <em>Download Audio:</em><br>
+  </center>
+</h2>
+
+<% if Time.now.strftime("%Y-%m-%d") <= @sermon.s_date.strftime("%Y-%m-%d") %>
+  <h4>
+    <div class="audio">
+      <center>(Audio & Video are posted here on Monday)</center>
     </div>
+  </h4>
+  <br>
+  <%= render 'sermons/social' %>
+  <% unless @sermon.announcements.nil? || @sermon.announcements == "" %>
     <br>
     <h2>
       <div class="audio">
-        <center><em><a href="http://us6.campaign-archive1.com/?u=0fdc6b5d25acfb7a21b115653&id=6837bb8338&e=">Announcements</a></em></center>
+        <center><em>
+          <%= link_to "Announcements", @sermon.announcements %>
+        </em></center>      
       </div>
-    </h2>
-  <% else %>
-    <h4>
-      <div class="audio">
-        <center><%= link_to @sermon.audio, @sermon.audio %></center>
-      </div>
-    </h4>
-  <div id="social">
-    <a href="http://twitter.com/calvary316"><img class="icons" src="http://www.curehr.com/graphics/twitter.png"></a>
-    <a href="http://facebook.com/calvary316"><img class="icons" src="http://www.curehr.com/graphics/facebook.png"></a>
-    <a href="https://squareup.com/market/calvary316"><img class="icons" src="http://www.curehr.com/graphics/square.png"></a>
-    <a href="http://calvary316.net"><img id="icon316" src="http://www.curehr.com/graphics/316icon2.png"></a>
-  </div>
+    </h2> 
   <% end %>
-  <br>
-  <h2>
-    <center><em>Outline:</em></center>
-  </h2>
-  <br>
+<% else %>
+  <h4>
+    <div class="audio">
+      <center><%= link_to @sermon.audio, @sermon.audio %></center>
+    </div>
+  </h4>
+  <%= render 'sermons/social' %>
+<% end %>
+<br>
+<h2>
+  <center><em>Outline:</em></center>
+</h2>
+<center>
+  <% if signed_in? %>
+    <% if current_user.admin?  %>
+      <%= link_to '(Edit)', edit_sermon_path(@sermon) %>
+    <% end %>
+  <% end %>
+</center>
+<br>
+<div class="col-lg-8 col-lg-offset-2">
   <p>
     <%= simple_format(@sermon.outline) %>
   </p>
-  <h2>
-    <center><em>Links:</em></center>
-  </h2>
- <h3><center>
-    <%= simple_format(@sermon.link) %>
-</h3></center>
-  <% if signed_in? %>
-    <% if current_user.admin?  %>
-      <%= link_to 'Edit', edit_sermon_path(@sermon) %>
-    <% end %>
+</div>
+<div class="col-lg-8 col-lg-offset-2">
+  <% unless @sermon.link.nil? || @sermon.link == "" %>
+    <h2>
+      <em>Links:</em>
+    </h2>
+     <h3>
+        <%= simple_format(@sermon.link) %>
+    </h3>
   <% end %>
 </div>
+

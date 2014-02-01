@@ -1,11 +1,11 @@
 <% provide(:title, "Sermons") %>
 <% provide(:bodyid, "front_page") %>
-<div class="container">
-  <div class="logo316"></div>
-  <h1 id="archive_title">C316.<em>tv</em></h1>
-  <div class="row">
-    <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
-      <h2 id="index_heading"><center><em>
+<div class="logo316"></div>
+<h1 id="archive_title">C316.<em>tv</em></h1>
+<div class="row">
+  <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+    <h2 id="index_heading">
+      <center><em>
         <% if Time.now.strftime("%Y-%m-%d") == @sermons_recent.first.s_date.strftime("%Y-%m-%d")%>
           Today's Sermon:
         <% elsif Time.now.strftime("%Y-%m-%d") < @sermons_recent.first.s_date.strftime("%Y-%m-%d") %>
@@ -13,28 +13,39 @@
         <% else %>
           Latest Sermon:
         <% end %>
-      </em></center><h2>
-      <%= link_to(@sermons_recent.first) do %>
-      <button type="button" class="btn btn-primary btn-lg btn-block"><%= @sermons_recent.first.s_date.strftime("%B %d") %><span id="arch_list_date"><em>, <%= @sermons_recent.first.book %> <%= @sermons_recent.first.chapter %>:<%= @sermons_recent.first.verse_first %>-<%= @sermons_recent.first.verse_last %></em></span></button>
-      <% end %>
-      <h2 id="index_heading"><center><em>Recent Sermons:</em></center><h2>
-      <% @sermons_recent.drop(1).each do |sermon| %>
-        <%= link_to(sermon) do %>
-          <button type="button" class="btn btn-default btn-lg btn-block"><%= sermon.s_date.strftime("%B %d") %><span id="arch_list_date"><em>, <%= sermon.book %> <%= sermon.chapter %>:<%= sermon.verse_first %>-<%= sermon.verse_last %></em></span></button>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-  <% if signed_in? %>
-    <% if current_user.admin? %>
-      <center>
-        <%= link_to new_sermon_path do %>
-          <button type="button" class="btn btn-default btn-md">Create New Sermon</button>
-        <% end %>
-        <%= link_to archive_path do %>
-          <button type="button" class="btn btn-default btn-md">Manage Sermons</button>
-        <% end %>
-      </center>
+      </em></center>
+    </h2>
+    <%= link_to(@sermons_recent.first) do %>
+      <button type="button" class="btn btn-primary btn-lg btn-block">
+        <span id="index_list_name"><%= @sermons_recent.first.s_date.strftime("%B %d") %></span>
+        <span id="index_list_date">,<em> <%= sermon_title(@sermons_recent.first) %></em>
+        </span>
+      </button>
     <% end %>
-  <% end %>
+    <h2 id="index_heading"><center><em>Recent Sermons:</em></center><h2>
+    <% @sermons_recent.drop(1).each do |sermon| %>
+      <%= link_to(sermon) do %>
+        <button type="button" class="btn btn-default btn-lg btn-block">
+          <span id="index_list_name"><%= sermon.s_date.strftime("%B %d") %></span>
+          <span id="index_list_date">
+            <em>, <%= sermon_title(sermon) %></em>
+          </span>
+        </button>
+      <% end %>
+    <% end %>
+  </div>
 </div>
+
+<% if signed_in? %>
+  <% if current_user.admin? %>
+    <center>
+      <%= link_to new_sermon_path do %>
+        <button type="button" class="btn btn-default btn-md">Create New Sermon</button>
+      <% end %>
+      <%= link_to manage_path do %>
+        <button type="button" class="btn btn-default btn-md">Manage Sermons</button>
+      <% end %>
+    </center>
+  <% end %>
+<% end %>
+
