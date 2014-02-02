@@ -11,4 +11,8 @@ module SermonsHelper
 			book + " " + first_chapter + ":" + first_verse + "-" + last_chapter.to_s + ":" + last_verse
 		end
 	end
+
+	def sermon_title?
+		!@sermon.nil?
+	end
 end
