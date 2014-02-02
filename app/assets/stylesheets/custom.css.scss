@@ -96,6 +96,24 @@ button.arch-btn  {
 }
 */
 
+/* Font-size canger */
+
+
+  .small  p {font-size: 1.3em; }
+  .medium p {font-size: 1.5em; }
+  .large  p {font-size: 1.7em; }
+
+  .resizer {
+      list-style: none;
+      float: right;
+    li {
+      float: left;
+      margin-left: 10px;
+      margin-bottom: 10;
+    }
+  }
+
+
 article,
 aside,
 details,
