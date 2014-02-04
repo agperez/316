@@ -90,28 +90,56 @@ tr:nth-child(even), tr:nth-child(even) a {
   margin-bottom: -6px;
 }
 
-/*
-button.arch-btn  {
-  color: #7272a3;  
-}
-*/
 
 /* Font-size canger */
 
 
-  .small  p {font-size: 1.3em; }
-  .medium p {font-size: 1.5em; }
-  .large  p {font-size: 1.7em; }
+.small  p {font-size: 1.3em; }
+.medium p {font-size: 1.5em; }
+.large  p {font-size: 1.7em; }
 
-  .resizer {
-      list-style: none;
-      float: right;
-    li {
-      float: left;
-      margin-left: 10px;
-      margin-bottom: 10;
-    }
+
+.resizer > div {
+  display: inline-block;
+  margin-right: 10px;
+}
+.fs-icons {
+  text-align: right;
+}
+
+.fs-icon-sm,
+.fs-icon-md,
+.fs-icon-lg  {
+  background: url(/assets/font-size.png) no-repeat;
+}
+
+
+.fs-icon-sm {
+  background-position: 0 -7px;
+  width: 13px;
+  height: 13px;
+  &:focus, :hover {
+    background-position: 0 -31px;
   }
+}
+
+.fs-icon-md {
+  background-position: -16px -3px;
+  width: 18px;
+  height: 17px;
+  &:focus {
+    background-position: -16px -27px;
+  }
+}
+
+.fs-icon-lg {
+  background-position: -38px 0;
+  width: 22px;
+  height: 20px;
+  &:focus {
+    background-position: -38px -23px;
+  } 
+}
 
 
 article,

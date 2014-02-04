@@ -65,6 +65,14 @@
   <li class="large"><a href="#" class="btn btn-default">140%</a></li>
 </ul>
 -->
+
+<div class="col-lg-8 col-lg-offset-2">
+  <div class="resizer">
+    <div class="small" id="thing1"><a href="#"><div class="fs-icon-sm"></div></a></div>
+    <div class="medium" id="thing2"><a href="#"><div class="fs-icon-md"></div></a></div>
+    <div class="large"><a href="#"><div class="fs-icon-lg"></div></a></div>
+  </div>
+</div>
 <br>
 <div class="aboutme col-lg-8 col-lg-offset-2">
   <p>
@@ -80,5 +88,14 @@
         <%= simple_format(@sermon.link) %>
     </h3>
   <% end %>
+</div>
+<div class="col-lg-8 col-lg-offset-2">
+  <center>
+    <% if signed_in? %>
+      <% if current_user.admin?  %>
+        <%= link_to '(Edit)', edit_sermon_path(@sermon) %>
+      <% end %>
+    <% end %>
+  </center>
 </div>
 
