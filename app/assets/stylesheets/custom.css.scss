@@ -118,7 +118,7 @@ tr:nth-child(even), tr:nth-child(even) a {
   background-position: 0 -7px;
   width: 13px;
   height: 13px;
-  &:focus {
+  &:hover {
     background-position: 0 -31px;
   }
 }
@@ -127,7 +127,7 @@ tr:nth-child(even), tr:nth-child(even) a {
   background-position: -16px -3px;
   width: 18px;
   height: 17px;
-  &:focus {
+  &:hover {
     background-position: -16px -27px;
   }
 }
@@ -136,7 +136,7 @@ tr:nth-child(even), tr:nth-child(even) a {
   background-position: -38px 0;
   width: 22px;
   height: 20px;
-  &:focus {
+  &:hover {
     background-position: -38px -23px;
   } 
 }
