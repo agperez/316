@@ -98,7 +98,9 @@ tr:nth-child(even), tr:nth-child(even) a {
 .medium p {font-size: 1.5em; }
 .large  p {font-size: 1.7em; }
 
+.resizer {
 
+}
 .resizer > div {
   display: inline-block;
   margin-right: 10px;
@@ -115,29 +117,29 @@ tr:nth-child(even), tr:nth-child(even) a {
 
 
 .fs-icon-sm {
-  background-position: 0 -7px;
+  background-position: 0 -31px;
   width: 13px;
   height: 13px;
   &:hover {
-    background-position: 0 -31px;
+    background-position: 0 -7px;
   }
 }
 
 .fs-icon-md {
-  background-position: -16px -3px;
+  background-position: -16px -27px;
   width: 18px;
   height: 17px;
   &:hover {
-    background-position: -16px -27px;
+    background-position: -16px -3px;
   }
 }
 
 .fs-icon-lg {
-  background-position: -38px 0;
+  background-position: -38px -23px;
   width: 22px;
   height: 20px;
   &:hover {
-    background-position: -38px -23px;
+    background-position: -38px 0;
   } 
 }
 
