@@ -24,16 +24,6 @@
               </li>
             <% end %>
             <li><%= link_to "Sermon Archive", archive_path %></li>
-              <% if sermon_title? %>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Adjust Font Size <b class="caret"></b></a>
-                <ul class="resizer dropdown-menu">
-                  <li class="small"><a href="#">100%</a></li>
-                  <li class="medium"><a href="#">120%</a></li>
-                  <li class="large"><a href="#">140%</a></li>
-                </ul>
-              </li>
-              <% end %>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if signed_in? %>

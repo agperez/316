@@ -118,7 +118,7 @@ tr:nth-child(even), tr:nth-child(even) a {
   background-position: 0 -7px;
   width: 13px;
   height: 13px;
-  &:focus, :hover {
+  &:focus {
     background-position: 0 -31px;
   }
 }
