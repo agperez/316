@@ -1,15 +1,6 @@
 <%= form_for(@sermon) do |f| %>
-  <% if @sermon.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@sermon.errors.count, "error") %> prohibited this sermon from being saved:</h2>
 
-      <ul>
-      <% @sermon.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render 'shared/error_messages', object: f.object %>
 
   <div class="form-group">
     <%= f.label :book %><br>
@@ -53,7 +44,7 @@
   <br>
   <div class="form-group">
     <%= f.label "Sermon Date" %><br>
-    <%= f.date_select :s_date, class: "form-control" %>
+    <%= f.text_field :s_date, class: "form-control", id: "datepicker" %>
   </div>
   <br>
   <div class="form-group">

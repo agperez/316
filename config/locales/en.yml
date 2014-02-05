@@ -20,4 +20,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      sermon:
+        s_date: "Sermon Date"
+        verse_first: "First Verse"
+        verse_last: "Last Verse"
