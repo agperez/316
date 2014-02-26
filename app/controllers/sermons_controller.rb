@@ -1,7 +1,7 @@
 class SermonsController < ApplicationController
   before_action :set_sermon,      only: [:show, :edit, :update, :destroy]
   before_action :all_sermons,     only: [:archive, :manage]
-  before_action :recent_sermons,  only: [:archive, :new, :create, :edit, :update, :destroy, :index]
+  before_action :recent_sermons,  only: [:new, :create, :edit, :update, :destroy, :index]
   before_action :signed_in_user,  only: [:manage, :new, :create, :edit, :update, :destroy]
   before_action :admin_user,      only: [:manage, :new, :create, :edit, :update, :destroy]
   
@@ -11,7 +11,8 @@ class SermonsController < ApplicationController
   end
 
   def archive
-    @sermons = Sermon.paginate(page: params[:page])
+    @ordered_sermons = Sermon.order("s_date DESC").paginate(page: params[:page])
+
   end
 
   def manage
