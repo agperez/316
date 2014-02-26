@@ -11,6 +11,7 @@ class SermonsController < ApplicationController
   end
 
   def archive
+    @sermons = Sermon.paginate(page: params[:page])
   end
 
   def manage
