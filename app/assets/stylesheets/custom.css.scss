@@ -7,7 +7,15 @@
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
 
 
-#front_page {
+@-webkit-viewport   { width: device-width; }
+@-moz-viewport      { width: device-width; }
+@-ms-viewport       { width: device-width; }
+@-o-viewport        { width: device-width; }
+@viewport           { width: device-width; }
+
+
+
+#sermon_listing_page {
   background-image: url(68.jpg);
   min-height: 500px;
 }
@@ -5129,7 +5137,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .pagination ul > .disabled > a:hover,
 .pagination ul > .disabled > a:focus {
   color: #999999;
-  background-color: transparent;
+  /*background-color: transparent;*/
   cursor: default; }
 
 .pagination ul > li:first-child > a,
