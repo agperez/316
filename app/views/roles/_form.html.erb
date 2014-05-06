@@ -11,28 +11,38 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
   </div>
   <div class="color_title">Color</div>
-  <div class="field">
+  <div class="form-group">
     <%= f.radio_button :color, "#59BA53", :id=>"green_role"%>
     <label for="green_role" class="green_box"></label>
+ 
     <%= f.radio_button :color, "#F8B0C8", :id=>"pink_role" %>
     <label for="pink_role" class="pink_box"></label>
+  
     <%= f.radio_button :color, "#9FE1E7", :id=>"light_blue_role" %>
     <label for="light_blue_role" class="light_blue_box"></label>
+  </div>
+  <div class="form-group">
     <%= f.radio_button :color, "#FCF0AD", :id=>"yellow_role" %>
     <label for="yellow_role" class="yellow_box"></label>
+  
     <%= f.radio_button :color, "#9FC6E7", :id=>"blue_gray_role" %>
     <label for="blue_gray_role" class="blue_gray_box"></label>
+  
     <%= f.radio_button :color, "#4986E7", :id=>"blue_role" %>
     <label for="blue_role" class="blue_box"></label>
+  </div>
+  <div class="form-group">
     <%= f.radio_button :color, "#9A9CFF", :id=>"purple_role" %>
     <label for="purple_role" class="purple_box"></label>
+  
     <%= f.radio_button :color, "#FFAD46", :id=>"orange_role" %>
     <label for="orange_role" class="orange_box"></label>
+  
     <%= f.radio_button :color, "#D06B64", :id=>"red_role" %>
     <label for="red_role" class="red_box"></label>
   </div>
