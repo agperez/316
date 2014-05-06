@@ -1,4 +1,19 @@
 class User < ActiveRecord::Base
+  
+  belongs_to :team, autosave: true
+  belongs_to :role, autosave: true
+  has_many :events, autosave: true
+
+  accepts_nested_attributes_for :events
+
+  after_save do
+    self.events.each do |e|
+      e.role_id = role_id
+      e.team_id = team_id 
+      e.save
+    end
+  end
+
 	before_save { self.email = email.downcase }
 	before_create :create_remember_token
 
@@ -8,7 +23,7 @@ class User < ActiveRecord::Base
   					  uniqueness: { case_sensitive: false }
 
   	has_secure_password
-  	validates :password, length: { minimum: 6 }
+  	validates :password, length: { minimum: 6 }, :if => :password
 
   	def User.new_remember_token
   		SecureRandom.urlsafe_base64

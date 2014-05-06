@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+
+<%= form_tag('/events', remote: true) do %>
+	<table>
+		<tr>
+			<td>
+				<%= number_field_tag 'event[][user_id]'%>
+			</td>
+			<td> 
+				<%= date_field_tag 'event[][event_date]'%>
+			</td>
+		</tr>
+		<tr class="actions">
+			<td>
+				<%= submit_tag 'Save' %>
+			</td>
+			<td>
+				<%= button_tag 'Add new user form', id: 'add_user_form' %>
+			</td>			
+		</tr>
+		<tr class="hidden new_user_row">
+			<td>
+				<%= number_field_tag 'event[][user_id]'%>
+			</td>
+			<td> 
+				<%= date_field_tag 'event[][event_date]'%>
+			</td>
+		</tr>
+	</table>
+<% end %>
+
+
+
+
+
+<%= link_to 'Back', events_path %>
+
+
+<script>
+  $('#add_user_form').bind('click', function(e) {
+    var row = $('tr.new_user_row').clone().removeClass('hidden new_user_row');
+    $('tr.actions').before(row); 
+  });
+</script>

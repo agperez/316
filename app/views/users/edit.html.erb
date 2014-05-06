@@ -18,6 +18,12 @@
       <%= f.label :password_confirmation, "Confirm Password" %>
       <%= f.password_field :password_confirmation %>
 
+      <%= f.label :team_id %>
+      <%= f.text_field :team_id %>
+
+      <%= f.label :role_id %>
+      <%= f.text_field :role_id %>
+
       <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
     <% end %>
 

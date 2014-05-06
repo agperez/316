@@ -1,0 +1,31 @@
+<h1><b>Team Name: </b><Br><%= @team.name %></h1>
+
+<h2><b>Team's Users: </b></h2>
+<% @team.users.each do |user| %>
+	<h3>
+		-<%= user.name %>:
+	</h3>
+	<% user.events.each do |event| %>
+	<p>
+		Event Date: <%= event.event_date %>
+	</p>
+	<p>
+		Role ID: <%= event.role_id %>
+	</p>
+	<% end %>
+<% end %>
+
+<%= form_for @team do |f| %>
+	<% @users.each do |user| %>
+		<%= f.fields_for :events, Event.new do |e| %>
+			<%= e.label :event_date, "Event Date" %><br>
+			<%= e.date_field :event_date %><br>
+			<%= e.label :role_id, "Select Role:" %><br>
+			<%= e.collection_select(:role_id, Role.all, :id, :name) %>
+
+			<%= e.hidden_field :user_id, value: user.id %>
+		<% end %>
+	<% end %>
+	<%= f.submit "Submit" %>
+<% end %>
+

@@ -11,6 +11,12 @@ class UsersController < ApplicationController
 
   def show
   	@user = User.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @user }
+      format.js { render :json => @user.to_json }
+    end
   end
 
   def create
@@ -33,23 +39,30 @@ class UsersController < ApplicationController
   end
 
   def update
+    if user_params[:password].blank?
+      user_params.delete(:password)
+      user_params.delete(:password_confirmation)
+    end
   	if @user.update_attributes(user_params)
-		flash[:success] = "Profile updated"
-		redirect_to @user
-  	else
-  		render 'edit'
-  	end
+		  flash[:success] = @user.name + " has been updated"
+		  redirect_to dashboard_path
+  	elsif @user.update_attributes(user_params)
+      flash[:success] = "Profile updated"
+      redirect_to @user
+    else
+      render dashboard_path
+    end
   end
 
   def destroy
   	User.find(params[:id]).destroy
   	flash[:success] = "User deleted."
-  	redirect_to users_url
+  	redirect_to dashboard_path
   end
 
   private
   	def user_params
-  		params.require(:user).permit(:name, :email, :password, :password_confirmation)	
+  		params.require(:user).permit(:name, :email, :password, :password_confirmation, :team_id, :role_id, events_attributes: [:user_id, :role_id])	
   	end
 
   	# Checks if a user is signed in when they attempt to view a particular page.

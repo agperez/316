@@ -15,3 +15,9 @@
 
 //= require bootstrap
 //= require_tree .
+
+$.ajaxSetup({
+  beforeSend: function(xhr) {
+    xhr.setRequestHeader("Accept", "text/javascript");
+  }
+});

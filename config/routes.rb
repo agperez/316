@@ -1,7 +1,10 @@
 SampleApp::Application.routes.draw do
   resources :sermons
-
+  resources :events
+  resources :roles
+  resources :teams
   resources :users
+  
   resources :sessions, only: [:new, :create, :destroy]
   root 'sermons#index'
 
@@ -16,6 +19,9 @@ SampleApp::Application.routes.draw do
   match '/contact', to: 'static_pages#contact', via: 'get'
   match '/about', to: 'static_pages#about', via: 'get'
   match '/datepicker', to: 'static_pages#datepicker', via: 'get'
+
+  match '/calendar', to: 'roles#calendar2', via: 'get'
+  match '/dashboard', to: 'static_pages#dashboard', via: 'get'
 
 
   

@@ -1,0 +1,376 @@
+<% provide(:title, 'Calendar') %>
+
+<!-- Reload the page (and therefore correctly places the events)
+  if the user arrives here via the back button  -->
+<input id="reloadValue" type="hidden" name="reloadValue" value="" />
+
+<!-- Dialog text for a clicked event -->
+<div id="event_click_dialog" title="Edit Existing Event">Would you like to edit or delete this event?</div>
+
+
+<div id="create_event_dialog">
+  <form>
+    <fieldset>
+      <select name="Users" id="createUser">
+        <% @users.each do |user| %>
+        <option value="<%= user.id %>"><%= user.name %></option>
+        <% end %>
+      </select>    
+    <label for="createStart">Date:</label>
+    <input type="text" name="createStart" id="createStart" /><br>
+    </fieldset>
+  </form>
+</div>
+
+<div id="select_add_dialog">
+  <form>
+    <fieldset>
+      <select name="Users" id="addUser">
+        <% @users.each do |user| %>
+        <option value="<%= user.id %>"><%= user.name %></option>
+        <% end %>
+      </select>    
+    </fieldset>
+  </form>
+</div>
+
+<div class="col-lg-2 col-md-2 col-sm-3">
+  <div id="toggleButtons">
+    <button id="create_event_button">Create Event</button>
+    <div id='external-events'>
+      <h4>Teams</h4>
+
+    </div>
+  </div>
+</div>
+
+<!-- Wrap for calendar -->
+<div class="col-lg-10 col-md-10 col-sm-9">
+  <!-- The Calendar -->
+  <div id='calendar'></div>
+
+  <!-- clearfix -->
+  <div style='clear:both'></div>
+</div>
+
+
+
+
+<script>
+
+  $(document).ready(function() {
+    
+    // Today's date stored to variables
+    var date = new Date();
+    var d = date.getDate();
+    var m = date.getMonth();
+    var y = date.getFullYear();   
+
+//////////////////////////////////////////////////
+
+ 
+
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+    var select_add_event = function() {
+      var user = $('#addUser').val();
+      var start = global_start_date;
+      var new_date = $.fullCalendar.formatDate(start, 'yyyy-MM-dd');
+
+      $.read('/users/'+user, function (response) {
+        var username = response.name;
+        var userteam = response.team_id;
+
+        $.read('/teams/'+userteam, function (response) {
+          var teamname = response.name;
+          var teamcolor = response.color;
+          $.create('/events',
+                  { event: { event_date: new_date, user_id: user } },
+                  function (response) {
+                    var created_event = {
+                      id: response.id,
+                      title: username,
+                      color: teamcolor,
+                      allDay: true,
+                      start: start
+                    }
+                    
+                    eval(teamname).push(created_event);
+                    $('#calendar').fullCalendar( 'refetchEvents' );
+
+          });  
+        });
+      });
+      $( this ).dialog( "close" );
+    }
+
+    $("#select_add_dialog").dialog({
+      autoOpen: false,
+      title: "New event",
+      modal: true,
+      height: 400,
+      width: 500,
+      buttons: {
+        "Add Event": select_add_event
+      }
+    });
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+    var create_event = function() {
+      var user = $('#createUser').val();
+      var start = new Date($('#createStart').val());
+      var new_date = $.fullCalendar.formatDate(start, 'yyyy-MM-dd');
+
+      $.read('/users/'+user, function (response) {
+        var username = response.name;
+        var userteam = response.team_id;
+
+        $.read('/teams/'+userteam, function (response) {
+          var teamname = response.name;
+          var teamcolor = response.color;
+          $.create('/events',
+                  { event: { event_date: new_date, user_id: user } },
+                  function (response) {
+                    var created_event = {
+                      id: response.id,
+                      title: username,
+                      color: teamcolor,
+                      allDay: true,
+                      start: start
+                    }
+                    
+                    eval(teamname).push(created_event);
+                    $('#calendar').fullCalendar( 'refetchEvents' );
+
+          });  
+        });
+      });
+      $( this ).dialog( "close" );
+    }
+
+
+    $("#create_event_button").click(function() {
+      $("#create_event_dialog").dialog("open");
+      $('#createStart').datepicker();
+    }); 
+
+
+    $("#create_event_dialog").dialog({
+      autoOpen: false,
+      modal: true,
+      title: "Create a New Event",
+      buttons: {
+        "Create Event": create_event
+      },
+      height: 500,
+      width: 300
+    });
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+    // Dialog Box for when an event is clicked. 
+    $( "#event_click_dialog" ).dialog({ 
+      autoOpen: false,
+      width: 400,
+      buttons: [
+        
+        // Edit Button 
+        {
+          text: "Edit",
+          click: function() {
+            // Creates a link to the edit_sermon_path
+            var event_url = '/events/' + globalevent_id + '/edit';
+            window.location.href = event_url;
+          }
+        },
+
+        // Destroy Button
+        {
+          text: "Delete",
+          click: function() {
+
+            // 1. Destroys the event in the RAILS DATABASE using $.destroy (jquery.rest.js)
+            $.destroy({
+              url: '/events/' + globalevent_id
+            });
+            
+            // 2. Removes the event object from the CALENDAR.
+            $('#calendar').fullCalendar('removeEvents', globalevent_id);
+            $( this ).dialog( "close" );
+          }
+        }
+      ]
+    });
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+    // Initiate the Calendar
+    $('#calendar').fullCalendar({
+      editable: true,
+      selectable: true,
+      droppable: true,
+
+      drop: function(date, allDay) { // this function is called when something is dropped
+      
+        var originalRoleName = $(this).data('roleName');
+        var new_date = date;
+
+        drop_event(new_date, originalRoleName);
+
+      },
+
+      //Action for when a day of the week is clicked:
+      select: function(start, end, allDay) {
+        global_start_date = start;
+        $('#select_add_dialog').dialog('open');
+      },
+
+
+      // Action for when an event is drag-and-dropped on a new date:
+      eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) {
+        var event_id = parseInt(event.id);
+        var event_start = $.fullCalendar.formatDate(event.start, 'yyyy-MM-dd');
+        
+        // Update the event date in the RAILS DATABASE via $.update (jquery.rest.js)
+        $.update(
+            '/events/' + event_id,
+            { event: {event_date: event_start, id: event_id} }
+          );
+
+        // Update the event date in the CALENDAR event object
+        $('#calendar').fullCalendar('updateEvent', event);
+      },
+
+      // Action for when an event is clicked:
+      eventClick: function(event, jsEvent, view) {
+        var event_id = parseInt(event.id);
+        globalevent_id = event_id;
+
+        // Open the dialog box with id="event_click_dialog"
+        $( "#event_click_dialog" ).dialog( "open" );
+      }
+    }); 
+
+//////////////////////////////////////////////////
+  //****  Render Role Events on Calendar ****//
+  //****  and Create Role Toggle Buttons ****//
+//////////////////////////////////////////////////
+
+    var add_set = function(event_set) {
+      $('#calendar').fullCalendar( 'addEventSource', event_set );
+    }
+
+    <% @roles.each do |role| %>
+      var <%= role.name %> = [       
+        <% role.events.each do |event| %>
+          {
+            // When creating a new event, store SERMON ATTRIBUTES in the attributes of the CALENDAR EVENT OBJECT...
+            // ... this way we can use these values later to identify the sermon when calling $.update and $.destroy
+            id: '<%= event.id %>',
+            title: '<%= event.user.name %>',
+            start: new Date(<%= event.event_date.strftime("%Y") %>, <%= event.event_date.strftime("%m") %>-1, <%= event.event_date.strftime("%d") %>),
+            color: '<%= event.role.color %>'      
+          },
+        <% end %>
+      ]
+      add_set(<%= role.name %>);
+
+      <% @role_button_id = role.name.downcase.tr(" ", "_") %>
+
+      $('<button/>', {
+        text: "<%= role.name %>", 
+        id: 'btn_<%= @role_button_id %>_off',
+        class: '<% case role.color %><% when "#59BA53" %>cupid-green<% when "#9FE1E7" %>cupid-light-blue<% when "#F8B0C8" %>cupid-pink<% when "#FCF0AD" %>cupid-yellow<% when "#9FC6E7" %>cupid-blue-gray<% when "#4986E7" %>cupid-blue<% when "#9A9CFF" %>cupid-purple<% when "#FFAD46" %>cupid-orange<% when "#D06B64" %>cupid-red<% else %>cupid-gray<% end %>',
+        click: function () { 
+          $('#btn_<%= @role_button_id %>_off').toggle(0, function() {
+            $('#btn_<%= @role_button_id %>_on').toggle(0);
+            $("#calendar").fullCalendar( 'removeEventSource', <%= role.name %> );
+          });
+        }
+      }).appendTo('#toggleButtons');
+
+      $('<button/>', {
+        text: "<%= role.name %>", 
+        id: 'btn_<%= @role_button_id %>_on',
+        class: '<% case role.color %><% when "#59BA53" %>cupid-green<% when "#9FE1E7" %>cupid-light-blue<% when "#F8B0C8" %>cupid-pink<% when "#FCF0AD" %>cupid-yellow<% when "#9FC6E7" %>cupid-blue-gray<% when "#4986E7" %>cupid-blue<% when "#9A9CFF" %>cupid-purple<% when "#FFAD46" %>cupid-orange<% when "#D06B64" %>cupid-red<% else %>cupid-gray<% end %>',
+        click: function () { 
+          $('#btn_<%= @role_button_id %>_on').toggle(0, function() {
+            $('#btn_<%= @role_button_id %>_off').toggle(0);
+            $("#calendar").fullCalendar( 'addEventSource', <%= role.name %> );
+          });
+        }
+      }).appendTo('#toggleButtons').hide(); 
+
+    <% end %>
+
+
+//////////////////////////////////////////////////
+      //****  Drag and Drop Events: ****//
+//////////////////////////////////////////////////
+    
+    <% @teams.each do |team| %>  
+      var <%= team.name %>_users = [       
+        <% team.users.each do |user| %>
+          {
+            userID: <%= user.id %>,
+            title: '<%= user.name %>',
+            start: new Date(2014,1,2),
+            color: '<%= user.team.color %>',
+            roleID: <%= user.role.id%>     
+          },
+        <% end %>
+      ]
+      
+      $('#external-events').append("<div class='external-event' id='<%=team.name%><%= team.id %>'><%= team.name %></div>");
+
+      $('#<%=team.name%><%=team.id%>').each(function() {
+      
+        // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+        // it doesn't need to have a start or end
+        var roleName = "<%= team.events.first.role.name %>";
+        
+        // store the Event Object in the DOM element so we can get to it later
+        $(this).data('roleName', roleName);
+        
+        // make the event draggable using jQuery UI
+        $(this).draggable({
+          zIndex: 999,
+          revert: true,      // will cause the event to go back to its
+          revertDuration: 0  //  original position after the drag
+        });
+        
+      });
+
+    <% end %>
+
+//////////////////////////////////////////////////
+
+    var drop_event = function(date, copiedName) {
+      var new_role_events = eval(copiedName+"_users");
+      var new_date = $.fullCalendar.formatDate( date, 'yyyy-MM-dd' );
+
+      new_role_events.forEach(function(event) {
+        var user = event.class;
+        var username = event.title;
+        var usercolor = event.color;
+        $.create('/events',
+          { event: { event_date: new_date, user_id: user } },
+          function (response) {
+            var created_event = {
+              id: response.id,
+              title: username,
+              color: usercolor,
+              allDay: true,
+              start: new_date
+            }
+          
+          eval(copiedName).push(created_event);
+          $("#calendar").fullCalendar( 'refetchEvents' );
+        });  
+      });
+    }
+
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+
+ });
+
+</script>

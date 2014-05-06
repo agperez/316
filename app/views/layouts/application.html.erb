@@ -12,6 +12,21 @@
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
 
+    <% if yield(:title) == 'Calendar' %>
+      <%= render 'layouts/reload' %>
+    <% end %>
+    <style>
+
+      #calendar {
+        margin: 0 auto;
+      }
+
+      div#users-contain { width: 350px; margin: 20px 0; }
+      div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+      div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+
+    </style>
+
     <script>
       // IE Mobile Viewport fix //
       if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
@@ -45,10 +60,8 @@
       <%= render 'layouts/footer' %>
     </div>
     <script>
-      // Basic FitVids Test
+      // FitVids
       $(".video").fitVids();
-      // Custom selector and No-Double-Wrapping Prevention Test
-      // $(".video").fitVids({ customSelector: "iframe[src^='http://socialcam.com']"});
     </script>
   </body>
 </html>

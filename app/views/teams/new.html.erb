@@ -1,0 +1,18 @@
+<h1>New team</h1>
+
+<%= form_for @team do |f| %>
+	
+	<p>
+		<%= f.label :name %><br>
+		<%= f.text_field :name %>
+	</p>
+	<%= f.fields_for :events do |builder| %>
+		<%= render "event_fields", :f => builder %>
+	<% end %>
+	</p>
+	<p>
+		<%= f.submit "Submit" %>
+	</p>
+<% end %>
+
+<%= link_to 'Back', teams_path %>
