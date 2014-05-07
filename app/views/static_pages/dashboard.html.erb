@@ -38,8 +38,12 @@
 		<div class="dash_list col-lg-4 col-md-4 col-sm-6 col-xs-12">
 			<h2><%= link_to role.name, edit_role_path(role) %></h2>
 			<div class="color_line" style="background-color: <%=role.color%>;"></div>
-			<% role.users.each do |user| %>
-				<div class="dash_names"><%= user.name %></div>
+			<% if role.users.length == 0 %>
+				<span style="color: #d9534f; font-style: italic;">(No Users Assigned)</span>
+			<% else %>
+				<% role.users.each do |user| %>
+					<div class="dash_names"><%= user.name %></div>
+				<% end %>
 			<% end %>
 		</div>
 	<% end %> 
@@ -49,14 +53,14 @@
 
 <% @users.each do |user| %>
 	<%= form_for user do |f| %>
-		<div class="col-lg-4 col-md-4 col-sm-6 col-sm-12">
+		<div class="dashboard_user col-lg-4 col-md-4 col-sm-6 col-sm-12">
 			<h3><%= user.name %></h3>
 			<div class="form-group">
-				<%= f.label "Role:" %>
+				<%= f.label "Role:" %><% unless user.role_id != nil %> <span class="not_assigned">(Not Assigned)</span><% end %>
 				<%= f.collection_select :role_id, Role.all, :id, :name, {}, {class: "form-control"} %>
 			</div>
 			<div class="form-group">
-				<%= f.label "Team:" %>
+				<%= f.label "Team:" %><% unless user.team_id != nil %> <span class="not_assigned">(Not Assigned)</span><% end %>
 				<%= f.collection_select :team_id, Team.all, :id, :name, {}, {class: "form-control"} %>
 			</div>
 			<%= f.hidden_field :user_id, value: user.id %>

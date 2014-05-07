@@ -23,8 +23,8 @@ class UsersController < ApplicationController
   	@user = User.new(user_params)    
     if @user.save
       sign_in @user
-      flash[:success] = "Welcome to Calvary316, "+@user.name
-      redirect_to @user
+      flash[:success] = "Account for "+@user.name+" created."
+      redirect_to dashboard_path
     else
       render 'new'
     end

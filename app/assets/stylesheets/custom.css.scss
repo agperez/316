@@ -14,10 +14,13 @@
 @viewport           { width: device-width; }
 
 /* Calendar */
-#toggleButtons {
+#controlButtons {
   margin-top: 42px;
 }
 
+.toggleButtons {
+  padding-top: 200px;
+}
 button.cupid-green,
 button.cupid-orange,
 button.cupid-pink,
@@ -34,6 +37,7 @@ button.cupid-light-blue {
   padding: 7px 0 8px 0;
   text-align: center;
   width: 150px;
+  margin-top: 10px;
   &:hover {cursor: pointer;}
   &:focus {outline: none;}
 }
@@ -176,7 +180,21 @@ button.cupid-light-blue {
   width: 150px;
 }
 
+#select_add_dialog {
+}
+
 /* Dashboard  */
+
+.dashboard_user {
+  margin-bottom: 30px;
+}
+
+.not_assigned {
+  font-style: italic;
+  font-size: 12px;
+  color: #d9534f;
+}
+
 .dash_heading {
   font-style: italic;
   color: #999;

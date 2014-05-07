@@ -1999,7 +1999,7 @@ function MonthView(element, calendar) {
 		t.visStart = visStart;
 		t.visEnd = visEnd;
 
-		renderBasic(rowCnt, colCnt, true);
+		renderBasic(colCnt, rowCnt, true);
 	}
 	
 	
@@ -6108,3 +6108,4 @@ function HorizontalPositionCache(getElement) {
 ;;
 
 })(jQuery);
+

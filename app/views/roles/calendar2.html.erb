@@ -7,20 +7,22 @@
 <div id="select_add_dialog">
   <form>
     <fieldset>
-      <select name="Users" id="addUser">
+      For: 
+      <select name="Users" id="addUser" class="form-control">
         <% @users.each do |user| %>
         <option value="<%= user.id %>"><%= user.name %></option>
         <% end %>
-      </select>    
+      </select>  
     </fieldset>
   </form>
 </div>
 
 <div class="col-lg-2 col-md-2 col-sm-3">
-  <div id="toggleButtons">
+  <div id="controlButtons">
     <div id='external-events'>
-      <h4>TEAMS</h4>
+      <h4><em>Drag & Drop</em></h4>
     </div>
+    <div class="toggleButtons"></div>
   </div>
 </div>
 
@@ -92,7 +94,7 @@
                       start: new_date,
                       role: userRole
                     }
-                    
+
                     eval("role"+userRole).push(created_event);
                     $('#calendar').fullCalendar( 'refetchEvents' );
           });  
@@ -118,10 +120,12 @@
             
             // 2. Removes the event object from the CALENDAR.
 
-
-            
             $( this ).dialog( "close" );
-            eval("role"+globalevent_role).splice(globalevent_index, 1);
+            for (var i=0; i<eval("role"+globalevent_role).length; i++) {
+              if (eval("role"+globalevent_role)[i].id == globalevent_id) {
+                eval("role"+globalevent_role).splice(i, 1);
+              }   
+            }
             $('#calendar').fullCalendar( 'refetchEvents' );
 
           }
@@ -133,8 +137,7 @@
       autoOpen: false,
       title: "New event",
       modal: true,
-      height: 400,
-      width: 500,
+      width: 400,
       buttons: {
         "Add Event": select_add_event
       }
@@ -162,7 +165,7 @@
       //Action for when a day of the week is clicked:
       select: function(start, end, allDay) {
         global_start_date = start;
-        $('#select_add_dialog').dialog('open');
+        $('#select_add_dialog').dialog("open");
       },      
 
       // Action for when an event is drag-and-dropped on a new date:
@@ -184,7 +187,6 @@
         var event_id = parseInt(event.id);
         globalevent_id = event_id;
         globalevent_role = event.role;
-        globalevent_index = event.index;
 
         // Open the dialog box with id="event_click_dialog"
         $( "#event_click_dialog" ).dialog( "open" );
@@ -201,7 +203,6 @@
     }
 
     <% @roles.each do |role| %>
-      <% @i = 0 %>
       var role<%= role.id %> = [       
         <% role.events.each do |event| %>
           {
@@ -212,9 +213,7 @@
             start: new Date(<%= event.event_date.strftime("%Y") %>, <%= event.event_date.strftime("%m") %>-1, <%= event.event_date.strftime("%d") %>),
             color: '<%= event.role.color %>',  
             role: <%= role.id %>, 
-            index: <%= @i %>
-          },
-          <% @i += 1 %>  
+          }, 
         <% end %>   
       ]
       add_set(role<%= role.id %>);
@@ -231,7 +230,7 @@
             $("#calendar").fullCalendar( 'removeEventSource', role<%= role.id %> );
           });
         }
-      }).appendTo('#toggleButtons');
+      }).prependTo('.toggleButtons');
 
       $('<button/>', {
         text: "<%= role.name %>", 
@@ -243,7 +242,7 @@
             $("#calendar").fullCalendar( 'addEventSource', role<%= role.id %> );
           });
         }
-      }).appendTo('#toggleButtons').hide();       
+      }).prependTo('.toggleButtons').hide();       
     <% end %>
 
     var drop_team = function(date, id, title, role, color) {
@@ -260,7 +259,6 @@
             role: role
           }
 
-          object.index = eval("role"+role).length;
           eval("role"+role).push(object);
           $('#calendar').fullCalendar( 'refetchEvents' );
 
