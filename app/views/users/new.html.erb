@@ -33,14 +33,14 @@
       <%= f.password_field :password_confirmation, class: "form-control" %>
     </div>
     <div class="form-group">
-      <%= f.label :team_id %>
-      <%= f.text_field :team_id, class: "form-control" %>
+      <%= f.label :role_id %>
+      <%= f.collection_select :role_id, Role.all, :id, :name, {:include_blank => "Choose a Role"}, {class: "form-control"} %>
     </div>
     <div class="form-group">
-      <%= f.label :role_id %>
-      <%= f.text_field :role_id, class: "form-control" %>
-    </div>    
-      <%= f.submit "Create new account", class: "btn btn-large btn-primary" %>
+      <%= f.label :team_id %>
+      <%= f.collection_select :team_id, Team.all, :id, :name, {:include_blank => "Choose a Team"}, {class: "form-control"} %>
+    </div>
+    <%= f.submit "Create new account", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>
 </div>

@@ -22,7 +22,6 @@ class UsersController < ApplicationController
   def create
   	@user = User.new(user_params)    
     if @user.save
-      sign_in @user
       flash[:success] = "Account for "+@user.name+" created."
       redirect_to dashboard_path
     else
@@ -44,11 +43,13 @@ class UsersController < ApplicationController
       user_params.delete(:password_confirmation)
     end
   	if @user.update_attributes(user_params)
-		  flash[:success] = @user.name + " has been updated"
-		  redirect_to dashboard_path
-  	elsif @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
-      redirect_to @user
+      if current_user.admin?
+        flash[:success] = @user.name + " has been updated"
+		    redirect_to dashboard_path
+  	  else
+        flash[:success] = "Profile updated"
+        redirect_to @user
+      end
     else
       render dashboard_path
     end

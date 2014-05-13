@@ -1,5 +1,7 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy, :assign_events]
+  before_action :set_team,        only: [:show, :edit, :update, :destroy, :assign_events]
+  before_action :signed_in_user,  only: [:index, :show, :new, :edit, :create, :update, :destroy]
+  before_action :admin_user,      only: [:index, :show, :new, :edit, :create, :update, :destroy]
 
   # GET /teams
   # GET /teams.json
@@ -52,7 +54,10 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       if @team.save
-        format.html { redirect_to dashboard_path, notice: 'Team was successfully created.' }
+        format.html { 
+          redirect_to dashboard_path
+          flash[:success] = @team.name+' was successfully created.' 
+        }
         format.json { render action: 'show', status: :created, location: @team }
       else
         format.html { render action: 'new' }
@@ -66,7 +71,9 @@ class TeamsController < ApplicationController
   def update
     respond_to do |format|
       if @team.update(team_params)
-        format.html { redirect_to @team, notice: 'Team was successfully updated.' }
+        format.html {
+          redirect_to dashboard_path
+          flash[:success] = @team.name+' was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -80,7 +87,7 @@ class TeamsController < ApplicationController
   def destroy
     @team.destroy
     respond_to do |format|
-      format.html { redirect_to teams_url }
+      format.html { redirect_to dashboard_path }
       format.json { head :no_content }
     end
   end

@@ -25,18 +25,18 @@
   
     <%= f.radio_button :color, "#9FE1E7", :id=>"light_blue_role" %>
     <label for="light_blue_role" class="light_blue_box"></label>
-  </div>
-  <div class="form-group">
+
     <%= f.radio_button :color, "#FCF0AD", :id=>"yellow_role" %>
     <label for="yellow_role" class="yellow_box"></label>
   
     <%= f.radio_button :color, "#9FC6E7", :id=>"blue_gray_role" %>
     <label for="blue_gray_role" class="blue_gray_box"></label>
+  </div>
+  <div class="form-group">
   
     <%= f.radio_button :color, "#4986E7", :id=>"blue_role" %>
     <label for="blue_role" class="blue_box"></label>
-  </div>
-  <div class="form-group">
+
     <%= f.radio_button :color, "#9A9CFF", :id=>"purple_role" %>
     <label for="purple_role" class="purple_box"></label>
   
@@ -45,6 +45,10 @@
   
     <%= f.radio_button :color, "#D06B64", :id=>"red_role" %>
     <label for="red_role" class="red_box"></label>
+  </div>
+  <div class="form-group">
+    <%= f.label :order %>
+    <%= f.number_field :order, class: "form-control" %>
   </div>
 
   <div class="actions">

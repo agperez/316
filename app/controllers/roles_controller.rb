@@ -1,5 +1,7 @@
 class RolesController < ApplicationController
-  before_action :set_role, only: [:show, :edit, :update, :destroy]
+  before_action :set_role,        only: [:show, :edit, :update, :destroy]
+  before_action :signed_in_user,  only: [:index, :show, :new, :calendar2, :edit, :create, :update, :destroy]
+  before_action :admin_user,      only: [:index, :show, :new, :calendar2, :edit, :create, :update, :destroy]
 
   # GET /roles
   # GET /roles.json
@@ -47,7 +49,9 @@ class RolesController < ApplicationController
 
     respond_to do |format|
       if @role.save
-        format.html { redirect_to dashboard_path, notice: 'Role was successfully created.' }
+        format.html {
+          redirect_to dashboard_path
+          flash[:success] = @role.name+' was successfully created.' }
         format.json { render json: @role.to_json }
       else
         format.html { render action: 'new' }
@@ -61,7 +65,9 @@ class RolesController < ApplicationController
   def update
     respond_to do |format|
       if @role.update(role_params)
-        format.html { redirect_to dashboard_path, notice: 'Role was successfully updated.' }
+        format.html {
+          redirect_to dashboard_path
+          flash[:success] = @role.name+' was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -75,7 +81,7 @@ class RolesController < ApplicationController
   def destroy
     @role.destroy
     respond_to do |format|
-      format.html { redirect_to roles_url }
+      format.html { redirect_to dashboard_path }
       format.json { head :no_content }
     end
   end
@@ -88,6 +94,6 @@ class RolesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def role_params
-      params.require(:role).permit(:name, :color)
+      params.require(:role).permit(:name, :color, :order)
     end
 end

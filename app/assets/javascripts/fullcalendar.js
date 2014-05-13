@@ -5824,6 +5824,7 @@ function segmentElementEach(segments, callback) { // TODO: use in AgendaView?
 function compareDaySegments(a, b) {
 	return (b.rightCol - b.leftCol) - (a.rightCol - a.leftCol) || // put wider events first
 		b.event.allDay - a.event.allDay || // if tie, put all-day events first (booleans cast to 0/1)
+		b.event.order - a.event.order || // if tie, put events with higher order first
 		a.event.start - b.event.start || // if a tie, sort by event start date
 		(a.event.title || '').localeCompare(b.event.title) // if a tie, sort by event title
 }

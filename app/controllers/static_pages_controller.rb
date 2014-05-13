@@ -1,4 +1,6 @@
 class StaticPagesController < ApplicationController
+  before_action :signed_in_user, only: :dashboard
+  before_action :admin_user,    only: :dashboard
   
   def home
     if signed_in?
@@ -25,4 +27,11 @@ class StaticPagesController < ApplicationController
   def datepicker
   end
 
+
+  private
+
+    
+
+    # Checks if the user's admin-boolean = true.
+    
 end

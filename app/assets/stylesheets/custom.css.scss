@@ -200,6 +200,20 @@ button.cupid-light-blue {
   color: #999;
 }
 
+.dash_role_name {
+  font-size: 30px;
+}
+
+.dash_delete {
+  font-size: 10px;
+  float: right;
+  margin-top: 20px;
+  a { 
+    color: #000;
+    font-weight: bold;
+  }
+}
+
 .dash_button {
   float: right;
 }

@@ -48,12 +48,15 @@
     <% @teams.each do |team| %>  
       var <%= team.name.downcase.tr(" ", "_") %>_users = [       
         <% team.users.each do |user| %>
+          <% unless user.role.blank? || user.role.nil? %>
           {
             userID: <%= user.id %>,
             title: '<%= user.name %>',
             color: '<%= user.role.color %>',
-            roleID: <%= user.role.id %>     
+            roleID: <%= user.role.id %>,
+            order: <%= user.role.order %>     
           },
+          <% end %>
         <% end %>
       ]
 
@@ -83,6 +86,7 @@
 
         $.read('/roles/'+userRole, function (response) {
           var roleColor = response.color;
+          var roleOrder = response.order;
           $.create('/events',
                   { event: { event_date: new_date, user_id: user, role_id: userRole } },
                   function (response) {
@@ -92,7 +96,8 @@
                       color: roleColor,
                       allDay: true,
                       start: new_date,
-                      role: userRole
+                      role: userRole,
+                      order: roleOrder
                     }
 
                     eval("role"+userRole).push(created_event);
@@ -156,7 +161,7 @@
 
         for (var i = 0; i < teamArray.length; i++) {
           var user = teamArray[i];
-          drop_team(date, user["userID"], user["title"], user["roleID"], user["color"]);
+          drop_team(date, user["userID"], user["title"], user["roleID"], user["color"], user["order"]);
         }
 
 
@@ -212,7 +217,8 @@
             title: '<%= event.user.name %>',
             start: new Date(<%= event.event_date.strftime("%Y") %>, <%= event.event_date.strftime("%m") %>-1, <%= event.event_date.strftime("%d") %>),
             color: '<%= event.role.color %>',  
-            role: <%= role.id %>, 
+            role: <%= role.id %>,
+            order: <%= role.order %>
           }, 
         <% end %>   
       ]
@@ -245,7 +251,7 @@
       }).prependTo('.toggleButtons').hide();       
     <% end %>
 
-    var drop_team = function(date, id, title, role, color) {
+    var drop_team = function(date, id, title, role, color, order) {
         
       $.create('/events',
         { event: { event_date: date, user_id: id, role_id: role } },
@@ -256,7 +262,8 @@
             color: color,
             allDay: true,
             start: $.fullCalendar.formatDate( date, 'yyyy-MM-dd'),
-            role: role
+            role: role,
+            order: order
           }
 
           eval("role"+role).push(object);
