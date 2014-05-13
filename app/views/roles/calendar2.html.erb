@@ -60,6 +60,7 @@
         <% end %>
       ]
 
+      eval(<%= team.name.downcase.tr(" ", "_") %>_users).sort(function(a,b) {return (a.order > b.order) ? 1 : ((b.order > a.order) ? -1 : 0);} );
       $('#external-events').append("<div class='external-event' id='<%=team.name.downcase.tr(" ", "_")%>_users'><%= team.name %></div>");
 
       $('#<%=team.name.downcase.tr(" ", "_")%>_users').each(function() {

@@ -35,7 +35,7 @@ class RolesController < ApplicationController
   def calendar2
     @teams = Team.all
     @users = User.all
-    @roles = Role.all
+    @roles = Role.order(:order)
   end
 
   # GET /roles/1/edit
