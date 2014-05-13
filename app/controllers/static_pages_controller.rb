@@ -10,7 +10,7 @@ class StaticPagesController < ApplicationController
   end
 
   def dashboard
-    @users = User.all
+    @users = User.order(:name)
     @teams = Team.all
     @roles = Role.all
   end
