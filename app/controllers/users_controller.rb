@@ -32,6 +32,10 @@ class UsersController < ApplicationController
   # Utilizes the will_paginate gem (and the bootstrap-will_paginate gem) to create multiple pages.
   def index
   	@users = User.paginate(page: params[:page])
+    respond_to do |format|
+      format.html
+      format.csv { render text: @users.to_csv }
+    end
   end
 
   def edit
