@@ -6,6 +6,12 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :events
 
+  def self.import(file)
+    CSV.foreach(file.path, headers: true) do |row|
+      User.create! row.to_hash
+    end
+  end
+
   def self.to_csv
     CSV.generate do |csv|
       csv << column_names

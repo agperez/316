@@ -3,7 +3,10 @@ SampleApp::Application.routes.draw do
   resources :events
   resources :roles
   resources :teams
-  resources :users
+  resources :users do
+    collection { post :import }
+  end
+
   
   resources :sessions, only: [:new, :create, :destroy]
   root 'sermons#index'
