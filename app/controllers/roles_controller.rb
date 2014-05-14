@@ -1,5 +1,6 @@
 class RolesController < ApplicationController
   before_action :set_role,        only: [:show, :edit, :update, :destroy]
+  before_action :set_calendar,    only: [:calendar2, :calendarAll]
   before_action :signed_in_user,  only: [:index, :show, :new, :calendar2, :edit, :create, :update, :destroy]
   before_action :admin_user,      only: [:index, :show, :new, :calendar2, :edit, :create, :update, :destroy]
 
@@ -26,17 +27,12 @@ class RolesController < ApplicationController
     @role = Role.new
   end
 
-  def calendar
-    @teams = Team.all
-    @users = User.all
-    @roles = Role.all
+  def calendar2
   end
 
-  def calendar2
-    @teams = Team.all
-    @users = User.all
-    @roles = Role.order(:order)
+  def calendarAll
   end
+
 
   # GET /roles/1/edit
   def edit
@@ -95,5 +91,11 @@ class RolesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def role_params
       params.require(:role).permit(:name, :color, :order)
+    end
+
+    def set_calendar
+      @teams = Team.all
+      @users = User.all
+      @roles = Role.order(:order) 
     end
 end
