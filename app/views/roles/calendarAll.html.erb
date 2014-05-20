@@ -1,0 +1,88 @@
+<% provide(:title, 'Calendar') %>
+
+<input id="reloadValue" type="hidden" name="reloadValue" value="" />
+
+<div class="col-lg-2 col-md-2 col-sm-3">
+  <div id="controlButtons">
+    <div class="toggleButtons_noEdit"></div>
+  </div>
+</div>
+
+<!-- Wrap for calendar -->
+<div class="col-lg-10 col-md-10 col-sm-9">
+  <!-- The Calendar -->
+  <div id='calendar'></div>
+
+  <!-- clearfix -->
+  <div style='clear:both'></div>
+</div>
+
+<script>
+
+  $(document).ready(function() {
+    var date = new Date();
+    var d = date.getDate();
+    var m = date.getMonth();
+    var y = date.getFullYear(); 
+
+    var global_start_date = "";
+
+    $('#calendar').fullCalendar({
+      editable: false,
+      selectable: false,
+      droppable: false,
+
+      hiddenDays: [ 1, 2, 3, 4, 5, 6 ]
+    });
+
+    var add_set = function(event_set) {
+      $('#calendar').fullCalendar( 'addEventSource', event_set );
+    }
+
+    <% @roles.each do |role| %>
+      var role<%= role.id %> = [       
+        <% role.events.each do |event| %>
+          {
+            // When creating a new event, store SERMON ATTRIBUTES in the attributes of the CALENDAR EVENT OBJECT...
+            // ... this way we can use these values later to identify the sermon when calling $.update and $.destroy
+            id: '<%= event.id %>',
+            title: '<%= event.user.name %>',
+            start: new Date(<%= event.event_date.strftime("%Y") %>, <%= event.event_date.strftime("%m") %>-1, <%= event.event_date.strftime("%d") %>),
+            color: '<%= event.role.color %>',  
+            role: <%= role.id %>,
+            order: <%= role.order %>
+          }, 
+        <% end %>   
+      ]
+      add_set(role<%= role.id %>);
+
+      <% @role_button_id = role.name.downcase.tr(" ", "_") %>
+
+      $('<button/>', {
+        text: "<%= role.name %>", 
+        id: 'btn_<%= @role_button_id %>_off',
+        class: '<% case role.color %><% when "#59BA53" %>cupid-green<% when "#9FE1E7" %>cupid-light-blue<% when "#F8B0C8" %>cupid-pink<% when "#FCF0AD" %>cupid-yellow<% when "#9FC6E7" %>cupid-blue-gray<% when "#4986E7" %>cupid-blue<% when "#9A9CFF" %>cupid-purple<% when "#FFAD46" %>cupid-orange<% when "#D06B64" %>cupid-red<% else %>cupid-gray<% end %>',
+        click: function () { 
+          $('#btn_<%= @role_button_id %>_off').toggle(0, function() {
+            $('#btn_<%= @role_button_id %>_on').toggle(0);
+            $("#calendar").fullCalendar( 'removeEventSource', role<%= role.id %> );
+          });
+        }
+      }).prependTo('.toggleButtons_noEdit');
+
+      $('<button/>', {
+        text: "<%= role.name %>", 
+        id: 'btn_<%= @role_button_id %>_on',
+        class: '<% case role.color %><% when "#59BA53" %>cupid-green<% when "#9FE1E7" %>cupid-light-blue<% when "#F8B0C8" %>cupid-pink<% when "#FCF0AD" %>cupid-yellow<% when "#9FC6E7" %>cupid-blue-gray<% when "#4986E7" %>cupid-blue<% when "#9A9CFF" %>cupid-purple<% when "#FFAD46" %>cupid-orange<% when "#D06B64" %>cupid-red<% else %>cupid-gray<% end %>',
+        click: function () { 
+          $('#btn_<%= @role_button_id %>_on').toggle(0, function() {
+            $('#btn_<%= @role_button_id %>_off').toggle(0);
+            $("#calendar").fullCalendar( 'addEventSource', role<%= role.id %> );
+          });
+        }
+      }).prependTo('.toggleButtons_noEdit').hide();       
+    <% end %>
+
+  });
+
+</script>

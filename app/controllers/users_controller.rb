@@ -10,6 +10,11 @@ class UsersController < ApplicationController
   	@user = User.new
   end
 
+  def import
+    User.import(params[:file])
+    redirect_to users_path, notice: "Users Updated."
+  end
+
   def show
   	@user = User.find(params[:id])
 
@@ -33,6 +38,11 @@ class UsersController < ApplicationController
   # Utilizes the will_paginate gem (and the bootstrap-will_paginate gem) to create multiple pages.
   def index
   	@users = User.paginate(page: params[:page])
+    @export = User.all
+    respond_to do |format|
+      format.html
+      format.csv { render text: @export.to_csv }
+    end
   end
 
   def edit

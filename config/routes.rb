@@ -3,7 +3,10 @@ SampleApp::Application.routes.draw do
   resources :events
   resources :roles
   resources :teams
-  resources :users
+  resources :users do
+    collection { post :import }
+  end
+
   
   resources :sessions, only: [:new, :create, :destroy]
   root 'sermons#index'
@@ -11,8 +14,11 @@ SampleApp::Application.routes.draw do
   match '/archive', to: 'sermons#archive', via: 'get'
   match '/manage', to: 'sermons#manage', via: 'get'
   
+<<<<<<< HEAD
   match '/returnemail', to: 'users#return_email', via: 'get'
   match '/email', to: 'static_pages#email', via: 'get'
+=======
+>>>>>>> 20f18c776bd142a5e3bb70723bdf233f3a29e503
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
 
@@ -22,6 +28,7 @@ SampleApp::Application.routes.draw do
   match '/datepicker', to: 'static_pages#datepicker', via: 'get'
 
   match '/calendar', to: 'roles#calendar2', via: 'get'
+  match '/calendarView', to: 'roles#calendarAll', via: 'get'
   match '/dashboard', to: 'static_pages#dashboard', via: 'get'
 
 

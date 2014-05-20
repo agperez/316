@@ -23,6 +23,8 @@ class StaticPagesController < ApplicationController
     @users = User.order(:name)
     @teams = Team.all
     @roles = Role.all
+    @filters = Array.new
+    first_letters
   end
 
   def help
@@ -40,8 +42,15 @@ class StaticPagesController < ApplicationController
 
   private
 
-    
-
-    # Checks if the user's admin-boolean = true.
+    def first_letters
+      previous_letter = ""
+      @users.each do |user|
+        letter = user.name[0].downcase
+        unless letter == previous_letter
+          @filters.push letter
+        end
+        previous_letter = letter
+      end
+    end
     
 end
