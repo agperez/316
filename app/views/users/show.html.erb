@@ -1,11 +1,95 @@
 <% provide(:title, @user.name) %>
 <div class="row">
-  <aside class="span4">
-    <section>
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
-    </section>
-  </aside>
+	<div class="col-lg-12">
+		<div class="user_edit_button">
+			<%= link_to edit_user_path(@user) do %>
+				<button type="button" class="btn btn-danger">
+					Edit My Settings
+				</button>
+			<% end %>
+		</div>
+	</div>
 </div>
+<div class="row">
+	<div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2">
+		<div class="user_name">
+			Hello, <%= @user.name %>
+		</div>
+		<% unless @future_events.length == 0 %>
+			<div class="next_event">
+				You are next scheduled to serve at church on <span class="next_event_date" style="font-weight: bold; color: #2E9614;">Sunday, <%= @future_events.first.event_date.strftime("%B %d") %></span> on the <%= @user.role.name %> team.
+			</div>
+		<% end %>
+	</div>
+</div>
+<hr class="divider">
+<div class="row">
+	<div class="upcoming_content col-lg-12">
+		<div class="user_heading">
+			My Upcoming Schedule:
+		</div>
+		<div class="upcoming_events">
+			<% if @future_events.length == 0 %>
+				There are currently have no upcoming dates where you're scheduled to serve. 
+			<% else %>
+				<% @future_events.each do |event| %>
+					<div class="user_upcoming_dates"><%=event.event_date.strftime("%B %d, %Y")%> - <%= @user.role.name %></div>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+</div>
+<hr class="divider">
+<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+	<div class="user_heading">
+		<%= @role.name %> Team's Calendar:
+	</div>
+  <!-- The Calendar -->
+  <div id='calendar'></div>
+
+  <!-- clearfix -->
+  <div style='clear:both'></div>
+</div>
+
+<script>
+
+  $(document).ready(function() {
+    var date = new Date();
+    var d = date.getDate();
+    var m = date.getMonth();
+    var y = date.getFullYear(); 
+
+    var global_start_date = "";
+
+    $('#calendar').fullCalendar({
+      editable: false,
+      selectable: false,
+      droppable: false,
+      height: 200,
+
+
+      hiddenDays: [ 1, 2, 3, 4, 5, 6 ]
+    });
+
+    var add_set = function(event_set) {
+      $('#calendar').fullCalendar( 'addEventSource', event_set );
+    }
+
+	var role<%= @role.id %> = [       
+	<% @role.events.each do |event| %>
+	  {
+	    // When creating a new event, store SERMON ATTRIBUTES in the attributes of the CALENDAR EVENT OBJECT...
+	    // ... this way we can use these values later to identify the sermon when calling $.update and $.destroy
+	    id: '<%= event.id %>',
+	    title: '<%= event.user.name %>',
+	    start: new Date(<%= event.event_date.strftime("%Y") %>, <%= event.event_date.strftime("%m") %>-1, <%= event.event_date.strftime("%d") %>),
+	    color: '<%= event.role.color %>',  
+	    role: <%= @role.id %>,
+	  }, 
+	<% end %>   
+	]
+	add_set(role<%= @role.id %>);
+
+  });
+
+</script>

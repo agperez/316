@@ -7,7 +7,11 @@ class SessionsController < ApplicationController
 		if user && user.authenticate(params[:session][:password])
 			#sign in the user, redirect to the user's show page
 			sign_in user
-			redirect_back_or user
+			if user.admin?
+				redirect_to dashboard_url
+			else
+				redirect_back_or user
+			end
 		else
 			#error message, re-render the signin form
 			flash.now[:error] = 'Invalid email/password combination' 

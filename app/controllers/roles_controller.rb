@@ -94,8 +94,8 @@ class RolesController < ApplicationController
     end
 
     def set_calendar
-      @teams = Team.all
-      @users = User.all
+      @teams = Team.order(:name)
+      @users = User.order(:name)
       @roles = Role.order(:order) 
     end
 end

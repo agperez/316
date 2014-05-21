@@ -13,6 +13,73 @@
 @-o-viewport        { width: device-width; }
 @viewport           { width: device-width; }
 
+/* User Show Page */
+
+
+.user_edit_button {
+  text-align: left;
+  margin-bottom: 60px;
+}
+
+.user_name,
+.next_event,
+.next_event_role,
+.user_heading,
+.upcoming_events {
+  text-align: center;
+}
+
+.user_name {
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+
+.next_event {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.user_heading {
+  font-size: 20px;
+  color: #777;
+  font-style: italic;
+  margin-top: 40px;
+  margin-bottom: 15px;
+}
+
+.upcoming_events {
+  font-size: 25px;
+  color: #333
+}
+
+.upcoming_content {
+  margin-bottom: 40px;
+}
+
+@media (min-width: 501px) and (max-width: 650px) {
+  .user_name {
+    font-size: 35px;
+  }
+  .next_event {
+    font-size: 20px;
+  }
+  .upcoming_events {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .user_name {
+    font-size: 28px;
+  }
+  .next_event {
+    font-size: 20px;
+  }
+  .upcoming_events {
+    font-size: 20px;
+  }  
+}
+
 /* Calendar */
 #controlButtons {
   margin-top: 42px;
@@ -186,6 +253,12 @@ button.cupid-light-blue {
 
 /* Dashboard  */
 
+.dash_title {
+  font-size: 15px;
+  color: #333;
+  font-weight: bold;
+}
+
 .dashboard_user {
   margin-bottom: 30px;
 }
@@ -199,6 +272,9 @@ button.cupid-light-blue {
 .dash_heading {
   font-style: italic;
   color: #999;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .dash_role_name {

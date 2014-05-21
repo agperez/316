@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :signed_in_user, 	only: [:index, :edit, :update, :destroy]
-  before_action :correct_user, 		only: [:edit, :update]
+  before_action :correct_user, 		only: [:show, :edit, :update]
 
   # prevent anyone except admins from using the delete method		
   before_action :admin_user, 		only: :destroy
@@ -16,6 +16,9 @@ class UsersController < ApplicationController
 
   def show
   	@user = User.find(params[:id])
+    @future_events = @user.events.where("event_date > ?", Time.now).order("event_date ASC")
+    @users = User.all 
+    @role = @user.role 
 
     respond_to do |format|
       format.html # show.html.erb
@@ -89,7 +92,7 @@ class UsersController < ApplicationController
   	# Checks if the user is the same as the user for who's action they are trying to access. 
   	def correct_user
   		@user = User.find(params[:id])
-      redirect_to(root_url) unless current_user?(@user) || current_user.admin?
+      redirect_to(current_user) unless current_user?(@user) || current_user.admin?
   	end
 
   	# Checks if the user's admin-boolean = true.
