@@ -87,7 +87,11 @@
 	    id: '<%= event.id %>',
 	    title: '<%= event.user.name %>',
 	    start: new Date(<%= event.event_date.strftime("%Y") %>, <%= event.event_date.strftime("%m") %>-1, <%= event.event_date.strftime("%d") %>),
-	    color: '<%= event.role.color %>',  
+	    <% if event.user == @user %>
+	    color: '#2E9614',
+	    <% else %>
+	    color: '<% event.role.color %>',
+	    <% end %>
 	    role: <%= @role.id %>,
 	  }, 
 	<% end %>   

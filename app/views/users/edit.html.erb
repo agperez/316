@@ -26,11 +26,11 @@
         <%= f.text_field :email, class: "form-control" %>
       </div>
       <div class="form-group">
-        <%= f.label :password %>
+        <%= f.label :password, "New Password" %>
         <%= f.password_field :password, class: "form-control" %>
       </div>
       <div class="form-group">
-        <%= f.label :password_confirmation, "Confirmation" %>
+        <%= f.label :password_confirmation, "Confirm Your New Password" %>
         <%= f.password_field :password_confirmation, class: "form-control" %>
       </div>
       <% if current_user.admin? %>
