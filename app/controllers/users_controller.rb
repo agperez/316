@@ -74,6 +74,12 @@ class UsersController < ApplicationController
   	redirect_to dashboard_path
   end
 
+  def return_email
+    ReturnMailer.rtrnemail(current_user).deliver
+    redirect_to dashboard_path
+  end
+
+
   private
   	def user_params
   		params.require(:user).permit(:name, :email, :password, :password_confirmation, :team_id, :role_id, events_attributes: [:user_id, :role_id])	
@@ -99,5 +105,4 @@ class UsersController < ApplicationController
   	def admin_user
   		redirect_to(root_url) unless current_user.admin?
   	end
-
 end
