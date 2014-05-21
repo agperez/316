@@ -1,6 +1,5 @@
 <% provide(:title, @user.name) %>
 <div class="row">
-<<<<<<< HEAD
 	<div class="col-lg-12">
 		<div class="user_edit_button">
 			<%= link_to edit_user_path(@user) do %>
@@ -24,7 +23,6 @@
 	</div>
 </div>
 <hr class="divider">
-  <%= link_to "Email Creighton", returnemail_path, class: "btn btn-large btn-primary" %>
 <div class="row">
 	<div class="upcoming_content col-lg-12">
 		<div class="user_heading">
@@ -39,6 +37,10 @@
 				<% end %>
 			<% end %>
 		</div>
+		<!-- <div class="user_changes">
+			<div class="user_changes_text">Need to reschedule?</div>
+			<div class="user_changes_button"><%= link_to "Let us know", returnemail_path %></div>
+		</div> -->
 	</div>
 </div>
 <hr class="divider">
@@ -67,7 +69,7 @@
       editable: false,
       selectable: false,
       droppable: false,
-      height: 200,
+      height: 300,
 
 
       hiddenDays: [ 1, 2, 3, 4, 5, 6 ]
