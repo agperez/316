@@ -23,7 +23,9 @@ class User < ActiveRecord::Base
 
   after_save do
     self.events.each do |e|
-      e.role_id = role_id
+      unless e.exception == true
+        e.role_id = role_id
+      end
       e.team_id = team_id 
       e.save
     end

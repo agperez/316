@@ -12,7 +12,19 @@
         <% @users.each do |user| %>
         <option value="<%= user.id %>"><%= user.name %></option>
         <% end %>
-      </select>  
+      </select>
+      <br>
+      Assign the User to their default role?
+      <select name="Exception" id="addException" class="form-control">
+        <option value="0">Yes</option>
+        <option value="1">No</option>
+      </select>   
+      <br>
+      <select name="Roles" id="addRole" class="form-control" style="display: none;">
+        <% @roles.each do |role| %>
+        <option value="<%= role.id %>"><%= role.name %></option>
+        <% end %>
+      </select>
     </fieldset>
   </form>
 </div>
@@ -36,6 +48,11 @@
 </div>
 
 <script>
+
+  $("#addException").change(function() {
+    $("#addRole").toggle();
+  });
+
 
   $(document).ready(function() {
     var date = new Date();
@@ -77,18 +94,28 @@
 
     var select_add_event = function() {
       var user = $('#addUser').val(); 
+      var except = $('#addException').val();
+      var exceptVal = "";
+      var userRole = "";
       var start = global_start_date;
       var new_date = $.fullCalendar.formatDate(start, 'yyyy-MM-dd');
 
       $.read('/users/'+user, function (response) {
         var userName = response.name;
-        var userRole = response.role_id;
+        if(except == 1) {
+          userRole = $('#addRole').val();
+          exceptVal = true;
+        }
+        else {
+          userRole = response.role_id;
+          exceptVal = false;
+        }
 
         $.read('/roles/'+userRole, function (response) {
           var roleColor = response.color;
           var roleOrder = response.order;
           $.create('/events',
-                  { event: { event_date: new_date, user_id: user, role_id: userRole } },
+                  { event: { event_date: new_date, user_id: user, role_id: userRole, exception: exceptVal } },
                   function (response) {
                     var created_event = {
                       id: response.id,
@@ -145,6 +172,10 @@
       width: 400,
       buttons: {
         "Add Event": select_add_event
+      },
+      close: function() {
+        $("#addRole").hide();
+        $('#addException').prop('selectedIndex',0);
       }
     });
 

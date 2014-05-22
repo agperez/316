@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140508204415) do
+ActiveRecord::Schema.define(version: 20140522001832) do
 
   create_table "events", force: true do |t|
     t.integer  "user_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20140508204415) do
     t.datetime "updated_at"
     t.integer  "team_id"
     t.integer  "role_id"
+    t.boolean  "exception"
   end
 
   add_index "events", ["role_id"], name: "index_events_on_role_id"
