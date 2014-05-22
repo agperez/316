@@ -33,7 +33,7 @@
 				There are currently have no upcoming dates where you're scheduled to serve. 
 			<% else %>
 				<% @future_events.each do |event| %>
-					<div class="user_upcoming_dates"><%=event.event_date.strftime("%B %d, %Y")%> - <%= @user.role.name %></div>
+					<div class="user_upcoming_dates"><%=event.event_date.strftime("%B %d, %Y")%> - <span style="color:<%=event.role.color%>;"><%= event.role.name %></div>
 				<% end %>
 			<% end %>
 		</div>
@@ -46,7 +46,7 @@
 <hr class="divider">
 <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 	<div class="user_heading">
-		<%= @role.name %> Team's Calendar:
+		Your <% if @roles.length > 1 %>Teams'<% else%>Team's<% end %> Calendar:
 	</div>
   <!-- The Calendar -->
   <div id='calendar'></div>
@@ -79,24 +79,23 @@
       $('#calendar').fullCalendar( 'addEventSource', event_set );
     }
 
-	var role<%= @role.id %> = [       
-	<% @role.events.each do |event| %>
-	  {
-	    // When creating a new event, store SERMON ATTRIBUTES in the attributes of the CALENDAR EVENT OBJECT...
-	    // ... this way we can use these values later to identify the sermon when calling $.update and $.destroy
-	    id: '<%= event.id %>',
-	    title: '<%= event.user.name %>',
-	    start: new Date(<%= event.event_date.strftime("%Y") %>, <%= event.event_date.strftime("%m") %>-1, <%= event.event_date.strftime("%d") %>),
-	    <% if event.user == @user %>
-	    color: '#2E9614',
-	    <% else %>
-	    color: '<% event.role.color %>',
-	    <% end %>
-	    role: <%= @role.id %>,
-	  }, 
-	<% end %>   
-	]
-	add_set(role<%= @role.id %>);
+    <% @roles.each do |role| %>
+		var role<%= role.id %> = [       
+			<% role.events.each do |event| %>
+			  {
+			    // When creating a new event, store SERMON ATTRIBUTES in the attributes of the CALENDAR EVENT OBJECT...
+			    // ... this way we can use these values later to identify the sermon when calling $.update and $.destroy
+			    id: '<%= event.id %>',
+			    title: '<%= event.user.name %>',
+			    start: new Date(<%= event.event_date.strftime("%Y") %>, <%= event.event_date.strftime("%m") %>-1, <%= event.event_date.strftime("%d") %>),
+			    color: '<%= event.role.color %>',
+			    role: <%= role.id %>,
+			    order: <%= role.order %>
+			  }, 
+			<% end %>   
+		]
+		add_set(role<%= role.id %>);
+	<% end %>
 
   });
 

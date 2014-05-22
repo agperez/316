@@ -7,24 +7,26 @@
 <div id="select_add_dialog">
   <form>
     <fieldset>
-      For: 
+      Select a User: 
       <select name="Users" id="addUser" class="form-control">
         <% @users.each do |user| %>
         <option value="<%= user.id %>"><%= user.name %></option>
         <% end %>
       </select>
       <br>
-      Assign the User to their default role?
+      Will this person be serving in their typical role?
       <select name="Exception" id="addException" class="form-control">
         <option value="0">Yes</option>
         <option value="1">No</option>
       </select>   
       <br>
-      <select name="Roles" id="addRole" class="form-control" style="display: none;">
-        <% @roles.each do |role| %>
-        <option value="<%= role.id %>"><%= role.name %></option>
-        <% end %>
-      </select>
+      <div id="role_exception" style="display:none">This is text
+        <select name="Roles" id="addRole" class="form-control">
+          <% @roles.each do |role| %>
+            <option value="<%= role.id %>"><%= role.name %></option>
+          <% end %>
+        </select>
+      </div>
     </fieldset>
   </form>
 </div>
@@ -50,7 +52,8 @@
 <script>
 
   $("#addException").change(function() {
-    $("#addRole").toggle();
+    $("#role_exception").toggle();
+
   });
 
 
@@ -174,7 +177,7 @@
         "Add Event": select_add_event
       },
       close: function() {
-        $("#addRole").hide();
+        $("#role_exception").hide();
         $('#addException').prop('selectedIndex',0);
       }
     });
