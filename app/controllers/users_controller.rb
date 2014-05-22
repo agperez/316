@@ -17,14 +17,12 @@ class UsersController < ApplicationController
   def show
   	@user = User.find(params[:id])
     @future_events = @user.events.where("event_date > ?", Time.now).order("event_date ASC")
-    @users = User.all 
+    @user_roles = @future_events.map {|a| a.role_id}.uniq
     @roles = Array.new
-    @user_roles = @user.events.where("event_date > ?", Time.now).map {|a| a.role_id}.uniq
     @user_roles.each do |id|
       @roles << Role.find(id)
     end
-
-
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user }
