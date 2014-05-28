@@ -98,6 +98,22 @@
 	<% end %>
 
   });
-
 </script>
+
+<%= form_for(EmailContent.new) do |f| %>
+
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :text %><br>
+    <%= f.text_area :text %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
 
