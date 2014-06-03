@@ -73,6 +73,7 @@
             userID: <%= user.id %>,
             title: '<%= user.name %>',
             color: '<%= user.role.color %>',
+            textColor: '<%= user.role.text_color %>',
             roleID: <%= user.role.id %>,
             order: <%= user.role.order %>     
           },
@@ -116,6 +117,7 @@
 
         $.read('/roles/'+userRole, function (response) {
           var roleColor = response.color;
+          var roleTextColor = response.text_color;
           var roleOrder = response.order;
           $.create('/events',
                   { event: { event_date: new_date, user_id: user, role_id: userRole, exception: exceptVal } },
@@ -124,6 +126,7 @@
                       id: response.id,
                       title: userName,
                       color: roleColor,
+                      textColor: roleTextColor,
                       allDay: true,
                       start: new_date,
                       role: userRole,
@@ -195,7 +198,7 @@
 
         for (var i = 0; i < teamArray.length; i++) {
           var user = teamArray[i];
-          drop_team(date, user["userID"], user["title"], user["roleID"], user["color"], user["order"]);
+          drop_team(date, user["userID"], user["title"], user["roleID"], user["color"], user["order"], user["textColor"]);
         }
 
 
@@ -242,6 +245,8 @@
     }
 
     <% @roles.each do |role| %>
+      var roleColor = '<%= role.color %>';
+      var roleTextColor = '<%= role.text_color %>';
       var role<%= role.id %> = [       
         <% role.events.each do |event| %>
           {
@@ -250,7 +255,8 @@
             id: '<%= event.id %>',
             title: '<%= event.user.name %>',
             start: new Date(<%= event.event_date.strftime("%Y") %>, <%= event.event_date.strftime("%m") %>-1, <%= event.event_date.strftime("%d") %>),
-            color: '<%= event.role.color %>',  
+            color: roleColor,  
+            textColor: roleTextColor,
             role: <%= role.id %>,
             order: <%= role.order %>
           }, 
@@ -285,7 +291,7 @@
       }).prependTo('.toggleButtons').hide();       
     <% end %>
 
-    var drop_team = function(date, id, title, role, color, order) {
+    var drop_team = function(date, id, title, role, color, order, textColor) {
         
       $.create('/events',
         { event: { event_date: date, user_id: id, role_id: role } },
@@ -294,6 +300,7 @@
             id: response.id,
             title: title,
             color: color,
+            textColor: textColor,
             allDay: true,
             start: $.fullCalendar.formatDate( date, 'yyyy-MM-dd'),
             role: role,
