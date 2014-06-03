@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @email_content.email %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @email_content.text %>
+</p>
+
+<%= link_to 'Edit', edit_email_content_path(@email_content) %> |
+<%= link_to 'Back', email_contents_path %>
