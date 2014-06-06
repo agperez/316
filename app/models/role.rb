@@ -4,12 +4,12 @@ class Role < ActiveRecord::Base
 
 	accepts_nested_attributes_for :events, :users
 
-
+=begin
 	before_save do
 		self.text_color = adjust_fontColor(self.color)
 	end
 
-=begin
+
 	def adjust_fontColor(color)
 		case color
 		when "#59BA53" #green
