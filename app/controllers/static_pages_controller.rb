@@ -12,10 +12,13 @@ class StaticPagesController < ApplicationController
   def email
     @date1 = Time.now
     @date2 = @date1 + 6.days
-    @users_with_events = User.joins(:events).where(:events => {:event_date => @date1..@date2})
+    @users_with_events = Array.new
+    @users_with_events << User.find_by_email("agperez@gmail.com")
+    @users_with_events << User.find_by_email("creightonvaughn@gmail.com")
+    #@users_with_events = User.joins(:events).where(:events => {:event_date => @date1..@date2})
     @users_with_events.each do |user|
-    UserMailer.welcome_email(user).deliver
-      end
+      UserMailer.welcome_email(user).deliver
+    end
     redirect_to dashboard_path
   end
 

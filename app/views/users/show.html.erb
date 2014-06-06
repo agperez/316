@@ -43,6 +43,23 @@
 		</div> -->
 	</div>
 </div>
+
+<div class="row">
+	<div class="email_content col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+		<div class="user_heading">
+			Need to request a change? Let Creighton know:
+		</div>
+		<%= form_for(EmailContent.new) do |f| %>
+		<%= f.hidden_field :email, :value => current_user.email %>
+		<div class="form-group">
+		  <%= f.text_area :text, {class: "form-control"} %>
+		</div>
+		<%= f.submit "Send", class: "btn btn-large btn-primary" %>
+		</div>
+		<% end %>
+	</div>
+</div>
+
 <hr class="divider">
 <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 	<div class="user_heading">
@@ -100,20 +117,7 @@
   });
 </script>
 
-<%= form_for(EmailContent.new) do |f| %>
 
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :text %><br>
-    <%= f.text_area :text %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
 
 
 

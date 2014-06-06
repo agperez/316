@@ -9,6 +9,7 @@ class Role < ActiveRecord::Base
 		self.text_color = adjust_fontColor(self.color)
 	end
 
+=begin
 	def adjust_fontColor(color)
 		case color
 		when "#59BA53" #green
@@ -17,7 +18,7 @@ class Role < ActiveRecord::Base
 			return "#ffffff"
 		when "#F8B0C8" #pink
 			return "#ffffff"
-		when "#FCF0AD" #yellow
+		when "#D5BB2A" #yellow
 			return "#000000"
 		when "#9FC6E7" #blue-gray
 			return "#ffffff"
@@ -33,5 +34,8 @@ class Role < ActiveRecord::Base
 			return "#ffffff"
 		end
 	end
+
+=end
+
 
 end

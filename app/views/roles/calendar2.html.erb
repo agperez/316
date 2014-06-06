@@ -269,7 +269,7 @@
       $('<button/>', {
         text: "<%= role.name %>", 
         id: 'btn_<%= @role_button_id %>_off',
-        class: '<% case role.color %><% when "#59BA53" %>cupid-green<% when "#9FE1E7" %>cupid-light-blue<% when "#F8B0C8" %>cupid-pink<% when "#FCF0AD" %>cupid-yellow<% when "#9FC6E7" %>cupid-blue-gray<% when "#4986E7" %>cupid-blue<% when "#9A9CFF" %>cupid-purple<% when "#FFAD46" %>cupid-orange<% when "#D06B64" %>cupid-red<% else %>cupid-gray<% end %>',
+        class: '<% case role.color %><% when "#59BA53" %>cupid-green<% when "#9FE1E7" %>cupid-light-blue<% when "#F8B0C8" %>cupid-pink<% when "#D5BB2A" %>cupid-yellow<% when "#9FC6E7" %>cupid-blue-gray<% when "#4986E7" %>cupid-blue<% when "#9A9CFF" %>cupid-purple<% when "#FFAD46" %>cupid-orange<% when "#D06B64" %>cupid-red<% else %>cupid-gray<% end %>',
         click: function () { 
           $('#btn_<%= @role_button_id %>_off').toggle(0, function() {
             $('#btn_<%= @role_button_id %>_on').toggle(0);
@@ -281,7 +281,7 @@
       $('<button/>', {
         text: "<%= role.name %>", 
         id: 'btn_<%= @role_button_id %>_on',
-        class: '<% case role.color %><% when "#59BA53" %>cupid-green<% when "#9FE1E7" %>cupid-light-blue<% when "#F8B0C8" %>cupid-pink<% when "#FCF0AD" %>cupid-yellow<% when "#9FC6E7" %>cupid-blue-gray<% when "#4986E7" %>cupid-blue<% when "#9A9CFF" %>cupid-purple<% when "#FFAD46" %>cupid-orange<% when "#D06B64" %>cupid-red<% else %>cupid-gray<% end %>',
+        class: '<% case role.color %><% when "#59BA53" %>cupid-green<% when "#9FE1E7" %>cupid-light-blue<% when "#F8B0C8" %>cupid-pink<% when "#D5BB2A" %>cupid-yellow<% when "#9FC6E7" %>cupid-blue-gray<% when "#4986E7" %>cupid-blue<% when "#9A9CFF" %>cupid-purple<% when "#FFAD46" %>cupid-orange<% when "#D06B64" %>cupid-red<% else %>cupid-gray<% end %>',
         click: function () { 
           $('#btn_<%= @role_button_id %>_on').toggle(0, function() {
             $('#btn_<%= @role_button_id %>_off').toggle(0);

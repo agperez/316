@@ -6,12 +6,11 @@ class SermonsController < ApplicationController
   before_action :admin_user,      only: [:manage, :new, :create, :edit, :update, :destroy]
   
 
-  def index
-    @sermons = Sermon.where("published=? OR published=?", true, nil)
+  def index 
   end
 
   def archive
-    @ordered_sermons = Sermon.where("published=? OR published=?", true, nil).order("s_date DESC").paginate(page: params[:page])
+    @ordered_sermons = Sermon.where(published: [true, nil]).order("s_date DESC").paginate(page: params[:page])
   end
 
   def manage
@@ -71,7 +70,7 @@ class SermonsController < ApplicationController
     end
 
     def recent_sermons
-      @sermons_recent = Sermon.where("published=? OR published=?", true, nil).order("s_date DESC").limit(5)
+      @sermons_recent = Sermon.where(published: [true, nil]).order("s_date DESC").limit(5)
     end
 
     def all_sermons
