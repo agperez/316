@@ -13,10 +13,12 @@ class StaticPagesController < ApplicationController
     @date1 = Time.now
     @date2 = @date1 + 6.days
     @users_with_events = User.joins(:events).where(:events => {:event_date => @date1..@date2})
+    @user_names = @users_with_events.map {|user| user.name}
     @users_with_events.each do |user|
       @next_event = user.events.where(:event_date => @date1..@date2).first
       UserMailer.welcome_email(user, @next_event).deliver
     end
+    flash[:success] = "A reminder email has been sent to "+@user_names.to_sentence
     redirect_to dashboard_path
   end
 

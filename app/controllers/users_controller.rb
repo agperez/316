@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :correct_user, 		only: [:show, :edit, :update]
 
   # prevent anyone except admins from using the delete method		
-  before_action :admin_user, 		only: :destroy
+  before_action :admin_user, 		  only: [:index, :destroy, :import]
 
   def new
   	@user = User.new
