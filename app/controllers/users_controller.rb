@@ -15,6 +15,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @current_user = current_user
   	@user = User.find(params[:id])
     @future_events = @user.events.where("event_date > ?", Time.now).order("event_date ASC")
     @user_roles = @future_events.map {|a| a.role_id}.uniq

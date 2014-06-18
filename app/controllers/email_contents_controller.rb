@@ -63,8 +63,8 @@ class EmailContentsController < ApplicationController
   end
 
   def return_email
-    ReturnMailer.return_email(@email_content).deliver
-    redirect_to dashboard_path
+    ReturnMailer.return_email(current_user).deliver
+    redirect_to(current_user)
   end
 
   private
