@@ -43,6 +43,9 @@
           <%= f.collection_select :team_id, Team.all, :id, :name, {:include_blank => "Choose a Team"}, {class: "form-control"} %>
         </div>
       <% end %>
+      <div class="checkbox">
+          <%= f.check_box :reminders, class: "checkbox checkbox_edit" %> Receive email reminders
+      </div>
       <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>

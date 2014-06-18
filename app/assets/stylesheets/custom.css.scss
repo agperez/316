@@ -71,6 +71,10 @@
   text-align: center;
 }
 
+.checkbox .checkbox_edit {
+  min-height: 0px;
+}
+
 @media (min-width: 501px) and (max-width: 650px) {
   .user_name {
     font-size: 35px;

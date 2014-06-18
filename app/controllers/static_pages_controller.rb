@@ -12,7 +12,7 @@ class StaticPagesController < ApplicationController
   def email
     @date1 = Time.now
     @date2 = @date1 + 6.days
-    @users_with_events = User.joins(:events).where(:events => {:event_date => @date1..@date2})
+    @users_with_events = User.where(:reminders => true).joins(:events).where(:events => {:event_date => @date1..@date2})
     @user_names = @users_with_events.map {|user| user.name}
     @users_with_events.each do |user|
       @next_event = user.events.where(:event_date => @date1..@date2).first

@@ -80,7 +80,7 @@ class UsersController < ApplicationController
 
   private
   	def user_params
-  		params.require(:user).permit(:name, :email, :password, :password_confirmation, :team_id, :role_id, events_attributes: [:user_id, :role_id])	
+  		params.require(:user).permit(:name, :email, :password, :password_confirmation, :reminders, :team_id, :role_id, events_attributes: [:user_id, :role_id])	
   	end
 
   	# Checks if a user is signed in when they attempt to view a particular page.
