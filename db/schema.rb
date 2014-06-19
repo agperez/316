@@ -11,11 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140601155403) do
+ActiveRecord::Schema.define(version: 20140618202000) do
 
   create_table "email_contents", force: true do |t|
-    t.string "email"
-    t.text   "text"
+    t.string   "email"
+    t.text     "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "events", force: true do |t|
@@ -73,6 +75,7 @@ ActiveRecord::Schema.define(version: 20140601155403) do
     t.boolean  "admin",           default: false
     t.integer  "team_id"
     t.integer  "role_id"
+    t.boolean  "reminders",       default: true
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

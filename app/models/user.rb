@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
-      user = User.find__or_initialize_by_id(row["id"])
+      user = User.find_or_initialize_by_id(row["id"])
       user.update_attributes(row.to_hash)
     end
   end
