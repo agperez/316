@@ -64,6 +64,7 @@ class EmailContentsController < ApplicationController
 
   def return_email
     ReturnMailer.return_email(current_user).deliver
+    flash[:success] = 'Your email has been sent.'
     redirect_to(current_user)
   end
 

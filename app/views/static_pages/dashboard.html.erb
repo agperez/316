@@ -17,10 +17,9 @@
 		</div>
 	</div>
 </div>
-
 <div class="row">	
 	<div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">
-		<h3 class="dash_heading" id="team_toggle">Current Teams</h3>
+		<h3 class="dash_heading" id="team_toggle">Current Teams <%= image_tag("arrowdown.gif", class: "team_arrow_toggle")%><%= image_tag("arrowright.gif", class: "team_arrow_two hiddentog")%></h3>
 	</div>
 	<% @teams.each do |team| %>
 		<div class="dash_list dash_teams col-lg-3 col-md-3 col-sm-4 col-xs-6">
@@ -40,7 +39,7 @@
 
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		<h3 class="dash_heading" id="role_toggle">Current Roles</h3>
+		<h3 class="dash_heading" id="role_toggle">Current Roles <%= image_tag("arrowdown.gif", class: "role_arrow_toggle")%><%= image_tag("arrowright.gif", class: "role_arrow_two hiddentog")%></h3>
 	</div>
 	<% @roles.each do |role| %>
 		<div class="dash_list dash_roles col-lg-3 col-md-3 col-sm-4 col-xs-6">
@@ -117,7 +116,11 @@
     
 	    e.preventDefault();  
 
-        $('.dash_teams').toggle();
+       	$('.dash_teams').toggle();
+        $('.team_arrow_toggle').toggle();
+		$('.team_arrow_two').toggle();
+
+
 	    
 	}); 	
 
@@ -126,7 +129,9 @@
 	    e.preventDefault();  
 
         $('.dash_roles').toggle();
-	    
+	    $('.role_arrow_toggle').toggle();
+	    $('.role_arrow_two').toggle();
+
 	}); 	
 
 </script>
