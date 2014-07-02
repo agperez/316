@@ -16,8 +16,10 @@ SampleApp::Application.routes.draw do
   match '/archive', to: 'sermons#archive', via: 'get'
   match '/manage', to: 'sermons#manage', via: 'get'
   
+
   match '/returnemail', to: 'email_contents#return_email', via: 'get'
   match '/email', to: 'static_pages#email', via: 'get'
+  match '/scheduleemail', to: 'email_contents#schedule_email', via: 'get'
 
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
