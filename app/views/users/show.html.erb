@@ -30,7 +30,7 @@
 		</div>
 		<div class="upcoming_events">
 			<% if @future_events.length == 0 %>
-				There are currently have no upcoming dates where you're scheduled to serve. 
+				There are currently no upcoming dates where you're scheduled to serve. 
 			<% else %>
 				<% @future_events.each do |event| %>
 					<div class="user_upcoming_dates"><%=event.event_date.strftime("%B %d, %Y")%> - <span style="color:<%=event.role.color%>;"><%= event.role.name %></div>
