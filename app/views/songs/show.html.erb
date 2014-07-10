@@ -10,10 +10,22 @@
   <%= @song.key %>
 </p>
 
-<p>
-  <strong>Chart:</strong>
-  <%= @song.chart %>
-</p>
+  <pre class="test_pre" data-key="<%= @song.key %>">
+<%= simple_format(@song.chart) %>
+  </pre>
 
+  <pre class="test_pre2" data-key="<%= @song.key %>">
+<%= simple_format(@song.chart) %>
+  </pre>
 <%= link_to 'Edit', edit_song_path(@song) %> |
 <%= link_to 'Back', songs_path %>
+
+  <script type="text/javascript">
+    $(function() {
+    	$(".test_pre").transpose();
+    });
+
+    $(function() {
+    	$(".test_pre2").transpose();
+    });
+  </script>
