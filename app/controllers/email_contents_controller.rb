@@ -65,11 +65,11 @@ class EmailContentsController < ApplicationController
   def schedule_email
     @date1 = Time.now
     @date2 = @date1 + 1.years
-    @users_with_events = User.where(:reminders => true)
+    @users_with_events = User.joins(:events).where(events: {event_date: @date1..@date2})
     @users_with_events.each do |user|
-    @eventsall = user.events.where(:events => {:event_date => @date1..@date2})
-    ScheduleMailer.schedule_email(user, @eventsall).deliver
-     end
+      @eventsall = user.events.where(events: {event_date: @date1..@date2})
+      ScheduleMailer.schedule_email(user, @eventsall).deliver
+    end
       flash[:success] = 'Your email has been sent.'
       redirect_to dashboard_path
   end

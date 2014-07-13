@@ -27,8 +27,8 @@
 			<% if team.users.length == 0 %>
 				<span style="color: #d9534f; font-style: italic;">(No Users Assigned)</span>
 			<% else %>
-				<% team.users.order("name ASC").each do |user| %>
-					<div class="dash_names"><%= user.name %></div>
+				<% team.users.order("first_name ASC").each do |user| %>
+					<div class="dash_names"><%= user.first_name + ' ' + user.last_name %></div>
 				<% end %>
 			<% end %>
 		</div>
@@ -48,8 +48,8 @@
 			<% if role.users.length == 0 %>
 				<span style="color: #d9534f; font-style: italic;">(No Users Assigned)</span>
 			<% else %>
-				<% role.users.order("name ASC").each do |user| %>
-					<div class="dash_names col-lg-6"><%= user.name %></div>
+				<% role.users.order("first_name ASC").each do |user| %>
+					<div class="dash_names col-lg-6"><%= user.first_name + ' ' + user.last_name %></div>
 				<% end %>
 			<% end %>
 		</div>
@@ -76,19 +76,20 @@
 	<div id="box">
 		<div class="filter">
 			<% @users.each do |user| %>
+			<% @first_letter = 'alpha_'+user.first_name[0].downcase %>
 				<%= form_for user do |f| %>
-					<div class="dashboard_user alpha_<%= user.name[0].downcase %> col-lg-3 col-md-3 col-sm-4 col-xs-6">
-						<h5><%= link_to user.name, edit_user_path(user) %></h5>
-						<div class="form-group alpha_<%= user.name[0].downcase %>">
+					<div class="dashboard_user <%= @first_letter %> col-lg-3 col-md-3 col-sm-4 col-xs-6">
+						<h5><%= link_to user.first_name + ' ' + user.last_name, edit_user_path(user) %></h5>
+						<div class="form-group <%= @first_letter %>">
 							<%= f.label "Role:" %><% unless user.role_id != nil %> <span class="not_assigned">(Not Assigned)</span><% end %>
 							<%= f.collection_select :role_id, Role.all, :id, :name, {:include_blank => "No Role"}, {class: "form-control"} %>
 						</div>
-						<div class="form-group alpha_<%= user.name[0].downcase %>">
+						<div class="form-group <%= @first_letter %>">
 							<%= f.label "Team:" %><% unless user.team_id != nil %> <span class="not_assigned">(Not Assigned)</span><% end %>
 							<%= f.collection_select :team_id, Team.all, :id, :name, {:include_blank => "No Team"}, {class: "form-control"} %>
 						</div>
 						<%= f.hidden_field :user_id, value: user.id %>
-						<div class="actions alpha_<%= user.name[0].downcase %>">
+						<div class="actions <%= @first_letter %>">
 						<%= f.submit "Update" %> 
 						</div>
 					</div>

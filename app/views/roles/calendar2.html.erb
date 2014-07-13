@@ -10,7 +10,7 @@
       Select a User: 
       <select name="Users" id="addUser" class="form-control">
         <% @users.each do |user| %>
-        <option value="<%= user.id %>"><%= user.name %></option>
+        <option value="<%= user.id %>"><%= user.first_name + ' ' + user.last_name %></option>
         <% end %>
       </select>
       <br>
@@ -71,7 +71,7 @@
           <% unless user.role.blank? || user.role.nil? %>
           {
             userID: <%= user.id %>,
-            title: '<%= user.name %>',
+            title: '<%= user.first_name + ' ' + user.last_name %>',
             color: '<%= user.role.color %>',
             textColor: '<%= user.role.text_color %>',
             roleID: <%= user.role.id %>,
@@ -105,7 +105,7 @@
       var new_date = $.fullCalendar.formatDate(start, 'yyyy-MM-dd');
 
       $.read('/users/'+user, function (response) {
-        var userName = response.name;
+        var userName = response.first_name + ' ' + response.last_name;
         if(except == 1) {
           userRole = $('#addRole').val();
           exceptVal = true;
@@ -253,7 +253,7 @@
             // When creating a new event, store SERMON ATTRIBUTES in the attributes of the CALENDAR EVENT OBJECT...
             // ... this way we can use these values later to identify the sermon when calling $.update and $.destroy
             id: '<%= event.id %>',
-            title: '<%= event.user.name %>',
+            title: '<%= event.user.first_name + ' ' + event.user.last_name %>',
             start: new Date(<%= event.event_date.strftime("%Y") %>, <%= event.event_date.strftime("%m") %>-1, <%= event.event_date.strftime("%d") %>),
             color: roleColor,  
             textColor: roleTextColor,

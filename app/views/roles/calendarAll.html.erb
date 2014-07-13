@@ -46,7 +46,7 @@
             // When creating a new event, store SERMON ATTRIBUTES in the attributes of the CALENDAR EVENT OBJECT...
             // ... this way we can use these values later to identify the sermon when calling $.update and $.destroy
             id: '<%= event.id %>',
-            title: '<%= event.user.name %>',
+            title: '<%= event.user.first_name + ' ' + event.user.last_name %>',
             start: new Date(<%= event.event_date.strftime("%Y") %>, <%= event.event_date.strftime("%m") %>-1, <%= event.event_date.strftime("%d") %>),
             color: '<%= event.role.color %>',  
             role: <%= role.id %>,
