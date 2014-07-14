@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   belongs_to :team, autosave: true
   belongs_to :role, autosave: true
   has_many :events, autosave: true
-
+  has_many :notes
   accepts_nested_attributes_for :events
 
   def self.import(file)
