@@ -11,14 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20140711194644) do
+ActiveRecord::Schema.define(version: 20140713160359) do
 
   create_table "email_contents", force: true do |t|
-    t.string   "email"
-    t.text     "text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string "email"
+    t.text   "text"
   end
 
   create_table "events", force: true do |t|
@@ -92,6 +89,15 @@ ActiveRecord::Schema.define(version: 20140711194644) do
     t.integer  "role_id"
     t.boolean  "reminders",       default: true
     t.string   "last_name"
+    t.string   "photo_link"
+    t.string   "gender"
+    t.date     "birth_date"
+    t.integer  "phone"
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "facebook"
+    t.string   "twitter"
+    t.string   "spouse"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
