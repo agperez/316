@@ -26,15 +26,23 @@ class NotesController < ApplicationController
   def create
     @note = Note.new(note_params)
 
-    respond_to do |format|
-      if @note.save
-        format.html { redirect_to @note, notice: 'Note was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @note }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @note.errors, status: :unprocessable_entity }
-      end
+    if @note.save
+      redirect_to notesmail_path
+   #respond_to do |format|
+    #if @note.save
+     #format.html { redirect_to @note, notice: 'Note was successfully created.' }
+      #format.json { render action: 'show', status: :created, location: @note }
+      #else
+      #format.html { render action: 'new' }
+      #format.json { render json: @note.errors, status: :unprocessable_entity }
+      #end
     end
+  end
+
+  def notes_email
+      NotesMailer.notes_mailer(current_user).deliver
+      flash[:success] = 'Your email has been sent.'
+      redirect_to dashboard_path
   end
 
   # PATCH/PUT /notes/1

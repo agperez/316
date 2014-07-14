@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140711211307) do
+ActiveRecord::Schema.define(version: 20140713160359) do
 
   create_table "email_contents", force: true do |t|
     t.string "email"
