@@ -56,7 +56,16 @@
 	<% end %> 
 </div>
 <hr class="divider">
-<%= link_to "Email Ministry Schedule", email_path, class: "btn btn-small btn-primary" %>
+
+<% @date1 = Time.now %>
+<% @date2 = @date1 + 6.days %>
+<% @users_with_events = User.where(:reminders => true).joins(:events).where(:events => {:event_date => @date1..@date2}) %>
+<% @confirm_users = Array.new %>
+<% @users_with_events.each do |user| %> 
+	<% @confirm_users << user.name %> 
+<% end %> 
+
+<%= link_to "Email Ministry Schedule", email_path, class: "btn btn-small btn-primary", :data => { :confirm => 'You are about to send schedule reminders to ' + @confirm_users.to_sentence + '. Continue?'} %>
 <%= link_to "Schedule", scheduleemail_path, class: "btn btn-small btn-primary" %>
 
 <div class="row">

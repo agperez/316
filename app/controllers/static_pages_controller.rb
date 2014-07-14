@@ -22,7 +22,6 @@ class StaticPagesController < ApplicationController
     redirect_to dashboard_path
   end
 
-
   def dashboard
     @users = User.order(:name)
     @teams = Team.all
