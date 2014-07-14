@@ -1,4 +1,4 @@
-<% provide(:title, @user.name) %>
+<% provide(:title, @user.first_name + ' ' + @user.last_name) %>
 <div class="row">
 	<div class="col-lg-12">
 		<div class="user_edit_button">
@@ -13,7 +13,7 @@
 <div class="row">
 	<div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2">
 		<div class="user_name">
-			Hello, <%= @user.name %>
+			Hello, <%= @user.first_name %>
 		</div>
 		<% unless @future_events.length == 0 %>
 			<div class="next_event">
@@ -30,7 +30,7 @@
 		</div>
 		<div class="upcoming_events">
 			<% if @future_events.length == 0 %>
-				There are currently have no upcoming dates where you're scheduled to serve. 
+				There are currently no upcoming dates where you're scheduled to serve. 
 			<% else %>
 				<% @future_events.each do |event| %>
 					<div class="user_upcoming_dates"><%=event.event_date.strftime("%B %d, %Y")%> - <span style="color:<%=event.role.color%>;"><%= event.role.name %></div>
@@ -104,7 +104,7 @@
 			    // When creating a new event, store SERMON ATTRIBUTES in the attributes of the CALENDAR EVENT OBJECT...
 			    // ... this way we can use these values later to identify the sermon when calling $.update and $.destroy
 			    id: '<%= event.id %>',
-			    title: '<%= event.user.name %>',
+			    title: '<%= event.user.first_name + ' ' + event.user.last_name %>',
 			    start: new Date(<%= event.event_date.strftime("%Y") %>, <%= event.event_date.strftime("%m") %>-1, <%= event.event_date.strftime("%d") %>),
 			    color: '<%= event.role.color %>',
 			    role: <%= role.id %>,

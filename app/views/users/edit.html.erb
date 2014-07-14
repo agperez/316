@@ -18,9 +18,13 @@
         </div>
       <% end %>
       <div class="form-group">
-        <%= f.label :name %>
-        <%= f.text_field :name, class: "form-control" %>
+        <%= f.label :first_name, "First Name" %>
+        <%= f.text_field :first_name, class: "form-control" %>
       </div>
+      <div class="form-group">
+        <%= f.label :last_name, "Last Name" %>
+        <%= f.text_field :last_name, class: "form-control" %>
+      </div>      
       <div class="form-group">
         <%= f.label :email %>
         <%= f.text_field :email, class: "form-control" %>
@@ -42,10 +46,10 @@
           <%= f.label :team_id %>
           <%= f.collection_select :team_id, Team.all, :id, :name, {:include_blank => "Choose a Team"}, {class: "form-control"} %>
         </div>
-      <% end %>
-      <div class="checkbox">
-          <%= f.check_box :reminders, class: "checkbox checkbox_edit" %> Receive email reminders
-      </div>
+        <div class="checkbox">
+            <%= f.check_box :reminders, class: "checkbox checkbox_edit" %> Receive email reminders
+        </div>
+      <% end %>  
       <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>

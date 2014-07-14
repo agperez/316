@@ -1,6 +1,8 @@
 SampleApp::Application.routes.draw do
-  resources :notes
 
+  resources :notes
+  resources :setlists
+  resources :songs
   resources :email_contents
 
   resources :sermons

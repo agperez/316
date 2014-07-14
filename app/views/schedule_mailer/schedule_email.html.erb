@@ -3,18 +3,16 @@
   <head>
   </head>
   <body>
-   <div>
-    <h1>
-<div class="upcoming_events">
-      <% if @events.length == 0 %>
-        There are currently no upcoming dates where you're scheduled to serve. 
-      <% else %>
-        <% @events.each do |event| %>
-          <div class="user_upcoming_dates"><%=event.event_date.strftime("%B %d, %Y")%> - <span style="color:<%=event.role.color%>;"><%= event.role.name %></div>
-        <% end %>
-      <% end %>
-    </div>
-</h1>
+    <div>
+      <h1>
+        <div class="upcoming_events">
+          <% @events.each do |event| %>
+            <div class="user_upcoming_dates">
+              <%=event.event_date.strftime("%B %d, %Y")%> - <span style="color:<%=event.role.color%>;"><%= event.role.name %></span>
+            </div>
+          <% end %>
+        </div>
+      </h1>
     </div>
   </body>
 </html>

@@ -13,6 +13,20 @@
 @-o-viewport        { width: device-width; }
 @viewport           { width: device-width; }
 
+
+/* Songs Edit Page */
+.chart_edit {
+  font-family: monospace;
+  height: 660px;
+  width: 796px;
+}
+
+/* Songs Show Page */
+.test_pre { 
+  font-size: 20px;
+}
+
+
 /* User Show Page */
 
 .user_edit_button {
@@ -584,7 +598,6 @@ html {
 
 body {
   margin: 0;
-  min-height: 2000px;
   padding-top: 70px;
 
 }

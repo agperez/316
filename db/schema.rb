@@ -67,6 +67,20 @@ ActiveRecord::Schema.define(version: 20140711211307) do
     t.boolean  "published"
   end
 
+  create_table "setlists", force: true do |t|
+    t.date     "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "songs", force: true do |t|
+    t.string   "name"
+    t.string   "key"
+    t.text     "chart"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "teams", force: true do |t|
     t.string   "name"
     t.string   "color"
@@ -75,7 +89,7 @@ ActiveRecord::Schema.define(version: 20140711211307) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "name"
+    t.string   "first_name"
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -85,6 +99,16 @@ ActiveRecord::Schema.define(version: 20140711211307) do
     t.integer  "team_id"
     t.integer  "role_id"
     t.boolean  "reminders",       default: true
+    t.string   "last_name"
+    t.string   "photo_link"
+    t.string   "gender"
+    t.date     "birth_date"
+    t.integer  "phone"
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "facebook"
+    t.string   "twitter"
+    t.string   "spouse"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

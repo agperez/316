@@ -13,7 +13,7 @@
 <p>
   <strong>Members:</strong>
   <% @team.users.each do |user| %>
-  	<p>- <%= user.name %></p>
+  	<p>- <%= user.first_name + ' ' + user.last_name %></p>
   <% end %>
 </p>
 
