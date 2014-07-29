@@ -10,7 +10,7 @@ class SermonsController < ApplicationController
   end
 
   def archive
-    @ordered_sermons = Sermon.where(published: [true, nil]).order("s_date DESC").paginate(page: params[:page])
+    @ordered_sermons = Sermon.ordered(params)
   end
 
   def manage
@@ -70,11 +70,11 @@ class SermonsController < ApplicationController
     end
 
     def recent_sermons
-      @sermons_recent = Sermon.where(published: [true, nil]).order("s_date DESC").limit(5)
+      @sermons_recent = Sermon.recent
     end
 
     def all_sermons
-      @sermons = Sermon.all.order("s_date DESC")
+      @sermons = Sermon.all_sermons
     end
     
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,4 +1,4 @@
-Hi <%= @user.first_name %>, this is just a reminder that you're scheduled to serve this Sunday at Calvary 316 on the <%= @event.role.name %> team.
+Hi <%= @user.first_name %>, this is just a reminder that you're scheduled to serve this Sunday, <%= @event.event_date.strftime("%B %d") %> at Calvary 316 on the <%= @event.role.name %> team.
 
 Thanks!
 Creighton
