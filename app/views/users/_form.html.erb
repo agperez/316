@@ -1,0 +1,80 @@
+<%= form_for(@user) do |f| %>
+      <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <div class="alert alert-error">
+          The form contains <%= pluralize(@user.errors.count, "error") %>.
+        </div>
+        <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li>* <%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :first_name, "First Name" %>
+      <%= f.text_field :first_name, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :last_name, "Last Name" %>
+      <%= f.text_field :last_name, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.text_field :email, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password %>
+      <%= f.password_field :password, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation, class: "form-control" %>
+    </div>
+     <div class="form-group">
+      <%= f.label :photo_link %>
+      <%= f.text_field :photo_link, class: "form-control" %>
+    </div>
+     <div class="form-group">
+      <%= f.label :gender %>
+      <%= f.text_field :gender, class: "form-control" %>
+    </div>
+     <div class="form-group">
+      <%= f.label :birth_date %>
+      <%= f.date_field :birth_date, class: "form-control" %>
+    </div>
+     <div class="form-group">
+      <%= f.label :phone_number %>
+      <%= f.number_field :phone, class: "form-control" %>
+    </div>
+     <div class="form-group">
+      <%= f.label :address_1 %>
+      <%= f.text_field :address1, class: "form-control" %>
+    </div>
+     <div class="form-group">
+      <%= f.label :address_2 %>
+      <%= f.text_field :address2, class: "form-control" %>
+    </div> 
+    <div class="form-group">
+      <%= f.label :facebook %>
+      <%= f.text_field :facebook, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :twitter %>
+      <%= f.text_field :twitter, class: "form-control" %>
+    </div> 
+    <div class="form-group">
+      <%= f.label :spouse %>
+      <%= f.text_field :spouse, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :role_id %>
+      <%= f.collection_select :role_id, Role.all, :id, :name, {:include_blank => "Choose a Role"}, {class: "form-control"} %>
+    </div>
+    <div class="form-group">
+      <%= f.label :team_id %>
+      <%= f.collection_select :team_id, Team.all, :id, :name, {:include_blank => "Choose a Team"}, {class: "form-control"} %>
+    </div>
+    <%= f.submit @type, class: "btn btn-large btn-primary" %>
+    <% end %>
