@@ -4,10 +4,13 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <center>
-      <h1>
-      Hi <%= @user.first_name %>, this is just a reminder that you're scheduled to serve this Sunday at Calvary316 on the <%= @event.role.name %> Team.<br>
-      </h1>
-    </center>
+    <h3>
+      <center>
+        Hi <%= @user.first_name %>, this is just a reminder that you're scheduled to serve this Sunday, <%= @event.event_date.strftime("%B %d") %> at Calvary316 on the <%= @event.role.name %> Team.<br>
+      </center>
+      <br>
+      Thanks!<br>
+      Creighton
+    </h3> 
   </body>
 </html>

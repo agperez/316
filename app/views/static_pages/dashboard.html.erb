@@ -62,7 +62,7 @@
 <% @users_with_events = User.where(:reminders => true).joins(:events).where(:events => {:event_date => @date1..@date2}) %>
 <% @confirm_users = Array.new %>
 <% @users_with_events.each do |user| %> 
-	<% @confirm_users << user.name %> 
+	<% @confirm_users << user.first_name + ' ' + user.last_name %> 
 <% end %> 
 
 <%= link_to "Send Email Reminders", email_path, class: "btn btn-small btn-primary", :data => { :confirm => 'You are about to send schedule reminders to ' + @confirm_users.to_sentence + '. Continue?'}  %>
