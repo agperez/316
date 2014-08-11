@@ -14,6 +14,10 @@ class UsersController < ApplicationController
     redirect_to users_path, notice: "Users Updated."
   end
 
+  def us
+
+  end
+
   def show
     @current_user = current_user
   	@user = User.find(params[:id])
