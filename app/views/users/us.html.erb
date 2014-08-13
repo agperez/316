@@ -1,2 +1,33 @@
 <% provide(:title, 'Us') %>
-<%= users.all %>
+<% provide(:bodyid, 'us_body') %>
+<script>
+  $(document).ready(function(){
+    $('.facebookpic').hover(function() {
+        $(this).addClass('transition');
+ 
+    }, function() {
+        $(this).removeClass('transition');
+    });
+  });
+</script>
+
+<div class="row">
+	<% @users.each do |user| %>
+		<div class="front_page_images col-lg-2 col-md-2 col-sm-3 col-xs-12">
+			<div class="us_box">
+				<div class="userbox">
+					<div class="image_box">
+						<center><%= image_for(user) %></center>
+					</div>
+					<div class="box_name">
+						<%= user.fullname %>
+					</div>
+					<div class="box_role">
+						<%= user.role.name unless user.role.nil? %> 
+					</div>
+				</div>
+			</div>
+		</div>
+	<% end %>
+</div>
+

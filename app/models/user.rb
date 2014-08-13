@@ -6,6 +6,11 @@ class User < ActiveRecord::Base
   has_many :notes
   accepts_nested_attributes_for :events
 
+  def fullname
+    name = self.first_name + ' '
+    name += self.last_name
+  end
+
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
       user = User.find_or_initialize_by_id(row["id"])

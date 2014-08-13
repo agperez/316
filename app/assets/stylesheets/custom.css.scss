@@ -13,6 +13,61 @@
 @-o-viewport        { width: device-width; }
 @viewport           { width: device-width; }
 
+/* Us page */
+
+.facebookpic {
+
+    -webkit-transition: all .1s ease-in-out;
+    -moz-transition: all .1s ease-in-out;
+    -o-transition: all .1s ease-in-out;
+    -ms-transition: all .1s ease-in-out;
+}
+
+.transition {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+
+#us_body {
+  background-color: #e5e5e5;
+}
+
+.us_box {
+  background-color: #fff;
+  margin-bottom: 10px;
+  width: 160px;
+  height: 250px;
+  box-shadow: 1px 1px 2px #999;
+}
+
+.image_box {
+  height: 160px;
+  overflow: hidden;
+}
+
+.facebookpic {
+  width: auto;
+  height: 160px;
+}
+
+.box_name, .box_role {
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+.box_name {
+  font-weight: bold;
+}
+
+.box_role {
+  font-style: italic;
+  font-size: 10px;
+}
+
+
 
 /* Songs Edit Page */
 .chart_edit {
@@ -22,7 +77,7 @@
 }
 
 /* Songs Show Page */
-.test_pre { 
+.test_pre {
   font-size: 20px;
 }
 
@@ -110,7 +165,7 @@
   }
   .upcoming_events {
     font-size: 20px;
-  }  
+  }
 }
 
 /* Calendar */
@@ -146,7 +201,7 @@ button.cupid-light-blue {
 
 
 button.cupid-green {
-  background-color: #59BA53;  
+  background-color: #59BA53;
   &:hover {
     -webkit-box-shadow: inset 0 1px 0 0 #59BA53;
     box-shadow: inset 0 1px 0 0 #59BA53; }
@@ -158,7 +213,7 @@ button.cupid-green {
 
 
 button.cupid-orange {
-  background-color: #FFAD46;  
+  background-color: #FFAD46;
   &:hover {
     -webkit-box-shadow: inset 0 1px 0 0 #FFAD46;
     box-shadow: inset 0 1px 0 0 #FFAD46; }
@@ -169,7 +224,7 @@ button.cupid-orange {
     }
 
 button.cupid-pink {
-  background-color: #F8B0C8;  
+  background-color: #F8B0C8;
   &:hover {
     -webkit-box-shadow: inset 0 1px 0 0 #F8B0C8;
     box-shadow: inset 0 1px 0 0 #F8B0C8; }
@@ -181,7 +236,7 @@ button.cupid-pink {
 
 
 button.cupid-blue {
-  background-color: #4986E7;  
+  background-color: #4986E7;
   &:hover {
     -webkit-box-shadow: inset 0 1px 0 0 #4986E7;
     box-shadow: inset 0 1px 0 0 #4986E7; }
@@ -193,7 +248,7 @@ button.cupid-blue {
 
 
 button.cupid-purple {
-  background-color: #9A9CFF; 
+  background-color: #9A9CFF;
   &:hover {
     -webkit-box-shadow: inset 0 1px 0 0 #9A9CFF;
     box-shadow: inset 0 1px 0 0 #9A9CFF; }
@@ -205,7 +260,7 @@ button.cupid-purple {
 
 
 button.cupid-blue-gray {
-  background-color: #9FC6E7; 
+  background-color: #9FC6E7;
   &:hover {
     -webkit-box-shadow: inset 0 1px 0 0 #9FC6E7;
     box-shadow: inset 0 1px 0 0 #9FC6E7; }
@@ -217,7 +272,7 @@ button.cupid-blue-gray {
 
 
 button.cupid-gray {
-  background-color: #CABDBF; 
+  background-color: #CABDBF;
   &:hover {
     -webkit-box-shadow: inset 0 1px 0 0 #CABDBF;
     box-shadow: inset 0 1px 0 0 #CABDBF; }
@@ -229,7 +284,7 @@ button.cupid-gray {
 
 
 button.cupid-red {
-  background-color: #D06B64; 
+  background-color: #D06B64;
   &:hover {
     -webkit-box-shadow: inset 0 1px 0 0 #D06B64;
     box-shadow: inset 0 1px 0 0 #D06B64; }
@@ -241,7 +296,7 @@ button.cupid-red {
 
 
 button.cupid-yellow {
-  background-color: #D5BB2A; 
+  background-color: #D5BB2A;
   &:hover {
     -webkit-box-shadow: inset 0 1px 0 0 #D5BB2A;
     box-shadow: inset 0 1px 0 0 #D5BB2A; }
@@ -309,7 +364,7 @@ button.cupid-light-blue {
   font-size: 10px;
   float: right;
   margin-top: 12px;
-  a { 
+  a {
     color: #000;
     font-weight: bold;
   }
@@ -432,7 +487,7 @@ background-color: #D06B64;
 
 .logo316 {
   background-repeat: no-repeat;
-  background-position: center; 
+  background-position: center;
 }
 
 .no_show {
@@ -450,7 +505,7 @@ background-color: #D06B64;
 
 #index_list_date, #arch_list_date {
     margin-left: -5px;
-    
+
 }
 
 tr:nth-child(odd), tr:nth-child(odd) a {
@@ -471,7 +526,7 @@ tr:nth-child(even), tr:nth-child(even) a {
   padding: 0 10px 0 10px;
   font-size: 4em;
   text-align: center;
- 
+
 }
 
 .s_elements a {
@@ -554,7 +609,7 @@ tr:nth-child(even), tr:nth-child(even) a {
   height: 20px;
   &:hover {
     background-position: -38px 0;
-  } 
+  }
 }
 
 /* Begin Bootstrap Defaults */

@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   def us
-
+    @users = User.all
   end
 
   def show
