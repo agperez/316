@@ -74,7 +74,7 @@ class SermonsController < ApplicationController
     end
 
     def all_sermons
-      @sermons = Sermon.all.order("s_date DESC")
+      @sermons = Sermon.all.order("s_date DESC").paginate(page: params[:page])
     end
     
     # Never trust parameters from the scary internet, only allow the white list through.
