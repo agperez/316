@@ -4,7 +4,7 @@
   $(document).ready(function(){
     $('.facebookpic').hover(function() {
         $(this).addClass('transition');
- 
+
     }, function() {
         $(this).removeClass('transition');
     });
@@ -12,22 +12,55 @@
 </script>
 
 <div class="row">
+  <div class="col-lg-12">
+    <h3 class="dash_heading">Users</h3>
+  </div>
+  <div class="col-lg-12">
+    <div id='filters'>
+      <span class="filter_title">Filter Names:</span>
+      <a href='#' id="show_all" class="filter_buttons">All</a>
+      <% @filters.each do |filter| %>
+        <a href='#' id="alpha_<%=filter%>" class="filter_buttons"><%=filter.upcase%></a>
+      <% end %>
+    </div>
+  </div>
+
+<div id="box">
+  <div class="filter">
 	<% @users.each do |user| %>
-		<div class="front_page_images col-lg-2 col-md-2 col-sm-3 col-xs-12">
-			<div class="us_box">
-				<div class="userbox">
-					<div class="image_box">
+  <% @first_letter = 'alpha_'+user.first_name[0].downcase %>
+  		<div class=" <%= @first_letter %> col-lg-2 col-md-2 col-sm-3 col-xs-12">
+			<div class="us_box <%= @first_letter %>">
+				<div class="userbox <%= @first_letter %>">
+					<div class="image_box <%= @first_letter %>">
 						<center><%= image_for(user) %></center>
 					</div>
-					<div class="box_name">
+					<div class="box_name <%= @first_letter %>">
 						<%= user.fullname %>
 					</div>
-					<div class="box_role">
-						<%= user.role.name unless user.role.nil? %> 
+					<div class="box_role <%= @first_letter %>">
+						<%= user.role.name unless user.role.nil? %>
 					</div>
 				</div>
 			</div>
 		</div>
 	<% end %>
+  </div>
 </div>
 
+<script type="text/javascript">
+$('#filters a').click(function(e){
+
+    e.preventDefault();
+
+    var filter = $(this).attr('id');
+
+    if (filter == "show_all") {
+      $('#box .filter div').show();
+    }
+    else {
+        $('#box .filter div').show();
+        $('#box .filter div:not(.' + filter + ')').hide();
+    }
+});
+</script>
