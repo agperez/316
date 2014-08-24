@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :signed_in_user, 	only: [:index, :edit, :update, :destroy]
   before_action :correct_user, 		only: [:show, :edit, :update]
 
-  # prevent anyone except admins from using the delete method		
+  # prevent anyone except admins from using the delete method
   before_action :admin_user, 		  only: [:index, :destroy, :import]
 
   def new
@@ -14,6 +14,12 @@ class UsersController < ApplicationController
     redirect_to users_path, notice: "Users Updated."
   end
 
+  def us
+    @users = User.order(:first_name)
+    @filters = Array.new
+    first_letters
+  end
+
   def show
     @current_user = current_user
   	@user = User.find(params[:id])
@@ -23,7 +29,7 @@ class UsersController < ApplicationController
     @user_roles.each do |id|
       @roles << Role.find(id)
     end
-    
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user }
@@ -32,7 +38,7 @@ class UsersController < ApplicationController
   end
 
   def create
-  	@user = User.new(user_params)    
+  	@user = User.new(user_params)
     if @user.save
       flash[:success] = "Account for "+@user.first_name+" created."
       redirect_to dashboard_path
@@ -80,7 +86,10 @@ class UsersController < ApplicationController
 
   private
   	def user_params
-  		params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :reminders, :team_id, :role_id, events_attributes: [:user_id, :role_id])	
+  		params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation,
+                                   :reminders, :facebook, :team_id, :role_id, :gender, :birth_date,
+                                   :phone, :address1, :address2, :twitter, :spouse, :photo_link,
+                                    events_attributes: [:user_id, :role_id])
   	end
 
   	# Checks if a user is signed in when they attempt to view a particular page.
@@ -89,11 +98,11 @@ class UsersController < ApplicationController
   	def signed_in_user
   		unless signed_in?
   			store_location
-  			redirect_to signin_url, notice: "Please sign in to view this page." 
+  			redirect_to signin_url, notice: "Please sign in to view this page."
   		end
   	end
 
-  	# Checks if the user is the same as the user for who's action they are trying to access. 
+  	# Checks if the user is the same as the user for who's action they are trying to access.
   	def correct_user
   		@user = User.find(params[:id])
       redirect_to(current_user) unless current_user?(@user) || current_user.admin?
@@ -103,4 +112,15 @@ class UsersController < ApplicationController
   	def admin_user
   		redirect_to(root_url) unless current_user.admin?
   	end
+
+    def first_letters
+      previous_letter = ""
+      @users.each do |user|
+        letter = user.first_name[0].downcase
+        unless letter == previous_letter
+          @filters.push letter
+        end
+        previous_letter = letter
+      end
+    end
 end

@@ -4,13 +4,13 @@ class SermonsController < ApplicationController
   before_action :recent_sermons,  only: [:new, :create, :edit, :update, :destroy, :index]
   before_action :signed_in_user,  only: [:manage, :new, :create, :edit, :update, :destroy]
   before_action :admin_user,      only: [:manage, :new, :create, :edit, :update, :destroy]
-  
 
-  def index 
+
+  def index
   end
 
   def archive
-    @ordered_sermons = Sermon.where(published: [true, nil]).order("s_date DESC").paginate(page: params[:page])
+    @ordered_sermons = Sermon.ordered(params)
   end
 
   def manage
@@ -70,13 +70,13 @@ class SermonsController < ApplicationController
     end
 
     def recent_sermons
-      @sermons_recent = Sermon.where(published: [true, nil]).order("s_date DESC").limit(5)
+      @sermons_recent = Sermon.recent
     end
 
     def all_sermons
-      @sermons = Sermon.all.order("s_date DESC").paginate(page: params[:page])
+      @sermons = Sermon.all_sermons
     end
-    
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def sermon_params
       params.require(:sermon).permit(:book, :chapter, :chapter_last, :verse_first, :verse_last, :video, :audio, :speaker, :s_date, :outline, :link, :announcements, :published)
@@ -85,7 +85,7 @@ class SermonsController < ApplicationController
     def signed_in_user
       unless signed_in?
         store_location
-        redirect_to signin_url, notice: "Please sign in to view this page." 
+        redirect_to signin_url, notice: "Please sign in to view this page."
       end
     end
 

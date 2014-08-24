@@ -14,8 +14,10 @@
 ActiveRecord::Schema.define(version: 20140713160359) do
 
   create_table "email_contents", force: true do |t|
-    t.string "email"
-    t.text   "text"
+    t.string   "email"
+    t.text     "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "events", force: true do |t|
