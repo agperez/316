@@ -13,12 +13,8 @@
 
 ActiveRecord::Schema.define(version: 20140713160359) do
 
-  create_table "email_contents", force: true do |t|
-    t.string   "email"
-    t.text     "text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "events", force: true do |t|
     t.integer  "user_id"
@@ -30,8 +26,8 @@ ActiveRecord::Schema.define(version: 20140713160359) do
     t.boolean  "exception"
   end
 
-  add_index "events", ["role_id"], name: "index_events_on_role_id"
-  add_index "events", ["team_id"], name: "index_events_on_team_id"
+  add_index "events", ["role_id"], name: "index_events_on_role_id", using: :btree
+  add_index "events", ["team_id"], name: "index_events_on_team_id", using: :btree
 
   create_table "notes", force: true do |t|
     t.text     "content"
@@ -41,8 +37,8 @@ ActiveRecord::Schema.define(version: 20140713160359) do
     t.integer  "sermon_id"
   end
 
-  add_index "notes", ["sermon_id"], name: "index_notes_on_sermon_id"
-  add_index "notes", ["user_id"], name: "index_notes_on_user_id"
+  add_index "notes", ["sermon_id"], name: "index_notes_on_sermon_id", using: :btree
+  add_index "notes", ["user_id"], name: "index_notes_on_user_id", using: :btree
 
   create_table "roles", force: true do |t|
     t.string  "name"
@@ -113,9 +109,9 @@ ActiveRecord::Schema.define(version: 20140713160359) do
     t.string   "spouse"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
-  add_index "users", ["role_id"], name: "index_users_on_role_id"
-  add_index "users", ["team_id"], name: "index_users_on_team_id"
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
+  add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
+  add_index "users", ["team_id"], name: "index_users_on_team_id", using: :btree
 
 end

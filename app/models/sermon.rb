@@ -13,4 +13,13 @@ class Sermon < ActiveRecord::Base
 	def self.all_sermons
 		all.order("s_date DESC")
 	end
+
+	def self.text_search(query)
+    if query.present?
+      where("book @@ :q or outline @@ :q", q: query)
+    else
+      scoped
+    end
+  end
+
 end
