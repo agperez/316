@@ -18,7 +18,6 @@ SampleApp::Application.routes.draw do
   root 'sermons#index'
 
   match '/archive', to: 'sermons#archive', via: 'get'
-  match '/search',  to: 'sermons#search',  via: 'get'
   match '/manage', to: 'sermons#manage', via: 'get'
 
   match '/us', to: 'users#us', via: 'get'

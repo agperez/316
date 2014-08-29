@@ -8,24 +8,18 @@
           Sermon Archive:
         </em>
       </h2>
+
+      <%= form_tag archive_path, method: :get, id: "sermon-search" do %>
+        <p>
+          <%= text_field_tag :query, params[:query] %>
+          <%= submit_tag "Search", name: nil %>
+        </p>
+      <% end %>
       <%= will_paginate @ordered_sermons, :inner_window => 1 %>
     </center>
   </div>
-  <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
-    <%= link_to(@ordered_sermons.first) do %>
-		  <button type="button" class="btn btn-primary btn-lg btn-block">
-		    <span id="arch_list_date"><%= @ordered_sermons.first.s_date.strftime("%B %d") %>,</span>
-        <span id="arch_list_name"><em> <%= sermon_title(@ordered_sermons.first) %></em></span> 
-		  </button>
-    <% end %>
-    <% @ordered_sermons.drop(1).each do |sermon| %>
-      <%= link_to(sermon) do %>
-			  <button type="button" class="btn btn-default btn-lg btn-block">
-			    <span id="arch_list_date"><%= sermon.s_date.strftime("%B %d") %>,</span>
-          <span id="arch_list_name"><em> <%= sermon_title(sermon) %></em></span> 
-			  </button>   
-      <% end %>   
-		<% end %>
-  </div>    
+      <div id="sermons">
+        <%= render 'ordered' %>
+      </div>
+  </div>
 </div>
-

@@ -10,6 +10,8 @@ gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem 'rake', '~> 10.3.1'
 gem 'pg'
+gem 'pg_search'
+gem 'pry-rails'
 
 # Use sqlite3 as the database for Active Record
 
