@@ -15,6 +15,7 @@
           <%= submit_tag "Search", name: nil %>
         </p>
       <% end %>
+
       <%= will_paginate @ordered_sermons, :inner_window => 1 %>
     </center>
   </div>

@@ -9,10 +9,6 @@ class SermonsController < ApplicationController
   def index
   end
 
-  def search
-    @ordered_sermons = Sermon.text_search(params[:query]).ordered(params)
-  end
-
   def archive
     @ordered_sermons = Sermon.text_search(params[:query]).ordered(params)
   end
