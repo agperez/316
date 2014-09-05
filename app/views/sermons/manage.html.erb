@@ -19,7 +19,7 @@
 			  <button type="button" class="btn btn-primary btn-md dropdown-toggle" data-toggle="dropdown">
 			    <%= @sermons.first.s_date.strftime("%B %d") %>,
           <span id="arch_list_date"><em> <%= sermon_title(@sermons.first) %></em>
-          </span> 
+          </span>
           <span class="caret"></span>
 			  </button>
 			  <ul class="dropdown-menu" role="menu">
@@ -40,7 +40,7 @@
 				  <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
 				    <%= sermon.s_date.strftime("%B %d") %>,
             <span id="arch_list_date"><em> <%= sermon_title(sermon) %></em>
-            </span> 
+            </span>
             <span class="caret"></span>
 				  </button>
 				  <ul class="dropdown-menu" role="menu">
@@ -48,9 +48,8 @@
 				    <li><%=link_to 'Delete', sermon, method: :delete,
                                       data: { confirm: "Seriously?" }%></li>
 				  </ul>
-				</div>      
-			<% end %>    
+				</div>
+			<% end %>
     </center>
   </div>
 </div>
-

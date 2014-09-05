@@ -15,7 +15,9 @@ class UsersController < ApplicationController
   end
 
   def us
-    @users = User.all
+    @users = User.order(:first_name)
+    @filters = Array.new
+    first_letters
   end
 
   def profile
@@ -88,10 +90,11 @@ class UsersController < ApplicationController
 
   private
   	def user_params
-  		params.require(:user).permit(:first_name, :last_name, :email, :password,
-                                   :password_confirmation, :reminders, :avatar,
-                                   :avatar_remote_url, :avatar_url,
-                                   :team_id, :role_id, events_attributes: [:user_id, :role_id])
+  		params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation,
+                                   :reminders, :facebook, :team_id, :role_id, :gender, :birth_date,
+                                   :phone, :address1, :address2, :twitter, :spouse, :photo_link,
+                                   :avatar, :avatar_remote_url, :avatar_url,
+                                    events_attributes: [:user_id, :role_id])
   	end
 
   	# Checks if a user is signed in when they attempt to view a particular page.
@@ -114,4 +117,15 @@ class UsersController < ApplicationController
   	def admin_user
   		redirect_to(root_url) unless current_user.admin?
   	end
+
+    def first_letters
+      previous_letter = ""
+      @users.each do |user|
+        letter = user.first_name[0].downcase
+        unless letter == previous_letter
+          @filters.push letter
+        end
+        previous_letter = letter
+      end
+    end
 end
