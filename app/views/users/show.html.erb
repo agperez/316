@@ -30,7 +30,7 @@
 		</div>
 		<div class="upcoming_events">
 			<% if @future_events.length == 0 %>
-				There are currently no upcoming dates where you're scheduled to serve. 
+				There are currently no upcoming dates where you're scheduled to serve.
 			<% else %>
 				<% @future_events.each do |event| %>
 					<div class="user_upcoming_dates"><%=event.event_date.strftime("%B %d, %Y")%> - <span style="color:<%=event.role.color%>;"><%= event.role.name %></div>
@@ -51,12 +51,35 @@
 		</div>
 		<%= form_for(EmailContent.new) do |f| %>
 		<%= f.hidden_field :email, :value => current_user.email %>
+		<%= f.hidden_field :recipient, :value => @user.email %>
+		<%= f.hidden_field :origin, :value => "returnemail" %>
 		<div class="form-group">
 		  <%= f.text_area :text, {class: "form-control"} %>
 		</div>
 		<%= f.submit "Send", class: "btn btn-large btn-primary" %>
 		</div>
 		<% end %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="email_content col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+		<% if signed_in? %>
+			<% if current_user.admin? %>
+		<div class="user_heading">
+			Send the Church a prayer request
+		</div>
+		<%= form_for(EmailContent.new) do |f| %>
+		<%= f.hidden_field :email, :value => current_user.email %>
+		<%= f.hidden_field :origin, :value => "prayeremail" %>
+		<div class="form-group">
+			<%= f.text_area :text, {class: "form-control"} %>
+		</div>
+		<%= f.submit "Send", class: "btn btn-large btn-primary" %>
+		</div>
+		<% end %>
+		<% end %>
+	<% end %>
 	</div>
 </div>
 
@@ -72,6 +95,26 @@
   <div style='clear:both'></div>
 </div>
 
+<div class="row">
+	<div class="email_content col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+		<% if signed_in? %>
+			<% if current_user.admin? %>
+		<div class="user_heading">
+			Need to contact <%= @user.first_name %>?
+		</div>
+				<%= form_for(EmailContent.new) do |f| %>
+				<%= f.hidden_field :email, :value => current_user.email %>
+				<%= f.hidden_field :recipient, :value => @user.email %>
+				<%= f.hidden_field :origin, :value => "contactemail" %>
+		<div class="form-group">
+				<%= f.text_area :text, {class: "form-control"} %>
+		</div>
+				<%= f.submit "Send", class: "btn btn-large btn-primary" %>
+				<% end %>
+			<% end %>
+		<% end %>
+	</div>
+</div>
 
 <script>
 
@@ -79,7 +122,7 @@
     var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();
-    var y = date.getFullYear(); 
+    var y = date.getFullYear();
 
     var global_start_date = "";
 
@@ -98,7 +141,7 @@
     }
 
     <% @roles.each do |role| %>
-		var role<%= role.id %> = [       
+		var role<%= role.id %> = [
 			<% role.events.each do |event| %>
 			  {
 			    // When creating a new event, store SERMON ATTRIBUTES in the attributes of the CALENDAR EVENT OBJECT...
@@ -109,16 +152,11 @@
 			    color: '<%= event.role.color %>',
 			    role: <%= role.id %>,
 			    order: <%= role.order %>
-			  }, 
-			<% end %>   
+			  },
+			<% end %>
 		]
 		add_set(role<%= role.id %>);
 	<% end %>
 
   });
 </script>
-
-
-
-
-

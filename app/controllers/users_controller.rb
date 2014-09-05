@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :signed_in_user, 	only: [:index, :edit, :update, :destroy]
   before_action :correct_user, 		only: [:show, :edit, :update]
+  before_action :not_signed_in,   only: [:new]
 
   # prevent anyone except admins from using the delete method
   before_action :admin_user, 		  only: [:index, :destroy, :import]
@@ -16,8 +17,11 @@ class UsersController < ApplicationController
 
   def us
     @users = User.order(:first_name)
+    @users2 = User.order(:last_name)
     @filters = Array.new
+    @last_filters = Array.new
     first_letters
+    first_letters_last
   end
 
   def show
@@ -95,9 +99,20 @@ class UsersController < ApplicationController
   	def signed_in_user
   		unless signed_in?
   			store_location
-  			redirect_to signin_url, notice: "Please sign in to view this page."
+  			redirect_to signin_url
+        flash[:error] = "Please sign in to view this page."
   		end
   	end
+
+    # Checks if the user is already signed-up
+    def not_signed_in
+      if signed_in?
+        unless current_user.admin?
+          redirect_to(current_user)
+          flash[:error] = "User creation is for new users and Admins."
+        end
+      end
+    end
 
   	# Checks if the user is the same as the user for who's action they are trying to access.
   	def correct_user
@@ -116,6 +131,17 @@ class UsersController < ApplicationController
         letter = user.first_name[0].downcase
         unless letter == previous_letter
           @filters.push letter
+        end
+        previous_letter = letter
+      end
+    end
+
+    def first_letters_last
+      previous_letter = ""
+      @users2.each do |user|
+        letter = user.last_name[0].downcase
+        unless letter == previous_letter
+          @last_filters.push letter
         end
         previous_letter = letter
       end

@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
   before_action :signed_in_user, only: :dashboard
   before_action :admin_user,    only: :dashboard
-  
+
   def home
     if signed_in?
       @micropost = current_user.microposts.build
@@ -16,7 +16,7 @@ class StaticPagesController < ApplicationController
     @user_names = @users_with_events.map {|user| user.first_name + ' ' + user.last_name}
     @users_with_events.each do |user|
       @next_event = user.events.where(:event_date => @date1..@date2).first
-      UserMailer.welcome_email(user, @next_event).deliver
+      UserMailer.reminder_email(user, @next_event).deliver
     end
     flash[:success] = "A reminder email has been sent to "+@user_names.to_sentence
     redirect_to dashboard_path
@@ -38,7 +38,7 @@ class StaticPagesController < ApplicationController
 
   def contact
   end
-  
+
   def datepicker
   end
 
@@ -55,5 +55,5 @@ class StaticPagesController < ApplicationController
         previous_letter = letter
       end
     end
-    
+
 end

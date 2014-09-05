@@ -17,7 +17,7 @@
 		</div>
 	</div>
 </div>
-<div class="row">	
+<div class="row">
 	<div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">
 		<h3 class="dash_heading" id="team_toggle">Current Teams <%= image_tag("arrowdown.gif", class: "team_arrow_toggle")%><%= image_tag("arrowright.gif", class: "team_arrow_two hiddentog")%></h3>
 	</div>
@@ -32,7 +32,7 @@
 				<% end %>
 			<% end %>
 		</div>
-	<% end %> 
+	<% end %>
 </div>
 
 <hr class="divider">
@@ -53,7 +53,7 @@
 				<% end %>
 			<% end %>
 		</div>
-	<% end %> 
+	<% end %>
 </div>
 <hr class="divider">
 
@@ -61,9 +61,9 @@
 <% @date2 = @date1 + 6.days %>
 <% @users_with_events = User.where(:reminders => true).joins(:events).where(:events => {:event_date => @date1..@date2}) %>
 <% @confirm_users = Array.new %>
-<% @users_with_events.each do |user| %> 
-	<% @confirm_users << user.first_name + ' ' + user.last_name %> 
-<% end %> 
+<% @users_with_events.each do |user| %>
+	<% @confirm_users << user.first_name + ' ' + user.last_name %>
+<% end %>
 
 <%= link_to "Send Email Reminders", email_path, class: "btn btn-small btn-primary", :data => { :confirm => 'You are about to send schedule reminders to ' + @confirm_users.to_sentence + '. Continue?'}  %>
 <%= link_to "Send Monthly Schedule Update", scheduleemail_path, class: "btn btn-small btn-primary" %>
@@ -72,7 +72,7 @@
 <div class="row">
 	<div class="col-lg-12">
 		<h3 class="dash_heading">Users</h3>
-	</div> 
+	</div>
 	<div class="col-lg-12">
 		<div id='filters'>
 			<span class="filter_title">Filter Names:</span>
@@ -100,51 +100,51 @@
 						</div>
 						<%= f.hidden_field :user_id, value: user.id %>
 						<div class="actions <%= @first_letter %>">
-						<%= f.submit "Update" %> 
+						<%= f.submit "Update" %>
 						</div>
 					</div>
 				<% end %>
-			<% end %>	
+			<% end %>
 		</div>
 	</div>
 </div>
 
 <script type="text/javascript">
-	$('#filters a').click(function(e){ 
-    
-	    e.preventDefault();  
-	    
-	    var filter = $(this).attr('id'); 
+	$('#filters a').click(function(e){
+
+	    e.preventDefault();
+
+	    var filter = $(this).attr('id');
 
 	    if (filter == "show_all") {
 	    	$('#box .filter div').show();
 	    }
 	    else {
 	        $('#box .filter div').show();
-	        $('#box .filter div:not(.' + filter + ')').hide(); 
+	        $('#box .filter div:not(.' + filter + ')').hide();
 	    }
-	}); 
-	
-	$('#team_toggle').click(function(e){ 
-    
-	    e.preventDefault();  
+	});
+
+	$('#team_toggle').click(function(e){
+
+	    e.preventDefault();
 
        	$('.dash_teams').toggle();
         $('.team_arrow_toggle').toggle();
 		$('.team_arrow_two').toggle();
 
 
-	    
-	}); 	
 
-	$('#role_toggle').click(function(e){ 
-    
-	    e.preventDefault();  
+	});
+
+	$('#role_toggle').click(function(e){
+
+	    e.preventDefault();
 
         $('.dash_roles').toggle();
 	    $('.role_arrow_toggle').toggle();
 	    $('.role_arrow_two').toggle();
 
-	}); 	
+	});
 
 </script>
