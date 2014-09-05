@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140713160359) do
+ActiveRecord::Schema.define(version: 20140905211331) do
 
   create_table "email_contents", force: true do |t|
     t.string   "email"
@@ -97,10 +97,10 @@ ActiveRecord::Schema.define(version: 20140713160359) do
     t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "remember_token"
-    t.boolean  "admin",           default: false
+    t.boolean  "admin",               default: false
     t.integer  "team_id"
     t.integer  "role_id"
-    t.boolean  "reminders",       default: true
+    t.boolean  "reminders",           default: true
     t.string   "last_name"
     t.string   "photo_link"
     t.string   "gender"
@@ -111,6 +111,11 @@ ActiveRecord::Schema.define(version: 20140713160359) do
     t.string   "facebook"
     t.string   "twitter"
     t.string   "spouse"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "avatar_remote_url"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

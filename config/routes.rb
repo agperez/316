@@ -11,15 +11,16 @@ SampleApp::Application.routes.draw do
   resources :teams
   resources :users do
     collection { post :import }
+    get 'profile', on: :member
   end
 
-  
+
   resources :sessions, only: [:new, :create, :destroy]
   root 'sermons#index'
 
   match '/archive', to: 'sermons#archive', via: 'get'
   match '/manage', to: 'sermons#manage', via: 'get'
-  
+
   match '/us', to: 'users#us', via: 'get'
   match '/notesmail', to: 'notes#notes_email', via: 'get'
   match '/returnemail', to: 'email_contents#return_email', via: 'get'
@@ -39,13 +40,13 @@ SampleApp::Application.routes.draw do
   match '/dashboard', to: 'static_pages#dashboard', via: 'get'
 
 
-  
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

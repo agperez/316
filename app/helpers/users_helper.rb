@@ -9,7 +9,9 @@ module UsersHelper
 
   def image_for(user)
   	facebookid = user.facebook
-  	if facebookid.nil?
+    if user.avatar_file_name
+      image_tag(user.avatar.url(:square), alt: user.fullname, class: "facebookpic")
+    elsif facebookid.nil?
   		if user.gender == "f"
   			gender = "female"
   		else

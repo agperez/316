@@ -1,10 +1,31 @@
+require 'open-uri'
+
 class User < ActiveRecord::Base
-  
+
   belongs_to :team, autosave: true
   belongs_to :role, autosave: true
   has_many :events, autosave: true
   has_many :notes
   accepts_nested_attributes_for :events
+
+  #paperclip
+  validates :avatar,
+    attachment_content_type: { content_type: /\Aimage/ },
+    attachment_size: { less_than: 4.megabytes }
+
+  has_attached_file :avatar,
+    styles: {
+      square: '160x160#',
+      medium: '300x300#',
+      square_blur: '200x200#'
+    },
+    convert_options: { square_blur: '-blur 0x8' }
+
+  def avatar_remote_url=(url_value)
+    self.avatar = URI.parse(url_value) unless url_value.blank?
+    super
+  end
+  #/paperclip
 
   def fullname
     name = self.first_name + ' '
@@ -32,7 +53,7 @@ class User < ActiveRecord::Base
       unless e.exception == true
         e.role_id = role_id
       end
-      e.team_id = team_id 
+      e.team_id = team_id
       e.save
     end
   end
@@ -57,9 +78,9 @@ class User < ActiveRecord::Base
   	def User.encrypt(token)
   		Digest::SHA1.hexdigest(token.to_s)
   	end
-  	
+
   	private
-  		
+
   		def create_remember_token
   			self.remember_token = User.encrypt(User.new_remember_token)
   		end
