@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
     attachment_content_type: { content_type: /\Aimage/ },
     attachment_size: { less_than: 4.megabytes }
 
+  after_save :check_for_avatar
+
   has_attached_file :avatar,
     styles: {
       square: '160x160#',
@@ -25,6 +27,13 @@ class User < ActiveRecord::Base
     self.avatar = URI.parse(url_value) unless url_value.blank?
     super
   end
+
+  def check_for_avatar
+    if self.avatar_file_size.nil? && self.facebook?
+      self.avatar = URI.parse("https://graph.facebook.com/" + self.facebook + "/picture?width=9999&height=9999")
+    end
+  end
+
   #/paperclip
 
   def fullname
