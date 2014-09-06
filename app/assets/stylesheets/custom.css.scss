@@ -235,7 +235,7 @@ a.profile_link {
 }
 
 .image_box {
-  height: 160px;
+  width: 160px;
   overflow: hidden;
 }
 
@@ -247,6 +247,7 @@ a.profile_link {
 .box_name, .box_role {
   margin-left: 5px;
   margin-top: 5px;
+  text-align: left;
 }
 
 .box_name {

@@ -13,9 +13,6 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <h3 class="dash_heading">Users</h3>
-  </div>
-  <div class="col-lg-12">
     <div id='filters'>
       <span class="filter_title">Filter Names:</span>
       <a href='#' id="show_all" class="filter_buttons">All</a>
@@ -26,29 +23,33 @@
   </div>
 </div>
 
+<div class="row">
 <div id="box">
   <div class="filter">
   	<% @users.each do |user| %>
       <% @first_letter = 'alpha_'+user.first_name[0].downcase %>
-  		<div class="<%= @first_letter %> front_page_images col-lg-2 col-md-3 col-sm-3 col-xs-4">
-        <%= link_to(profile_user_path(user), class: "profile_link") do %>
-    			<div class="us_box <%= @first_letter %>">
-    				<div class="userbox <%= @first_letter %>">
-    					<div class="image_box <%= @first_letter %>">
-    						<center><%= image_for(user) %></center>
-    					</div>
-    					<div class="box_name <%= @first_letter %>">
-    						<%= user.fullname %>
-    					</div>
-    					<div class="box_role <%= @first_letter %>">
-    						<%= user.role.name unless user.role.nil? %>
-    					</div>
-    				</div>
-    			</div>
-        <% end %>
+  		<div class="<%= @first_letter %> front_page_images col-lg-2 col-md-3 col-sm-3 col-xs-6">
+        <center>
+          <%= link_to(profile_user_path(user), class: "profile_link") do %>
+      			<div class="us_box <%= @first_letter %>">
+      				<div class="userbox <%= @first_letter %>">
+      					<div class="image_box <%= @first_letter %>">
+      						<center><%= image_for(user) %></center>
+      					</div>
+      					<div class="box_name <%= @first_letter %>">
+      						<%= user.fullname %>
+      					</div>
+      					<div class="box_role <%= @first_letter %>">
+      						<%= user.role.name unless user.role.nil? %>
+      					</div>
+      				</div>
+      			</div>
+          <% end %>
+      </center>
       </div>
     <% end %>
   </div>
+</div>
 </div>
 
 

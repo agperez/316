@@ -30,9 +30,9 @@ SampleApp::Application.configure do
   config.paperclip_defaults = {
     storage: :s3,
     s3_credentials: {
-      bucket: '316test',
-      access_key_id: 'AKIAJ4633N6LGAPKQLOA',
-      secret_access_key: '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'
+      bucket: '316churchapp',
+      access_key_id: 'AKIAINW7HC43B2GUUCUQ',
+      secret_access_key: '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'
     }
   }
 end
