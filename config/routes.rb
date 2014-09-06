@@ -11,6 +11,7 @@ SampleApp::Application.routes.draw do
   resources :teams
   resources :users do
     collection { post :import }
+    get 'profile', on: :member
   end
 
 

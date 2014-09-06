@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :signed_in_user, 	only: [:index, :edit, :update, :destroy]
+  before_action :signed_in_user, 	only: [:index, :edit, :update, :destroy, :profile]
   before_action :correct_user, 		only: [:show, :edit, :update]
   before_action :not_signed_in,   only: [:new]
 
@@ -22,6 +22,10 @@ class UsersController < ApplicationController
     @last_filters = Array.new
     first_letters
     first_letters_last
+  end
+
+  def profile
+    @user = User.find(params[:id])
   end
 
   def show
@@ -78,7 +82,7 @@ class UsersController < ApplicationController
         redirect_to @user
       end
     else
-      render dashboard_path
+      redirect_to dashboard_path
     end
   end
 
@@ -90,7 +94,11 @@ class UsersController < ApplicationController
 
   private
   	def user_params
-  		params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :reminders, :team_id, :role_id, events_attributes: [:user_id, :role_id])
+  		params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation,
+                                   :reminders, :facebook, :team_id, :role_id, :gender, :birth_date,
+                                   :phone, :address1, :address2, :twitter, :spouse, :photo_link,
+                                   :avatar, :avatar_remote_url, :avatar_url,
+                                    events_attributes: [:user_id, :role_id])
   	end
 
   	# Checks if a user is signed in when they attempt to view a particular page.
@@ -109,7 +117,6 @@ class UsersController < ApplicationController
       if signed_in?
         unless current_user.admin?
           redirect_to(current_user)
-          flash[:error] = "User creation is for new users and Admins."
         end
       end
     end

@@ -1,0 +1,24 @@
+<% provide(:title, @user.first_name + ' ' + @user.last_name) %>
+<% provide(:bodyid, 'profile_body') %>
+<% provide(:containerid, 'profile_container') %>
+
+<div class="profile_header" style="background-image: url('<%= @user.avatar.url(:square_blur) %>');">
+  <div class="profile_title">
+    <div class="profile_picture">
+      <%= image_tag @user.avatar.url(:medium) %>
+    </div>
+    <div class="profile_text">
+      <div class="profile_name"><%= @user.first_name + ' ' + @user.last_name %></div>
+      <div class="profile_info"><%= @user.email %></div>
+    </div>
+    <div class="clear"></div>
+    <div class="profile_boxes">
+      <ul>
+        <li>
+          <span class="profile_phone">(678) 984-6822</span>
+          869 Confederate Ave. Atlanta, GA 30312</li>
+      </ul>
+      <div class="clear"></div>
+    </div>
+  </div>
+</div>

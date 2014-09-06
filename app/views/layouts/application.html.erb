@@ -26,6 +26,23 @@
       div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
       div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
 
+      <% if yield(:bodyid) == 'profile_body' %>
+        body, html {
+          height: 100%;
+          padding: 0;
+        }
+
+        .container {
+          width: 100%;
+          height: 100%;
+          padding: 0;
+          margin: 0;
+        }
+        .navbar {
+          margin: 0;
+        }
+      <% end %>
+
     </style>
 
     <script>
@@ -40,7 +57,7 @@
         document.querySelector('head').appendChild(msViewportStyle)
       }
     </script>
-    
+
     <script>
       $(function() {
         $( "#datepicker" ).datepicker({
@@ -52,7 +69,7 @@
 
   </head>
   <body id="<%= yield(:bodyid) %>">
-    <%= render 'layouts/header' %>
+    <%= render 'layouts/header' unless yield(:bodyid) == 'profile_body' %>
     <div class="container">
       <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>
