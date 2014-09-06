@@ -54,7 +54,7 @@
     </div>
      <div class="form-group">
       <%= f.label :phone_number %>
-      <%= f.number_field :phone, class: "form-control" %>
+      <%= f.telephone_field :phone, class: "form-control" %>
     </div>
      <div class="form-group">
       <%= f.label :address_1 %>
@@ -65,17 +65,19 @@
       <%= f.text_field :address2, class: "form-control" %>
     </div>
     <div class="form-group">
-      <%= f.label :facebook %>
-      <%= f.text_field :facebook, class: "form-control" %>
+      <%= f.label :facebook %><br><font color='#D1D0CE'>https://www.facebook.com/<span style="background-color: #FFFFCC">creighton.vaughn</span></font>
+      <%= f.text_field :facebook, class: "form-control", autofocus: true, placeholder: 'creighton.vaughn' %>
     </div>
     <div class="form-group">
-      <%= f.label :twitter %>
-      <%= f.text_field :twitter, class: "form-control" %>
+      <%= f.label :twitter %><br><font color='#D1D0CE'>https://twitter.com/<span style="background-color: #FFFFCC">ctaylorvaughn</span></font>
+      <%= f.text_field :twitter, class: "form-control", autofocus: true, placeholder: '@ctaylorvaughn' %>
     </div>
     <div class="form-group">
       <%= f.label :spouse %>
       <%= f.text_field :spouse, class: "form-control" %>
     </div>
+    <% if signed_in? %>
+      <% if current_user.admin? %>
     <div class="form-group">
       <%= f.label :role_id %>
       <%= f.collection_select :role_id, Role.all, :id, :name, {:include_blank => "Choose a Role"}, {class: "form-control"} %>
@@ -84,5 +86,7 @@
       <%= f.label :team_id %>
       <%= f.collection_select :team_id, Team.all, :id, :name, {:include_blank => "Choose a Team"}, {class: "form-control"} %>
     </div>
+      <% end %>
+    <% end %>
     <%= f.submit @type, class: "btn btn-large btn-primary" %>
     <% end %>

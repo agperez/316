@@ -25,17 +25,18 @@ class EmailContentsController < ApplicationController
   # POST /email_contents.json
   def create
     @email_content = EmailContent.new(email_content_params)
-
-   # respond_to do |format|
       if @email_content.save
-        redirect_to returnemail_path
-        #format.html { redirect_to @email_content, notice: 'Email content was successfully created.' }
-        #format.json { render action: 'show', status: :created, location: @email_content }
-      #else
-        #format.html { render action: 'new' }
-        #format.json { render json: @email_content.errors, status: :unprocessable_entity }
-   #   end
-    end
+        if @email_content.origin == "contactemail"
+          contact_email
+        elsif @email_content.origin == "returnemail"
+          return_email
+        else
+          prayer_email
+        end
+      else
+        flash[:error] = 'Your email has failed to send.'
+        redirect_to dashboard_path
+      end
   end
 
   # PATCH/PUT /email_contents/1
@@ -66,7 +67,7 @@ class EmailContentsController < ApplicationController
     @date1 = Time.now
     @date2 = @date1 + 1.years
     @users_with_events = User.joins(:events).where(events: {event_date: @date1..@date2})
-    @users_with_events.each do |user|
+    @users_with_events.uniq.each do |user|
       @eventsall = user.events.where(events: {event_date: @date1..@date2})
       ScheduleMailer.schedule_email(user, @eventsall).deliver
     end
@@ -80,6 +81,18 @@ class EmailContentsController < ApplicationController
     redirect_to(current_user)
   end
 
+  def contact_email
+    ContactMailer.contact_email(current_user).deliver
+    flash[:success] = 'Your email has been sent.'
+    redirect_to(current_user)
+  end
+
+  def prayer_email
+    PrayerMailer.prayer_email(current_user).deliver
+    flash[:success] = 'Your email has been sent.'
+    redirect_to(current_user)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_email_content
@@ -88,6 +101,6 @@ class EmailContentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def email_content_params
-      params.require(:email_content).permit(:email, :text)
+      params.require(:email_content).permit(:email, :text, :recipient, :origin)
     end
 end

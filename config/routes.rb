@@ -24,9 +24,13 @@ SampleApp::Application.routes.draw do
   match '/us', to: 'users#us', via: 'get'
   match '/notesmail', to: 'notes#notes_email', via: 'get'
   match '/returnemail', to: 'email_contents#return_email', via: 'get'
+  match '/contactemail', to: 'email_contents#contact_email', via: 'get'
   match '/email', to: 'static_pages#email', via: 'get'
   match '/scheduleemail', to: 'email_contents#schedule_email', via: 'get'
 
+
+  match '/user', to: 'users#show', via: 'get'
+  match '/signup', to: 'users#new', via: 'get'
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
 

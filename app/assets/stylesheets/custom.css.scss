@@ -6173,8 +6173,14 @@ a.thumbnail.active {
 
 .alert-success {
   color: #3c763d;
-  background-color: #dff0d8;
-  border-color: #d6e9c6;
+  background-color: #d6e9c6;
+  border-color: #dff0d8;
+}
+
+.alert-error {
+  color: #800517;
+  background-color: #FAAFBE;
+  border-color: #FFDFDD;
 }
 
 .alert-success hr {
