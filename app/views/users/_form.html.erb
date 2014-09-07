@@ -40,10 +40,6 @@
     <%= f.label :avatar_remote_url, "... or upload a picture from a URL" %>
     <%= f.text_field :avatar_remote_url, class: "form-control" %>
   </div>
-  <div class="form-group">
-    <%= f.label :photo_link %>
-    <%= f.text_field :photo_link, class: "form-control" %>
-  </div>
    <div class="form-group">
     <%= f.label :gender %>
     <%= f.text_field :gender, class: "form-control" %>
@@ -53,27 +49,35 @@
     <%= f.date_field :birth_date, class: "form-control" %>
   </div>
    <div class="form-group">
-    <%= f.label :phone_number %>
+    <%= f.label :phone_number, "Phone Number" %>
     <%= f.telephone_field :phone, class: "form-control" %>
   </div>
    <div class="form-group">
     <%= f.label :address_1 %>
     <%= f.text_field :address1, class: "form-control" %>
   </div>
-   <div class="form-group">
-    <%= f.label :address_2 %>
-    <%= f.text_field :address2, class: "form-control" %>
+  <div class="form-group">
+    <%= f.label :city %>
+    <%= f.text_field :city, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :facebook %><br><font color='#D1D0CE'>https://www.facebook.com/<span style="background-color: #FFFFCC">creighton.vaughn</span></font>
-    <%= f.text_field :facebook, class: "form-control", autofocus: true, placeholder: 'creighton.vaughn' %>
+    <%= f.label :state %>
+    <%= f.text_field :state, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :twitter %><br><font color='#D1D0CE'>https://twitter.com/<span style="background-color: #FFFFCC">ctaylorvaughn</span></font>
-    <%= f.text_field :twitter, class: "form-control", autofocus: true, placeholder: '@ctaylorvaughn' %>
+    <%= f.label :zip %>
+    <%= f.telephone_field :zip, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :spouse %>
+    <%= f.label :facebook %><br><font color='#999'>Example: https://www.facebook.com/<span style="background-color: #FAFA9A">john.doe123</span></font>
+    <%= f.text_field :facebook, class: "form-control", autofocus: true, placeholder: 'john.doe123' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :twitter %><br><font color='#999'>Example: https://twitter.com/<span style="background-color: #FAFA9A">johndoe</span></font>
+    <%= f.text_field :twitter, class: "form-control", autofocus: true, placeholder: '@johndoe' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :spouse, "Spouse's Name" %>
     <%= f.text_field :spouse, class: "form-control" %>
   </div>
   <% if signed_in? %>

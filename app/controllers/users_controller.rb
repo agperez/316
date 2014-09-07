@@ -16,7 +16,6 @@ class UsersController < ApplicationController
   end
 
   def picture
-    
   end
 
 
@@ -80,11 +79,11 @@ class UsersController < ApplicationController
     end
   	if @user.update_attributes(user_params)
       if current_user.admin?
-        flash[:success] = @user.first_name + " has been updated"
-		    redirect_to dashboard_path
+        #flash[:success] = @user.first_name + " has been updated"
+		    redirect_to profile_user_path(@user)
   	  else
         flash[:success] = "Profile updated"
-        redirect_to @user
+        redirect_to profile_user_path(@user)
       end
     else
       redirect_to dashboard_path
@@ -101,8 +100,8 @@ class UsersController < ApplicationController
   	def user_params
   		params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation,
                                    :reminders, :facebook, :team_id, :role_id, :gender, :birth_date,
-                                   :phone, :address1, :address2, :twitter, :spouse, :photo_link,
-                                   :avatar, :avatar_remote_url, :avatar_url,
+                                   :phone, :address1, :city, :state, :zip, :twitter,
+                                   :spouse, :photo_link, :avatar, :avatar_remote_url, :avatar_url,
                                     events_attributes: [:user_id, :role_id])
   	end
 

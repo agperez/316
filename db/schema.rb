@@ -11,13 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140905211331) do
+ActiveRecord::Schema.define(version: 20140907103734) do
 
   create_table "email_contents", force: true do |t|
-    t.string "email"
-    t.text   "text"
-    t.string "origin"
-    t.string "recipient"
+    t.string   "email"
+    t.text     "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "origin"
+    t.string   "recipient"
   end
 
   create_table "events", force: true do |t|
@@ -105,9 +107,8 @@ ActiveRecord::Schema.define(version: 20140905211331) do
     t.string   "photo_link"
     t.string   "gender"
     t.date     "birth_date"
-    t.integer  "phone"
     t.string   "address1"
-    t.string   "address2"
+    t.string   "city"
     t.string   "facebook"
     t.string   "twitter"
     t.string   "spouse"
@@ -116,6 +117,9 @@ ActiveRecord::Schema.define(version: 20140905211331) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string   "avatar_remote_url"
+    t.string   "phone"
+    t.string   "state"
+    t.integer  "zip"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

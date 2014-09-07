@@ -26,12 +26,6 @@ class User < ActiveRecord::Base
     super
   end
 
-  def check_for_avatar
-    if self.avatar_file_size.nil? && self.facebook?
-      self.avatar = URI.parse("https://graph.facebook.com/" + self.facebook + "/picture?width=9999&height=9999")
-    end
-  end
-
   #/paperclip
 
   def fullname
@@ -70,6 +64,7 @@ class User < ActiveRecord::Base
 
 	validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: true, length: { maximum: 50 }
+
 
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   	validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },

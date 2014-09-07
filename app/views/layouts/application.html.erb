@@ -27,19 +27,17 @@
       div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
 
       <% if yield(:bodyid) == 'profile_body' %>
-        body, html {
-          height: 100%;
-          padding: 0;
+        body {
+          padding-top: 50px;
+          background-color: #C5C5C5;
         }
-
         .container {
           width: 100%;
-          height: 100%;
           padding: 0;
-          margin: 0;
         }
         .navbar {
           margin: 0;
+          padding: 0 50px 0 50px;
         }
       <% end %>
 
@@ -69,7 +67,7 @@
 
   </head>
   <body id="<%= yield(:bodyid) %>">
-    <%= render 'layouts/header' unless yield(:bodyid) == 'profile_body' %>
+    <%= render 'layouts/header' %>
     <div class="container">
       <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>

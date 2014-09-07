@@ -27,5 +27,12 @@ SampleApp::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
-
+  config.paperclip_defaults = {
+    storage: :s3,
+    s3_credentials: {
+      bucket: '316churchapp',
+      access_key_id: 'AKIAJGMMFM52LUXB3ZMA',
+      secret_access_key: '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'
+    }
+  }
 end

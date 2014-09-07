@@ -30,7 +30,7 @@ body {
 
 
 .profile_header {
-  font-family: 'Open Sans', Arial, sans-serif;
+  //font-family: 'Open Sans', Arial, sans-serif;
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -79,7 +79,7 @@ body {
 }
 
 .profile_name {
-  font-family: 'Open Sans', Arial, sans-serif;
+  //font-family: 'Open Sans', Arial, sans-serif;
   font-size: 40px;
   font-weight: 300;
   line-height: 47px;
@@ -91,7 +91,7 @@ body {
 }
 
 .profile_info {
-  font-family: 'Open Sans', Arial, sans-serif;
+  //font-family: 'Open Sans', Arial, sans-serif;
   margin-bottom: 30px;
   font-size: 16px;
   font-weight: 400;
@@ -211,6 +211,38 @@ body {
     transform: scale(1.1);
 }
 
+.us_filter_box {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.us_filter_title {
+  font-style: italic;
+  color: #999;
+  font-size: 12px;
+}
+
+.filter_last_names {
+  margin-top: -20px;
+}
+
+.filter_first_names {
+  margin-top: -10px;
+}
+
+a.us_filters {
+  padding: 8px;
+  color: #999;
+  font-size: 12px;
+  &:hover {
+    text-decoration: none;
+  }
+  &:focus {
+    text-decoration: none;
+    outline: 0;
+  }
+}
 
 #us_body {
   background-color: #e5e5e5;
