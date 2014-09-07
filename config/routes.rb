@@ -12,6 +12,7 @@ SampleApp::Application.routes.draw do
   resources :users do
     collection { post :import }
     get 'profile', on: :member
+    get 'picture', on: :member
   end
 
 
