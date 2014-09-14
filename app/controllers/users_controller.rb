@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :signed_in_user, 	only: [:index, :edit, :update, :destroy, :profile, :picture]
+  before_action :signed_in_user, 	only: [:index, :edit, :update, :destroy, :profile, :picture, :us]
   before_action :correct_user, 		only: [:show, :edit, :update, :picture]
   before_action :not_signed_in,   only: [:new]
 
@@ -52,6 +52,7 @@ class UsersController < ApplicationController
   def create
   	@user = User.new(user_params)
     if @user.save
+      sign_in @user
       flash[:success] = "Your account has been created!"
       redirect_to picture_user_path(@user)
     else
