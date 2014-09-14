@@ -1,3 +1,9 @@
+<script>
+  jQuery(function($) {
+    $("#phone").mask("(999) 999-9999",{placeholder:" "});
+  })
+</script>
+
 <%= form_for(@user) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
@@ -37,8 +43,8 @@
     <%= f.file_field :avatar, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :avatar_remote_url, "... or upload a picture from a URL" %>
-    <%= f.text_field :avatar_remote_url, class: "form-control" %>
+    <%= f.label :avatar_url, "... or upload a picture from a URL" %>
+    <%= f.text_field :avatar_url, class: "form-control" %>
   </div>
    <div class="form-group">
     <%= f.label :gender %>
@@ -50,7 +56,7 @@
   </div>
    <div class="form-group">
     <%= f.label :phone_number, "Phone Number" %>
-    <%= f.telephone_field :phone, class: "form-control" %>
+    <%= f.telephone_field :phone, class: "form-control", id: "phone" %>
   </div>
    <div class="form-group">
     <%= f.label :address_1 %>

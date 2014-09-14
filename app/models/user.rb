@@ -2,6 +2,8 @@ require 'open-uri'
 
 class User < ActiveRecord::Base
 
+  attr_accessor :avatar_url
+
   belongs_to :team, autosave: true
   belongs_to :role, autosave: true
   has_many :events, autosave: true
@@ -9,6 +11,8 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :events
 
   #paperclip
+
+
   validates :avatar,
     attachment_content_type: { content_type: /\Aimage/ },
     attachment_size: { less_than: 4.megabytes }
@@ -26,6 +30,7 @@ class User < ActiveRecord::Base
     super
   end
 
+  before_save { self.avatar_remote_url = avatar_url }
   #/paperclip
 
   def fullname

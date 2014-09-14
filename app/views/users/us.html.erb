@@ -8,7 +8,20 @@
     }, function() {
         $(this).removeClass('transition');
     });
+
+    var win_width = $(window).width();
+
+    if (win_width >= 380 && win_width < 571) {
+      $('.us_images').toggleClass('col-xs-4');
+      $('.us_images').toggleClass('col-xs-6');
+    }
+    else if (win_width < 380) {
+      $('.us_images').toggleClass('col-xs-4');
+      $('.us_images').toggleClass('col-xs-12');
+    }
   });
+
+
 </script>
 
 <div class="row">
@@ -38,7 +51,8 @@
       <% @users.each do |user| %>
         <% @first_letter = 'alpha_'+user.first_name[0].downcase %>
         <% @first_letter_last = 'beta_'+user.last_name[0].downcase %>
-        <div class="<%= @first_letter %> <%= @first_letter_last %> front_page_images col-lg-2 col-md-3 col-sm-3 col-xs-6">
+        <div class="<%= @first_letter %> <%= @first_letter_last %> us_images col-lg-2 col-md-3 col-sm-3 col-xs-4">
+          <center>
           <%= link_to(profile_user_path(user), class: "profile_link") do %>
             <div class="us_box <%= @first_letter %> <%= @first_letter_last %>">
               <div class="userbox <%= @first_letter %> <%= @first_letter_last %>">
@@ -54,6 +68,7 @@
               </div>
             </div>
           <% end %>
+        </center>
         </div>
       <% end %>
     </div>

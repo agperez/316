@@ -1,28 +1,45 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <div class="alert alert-error">
-        The form contains <%= pluralize(@user.errors.count, "error") %>.
+<div class="upload_photo_header col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  Select a Profile Photo:
+</div>
+<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 upload_photo up_fb">
+  <%= form_for(@user) do |f| %>
+    <h2>Use Facebook Photo</h2>
+    <% if @user.facebook? %>
+      <div class="up_fb_thumb">
+        <%= image_tag "https://graph.facebook.com/#{@user.facebook}/picture?size=small" %>
       </div>
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li>* <%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+      <%= f.hidden_field :avatar_url, value: "https://graph.facebook.com/#{@user.facebook}/picture?width=9999&height=9999" %>
+      <%= f.submit "Use Facebook Photo", class: "btn btn-large btn-primary" %>
+    <% else %>
+      <div class="up_fb_error">
+        To use your facebook profile picture, please first visit <%= link_to "Settings", edit_user_path(@user) %> and add your facebook ID
+      </div>
+      <%= f.submit "Use Facebook Photo", class: "btn btn-large btn-primary disabled" %>
+    <% end %>
   <% end %>
+</div>
 
-  <div class="form-group">
-    <%= f.label :avatar, "Upload a picture from your computer / device..." %>
-    <%= f.file_field :avatar, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :avatar_remote_url, "... or upload a picture from a URL" %>
-    <%= f.text_field :avatar_remote_url, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :photo_link %>
-    <%= f.text_field :photo_link, class: "form-control" %>
-  </div>
-  <%= f.submit @type, class: "btn btn-large btn-primary" %>
-<% end %>
+<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 upload_photo up_dev">
+  <%= form_for(@user) do |f| %>
+    <div class="form-group">
+      <h2>Upload a Photo</h2>
+      <%= f.file_field :avatar, class: "form-control" %>
+    </div>
+    <%= f.submit "Upload Photo", class: "btn btn-large btn-primary" %>
+  <% end %>
+</div>
+
+<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 upload_photo up_url">
+  <%= form_for(@user) do |f| %>
+    <div class="form-group">
+      <h2>Provide a Link</h2>
+      <%= f.text_field :avatar_url, class: "form-control" %>
+    </div>
+    <%= f.submit "Get Photo from URL", class: "btn btn-large btn-primary" %>
+  <% end %>
+</div>
+
+<div class="upload_photo_note col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+  <b>*Facebook Photos:</b> Your c316.tv profile page will display your <em>current</em> Facebook photo. If you change it on Facebook,
+  you'll need to click "Use Facebook Photo" again for the new photo to appear on c316.tv
+</div>

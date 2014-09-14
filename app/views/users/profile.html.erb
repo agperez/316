@@ -15,33 +15,65 @@
     <% end %>
     <div class="profile_text" <% unless @user.avatar_file_size? || @user.facebook? %>style="margin: 0;"<% end %>>
       <div class="profile_name"><%= @user.first_name + ' ' + @user.last_name %></div>
-      <div class="profile_info"><%= @user.email %></div>
-    </div>
-
-    <div class="clear"></div>
-    <% if @user.phone? || @user.address1? || @user.city? %>
-    <div class="profile_boxes">
-      <ul>
-        <li>
-          <% if @user.phone? %>
-          <span class="profile_phone"><%= @user.phone %></span>
-          <% end %>
-          <% if @user.address1? %>
-            <%= @user.address1 %>
-          <% end %>
-          <% if @user.city? %>
-            <br><%= @user.city %>,
-          <% end %>
-          <% if @user.state? %>
-            <%= @user.state %>
-          <% end %>
+      <div class="profile_info">
+        <% if @user.address1? %>
+          <%= @user.email %><br>
+        <% end %>
+        <% if @user.address1? %>
+          <br><%= @user.address1 %><br>
+        <% end %>
+        <% if @user.city? && @user.state? %>
+          <%= @user.city %>, <%= @user.state %>
           <% if @user.zip? %>
             <%= @user.zip %>
           <% end %>
+          <br>
+        <% end %>
+        <% if @user.phone? %>
+          <%= @user.phone %><br>
+        <% end %>
+
+
+
+      </div>
+    </div>
+
+    <div class="clear"></div>
+    <div class="profile_boxes">
+      <ul>
+        <li>
+          <span class="profile_contact">Contact <%= @user.first_name %></span>
         </li>
       </ul>
       <div class="clear"></div>
     </div>
+  </div>
+</div>
+
+<div class="row" id="profile_send_email">
+  <div class="email_content col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+    <% if signed_in? %>
+      <% if current_user.admin? %>
+    <div class="user_heading">
+      Send a note to <%=@user.first_name %>:
+    </div>
+        <%= form_for(EmailContent.new) do |f| %>
+        <%= f.hidden_field :email, :value => current_user.email %>
+        <%= f.hidden_field :recipient, :value => @user.email %>
+        <%= f.hidden_field :origin, :value => "contactemail" %>
+    <div class="form-group">
+        <%= f.text_area :text, class: "form-control", style: "text-align:center;", placeholder:"Hey, we met at church on Sunday. Want to get lunch this week?"  %>
+    </div>
+        <%= f.submit "Send", class: "btn btn-large btn-primary" %>
+        <% end %>
+      <% end %>
     <% end %>
   </div>
 </div>
+
+<script type="text/javascript">
+  $('.profile_contact').click(function(e){
+    e.preventDefault();
+   	$('#profile_send_email').slideToggle();
+	});
+</script>

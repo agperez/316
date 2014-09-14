@@ -31,8 +31,8 @@ SampleApp::Application.configure do
     storage: :s3,
     s3_credentials: {
       bucket: '316churchapp',
-      access_key_id: 'AKIAJGMMFM52LUXB3ZMA',
-      secret_access_key: 'kYuGMx4LLemJxWe/fFov55Qk/+LqewObTBRYXp7T'
+      access_key_id: 'AKIAI36DSV4N6YDG6RXQ',
+      secret_access_key: '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'
     }
   }
 end

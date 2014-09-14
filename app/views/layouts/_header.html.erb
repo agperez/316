@@ -15,7 +15,6 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><%= link_to "Calvary316", "http://www.Calvary316.tv" %></li>
             <% unless @sermons_recent.nil? %>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Recent Sermons <b class="caret"></b></a>
@@ -23,37 +22,54 @@
                   <% @sermons_recent.each do |sermon| %>
                     <li><a href="<%= sermon_path(sermon) %>"><%= sermon.s_date.strftime("%m/%d/%Y") %> | <%= sermon_title(sermon) %></a>
                     </li>
-                  <% end %> 
+                  <% end %>
                 </ul>
               </li>
+              <li><%= link_to "Sermon Archive", archive_path %></li>
             <% end %>
-            <li><%= link_to "Sermon Archive", archive_path %></li>
+
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to "theChurch", us_path, id: "the_church_link" %></li>
             <% if signed_in? %>
               <% if current_user.admin? %>
-                <li><%= link_to "Dashboard", dashboard_path %></li>
-                <li><%= link_to "Calendar", calendar_path %></li>
                 <li id="fat-menu" class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    Account <b class="caret"></b>
+                    Admin <b class="caret"></b>
                   </a>
                   <ul class="dropdown-menu">
-                    <li><%= link_to "My Home", current_user %></li>
-                    <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+                    <li><%= link_to "Dashboard", dashboard_path %></li>
+                    <li><%= link_to "Calendar", calendar_path %></li>
+                  </ul>
+                </li>
+                <li id="fat-menu" class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    My Pages <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><%= link_to "My Profile", profile_user_path(current_user) %></li>
+                    <li><%= link_to "My Schedule", current_user %></li>
+                    <li><%= link_to "Edit My Settings", edit_user_path(current_user) %></li>
+                    <li><%= link_to "Change My Picture", picture_user_path(current_user) %></li>
                     <li class="divider"></li>
-                    <li>
-                      <%= link_to "Sign out", signout_path, method: "delete" %>
-                    </li>
+                    <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
                   </ul>
                 </li>
               <% else %>
-                <li><%= link_to "My Home", current_user %></li>
-                <li>
-                  <%= link_to "Sign out", signout_path, method: "delete" %>
+                <li id="fat-menu" class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    My Pages <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><%= link_to "My Profile", profile_user_path(current_user) %></li>
+                    <li><%= link_to "My Schedule", current_user %></li>
+                    <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+                    <li class="divider"></li>
+                    <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
+                  </ul>
                 </li>
               <% end %>
-            <% else %>  
+            <% else %>
               <li><%= link_to "Sign in", signin_path %></li>
             <% end %>
           </ul>

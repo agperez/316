@@ -111,9 +111,7 @@
 
 <script type="text/javascript">
 	$('#filters a').click(function(e){
-
 	    e.preventDefault();
-
 	    var filter = $(this).attr('id');
 
 	    if (filter == "show_all") {
@@ -126,25 +124,17 @@
 	});
 
 	$('#team_toggle').click(function(e){
-
-	    e.preventDefault();
-
-       	$('.dash_teams').toggle();
-        $('.team_arrow_toggle').toggle();
+	  e.preventDefault();
+    $('.dash_teams').toggle();
+    $('.team_arrow_toggle').toggle();
 		$('.team_arrow_two').toggle();
-
-
-
 	});
 
 	$('#role_toggle').click(function(e){
-
-	    e.preventDefault();
-
-        $('.dash_roles').toggle();
-	    $('.role_arrow_toggle').toggle();
-	    $('.role_arrow_two').toggle();
-
+    e.preventDefault();
+    $('.dash_roles').toggle();
+    $('.role_arrow_toggle').toggle();
+    $('.role_arrow_two').toggle();
 	});
 
 </script>
