@@ -40,7 +40,7 @@
     <div class="profile_text" <% unless @user.avatar_file_size? || @user.facebook? %>style="margin: 0;"<% end %>>
       <div class="profile_name"><%= @user.first_name + ' ' + @user.last_name %></div>
       <div class="profile_info">
-        <% if @user.address1? %>
+        <% if @user.email? %>
           <%= @user.email %><br>
         <% end %>
         <% if @user.address1? %>
