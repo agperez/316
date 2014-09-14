@@ -25,4 +25,4 @@ doc/
 .idea
 .secret
 
-
+/config/environments/development.rb

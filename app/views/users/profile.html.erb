@@ -2,6 +2,26 @@
 <% provide(:bodyid, 'profile_body') %>
 <% provide(:containerid, 'profile_container') %>
 
+<div class="row" id="profile_send_email">
+  <div class="email_content col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+    <div class="user_heading">
+      Send a note to <%=@user.first_name %>:
+    </div>
+        <%= form_for(EmailContent.new) do |f| %>
+        <%= f.hidden_field :email, :value => current_user.email %>
+        <%= f.hidden_field :recipient, :value => @user.email %>
+        <%= f.hidden_field :origin, :value => "contactemail" %>
+    <div class="form-group">
+        <%= f.text_area :text, class: "form-control", style: "text-align:center;", placeholder:"Hey, we met at church on Sunday. Want to get lunch this week?"  %>
+    </div>
+        <%= f.submit "Send", class: "btn btn-large btn-primary" %>
+        <% end %>
+    <div class="profile_send_email_back">
+      Back to Profile
+    </div>
+  </div>
+</div>
+
 <div class="profile_header" style="background-image: url('<%= @user.avatar.url(:square_blur) %>');">
   <div class="profile_title">
     <% if @user.avatar_file_size? %>
@@ -50,30 +70,19 @@
   </div>
 </div>
 
-<div class="row" id="profile_send_email">
-  <div class="email_content col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
-    <% if signed_in? %>
-      <% if current_user.admin? %>
-    <div class="user_heading">
-      Send a note to <%=@user.first_name %>:
-    </div>
-        <%= form_for(EmailContent.new) do |f| %>
-        <%= f.hidden_field :email, :value => current_user.email %>
-        <%= f.hidden_field :recipient, :value => @user.email %>
-        <%= f.hidden_field :origin, :value => "contactemail" %>
-    <div class="form-group">
-        <%= f.text_area :text, class: "form-control", style: "text-align:center;", placeholder:"Hey, we met at church on Sunday. Want to get lunch this week?"  %>
-    </div>
-        <%= f.submit "Send", class: "btn btn-large btn-primary" %>
-        <% end %>
-      <% end %>
-    <% end %>
-  </div>
-</div>
+
 
 <script type="text/javascript">
   $('.profile_contact').click(function(e){
     e.preventDefault();
+    $('.profile_header').toggle();
    	$('#profile_send_email').slideToggle();
 	});
+
+  $('.profile_send_email_back').click(function(e){
+    e.preventDefault();
+    $('#profile_send_email').slideToggle();
+    $('.profile_header').toggle();
+  });
+
 </script>

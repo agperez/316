@@ -15,6 +15,10 @@
 
 // Photo Upload Page
 
+.upload_photo_profile_link {
+  font-size: 12px;
+}
+
 .upload_photo_header {
   margin-top: 60px;
   font-size: 60px;
@@ -52,6 +56,64 @@
   margin-top: 75px;
   font-size: 12px;
 }
+
+@media (min-width: 992px) and (max-width: 1209px) {
+  .upload_photo h2 {
+    font-size: 25px;
+  }
+
+}
+
+@media (min-width: 581px) and (max-width: 779px) {
+  .upload_photo_header {
+    font-size: 50px;
+  }
+  .upload_photo {
+    height: 175px;
+    padding-top: 20px;
+  }
+  .upload_photo_note {
+    margin-top: 30px;
+  }
+}
+
+@media (min-width: 492px) and (max-width: 580px) {
+  .upload_photo_header {
+    font-size: 40px;
+    margin-top: 10px;
+  }
+  .upload_photo h2 {
+    font-size: 25px;
+  }
+  .upload_photo {
+    height: 175px;
+    padding-top: 20px;
+  }
+  .upload_photo_note {
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 491px) {
+  .upload_photo_header {
+    font-size: 25px;
+    margin-top: 10px;
+  }
+  .upload_photo h2 {
+    font-size: 22px;
+  }
+  .upload_photo_note {
+    margin-top: 50px;
+  }
+  .upload_photo {
+    height: 150px;
+    padding-top: 20px;
+  }
+  .upload_photo_profile_link {
+    margin-bottom: 20px;
+  }
+}
+
 // Profile Page
 /*
 body, html {
@@ -166,6 +228,8 @@ body {
   overflow: hidden;
 }
 
+
+
 // .profile_boxes li:first-child:after {
 //   content: '';
 //   position: absolute;
@@ -201,8 +265,15 @@ body {
   padding-bottom: 40px;
   display: none;
   background-color: white;
+  height: 700px;
 }
 
+.profile_send_email_back {
+  font-size: 14px;
+  color: #999;
+  margin-top: 15px;
+  cursor: pointer;
+}
 
 // .profile_boxes li:last-child:before {
 //   content: '';
@@ -216,11 +287,7 @@ body {
 //   background: rgba(255,255,255,0.15);
 // }
 
-@media (max-width: 720px) {
-  .profile_title {
-    padding: 0 10px;
-  }
-}
+
 
 @media (max-width: 580px) {
   .profile_title {
