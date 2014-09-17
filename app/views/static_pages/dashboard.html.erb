@@ -59,7 +59,7 @@
 
 <% @date1 = Time.now %>
 <% @date2 = @date1 + 6.days %>
-<% @users_with_events = User.where(:reminders => true).joins(:events).where(:events => {:event_date => @date1..@date2}) %>
+<% @users_with_events = User.active.where(:reminders => true).joins(:events).where(:events => {:event_date => @date1..@date2}) %>
 <% @confirm_users = Array.new %>
 <% @users_with_events.each do |user| %>
 	<% @confirm_users << user.first_name + ' ' + user.last_name %>
@@ -71,7 +71,7 @@
 
 <div class="row">
 	<div class="col-lg-12">
-		<h3 class="dash_heading">Users</h3>
+		<h3 class="dash_heading">Users <span class="dash_deactivated_link"><%= link_to "View Deactivated Users", deactivated_path %> </span></h3>
 	</div>
 	<div class="col-lg-12">
 		<div id='filters'>
@@ -83,27 +83,38 @@
 		</div>
 	</div>
 
-	<div id="box">
+	<div id="box" style="min-height: 1000px;">
 		<div class="filter">
 			<% @users.each do |user| %>
-			<% @first_letter = 'alpha_'+user.first_name[0].downcase %>
-				<%= form_for user do |f| %>
-					<div class="dashboard_user <%= @first_letter %> col-lg-3 col-md-3 col-sm-4 col-xs-6">
-						<h5><%= link_to user.first_name + ' ' + user.last_name, edit_user_path(user) %></h5>
-						<div class="form-group <%= @first_letter %>">
-							<%= f.label "Role:" %><% unless user.role_id != nil %> <span class="not_assigned">(Not Assigned)</span><% end %>
-							<%= f.collection_select :role_id, Role.all, :id, :name, {:include_blank => "No Role"}, {class: "form-control"} %>
+				<% @first_letter = 'alpha_'+user.first_name[0].downcase %>
+				<div class="dashboard_user <%= @first_letter %> col-lg-3 col-md-3 col-sm-4 col-xs-6">
+					<%= form_for user do |f| %>
+						<div class="<%= @first_letter %>">
+							<h5><%= link_to user.first_name + ' ' + user.last_name, edit_user_path(user) %></h5>
+							<div class="form-group <%= @first_letter %>">
+								<%= f.label "Role:" %><% unless user.role_id != nil %> <span class="not_assigned">(Not Assigned)</span><% end %>
+								<%= f.collection_select :role_id, Role.all, :id, :name, {:include_blank => "No Role"}, {class: "form-control"} %>
+							</div>
+							<div class="form-group <%= @first_letter %>">
+								<%= f.label "Team:" %><% unless user.team_id != nil %> <span class="not_assigned">(Not Assigned)</span><% end %>
+								<%= f.collection_select :team_id, Team.all, :id, :name, {:include_blank => "No Team"}, {class: "form-control"} %>
+							</div>
+							<%= f.hidden_field :user_id, value: user.id %>
+							<div class="actions <%= @first_letter %>">
+							<%= f.submit "Update" %>
+							</div>
 						</div>
-						<div class="form-group <%= @first_letter %>">
-							<%= f.label "Team:" %><% unless user.team_id != nil %> <span class="not_assigned">(Not Assigned)</span><% end %>
-							<%= f.collection_select :team_id, Team.all, :id, :name, {:include_blank => "No Team"}, {class: "form-control"} %>
-						</div>
-						<%= f.hidden_field :user_id, value: user.id %>
-						<div class="actions <%= @first_letter %>">
-						<%= f.submit "Update" %>
-						</div>
+					<% end %>
+					<div class="dash_deactivate <%= @first_letter %>">
+						<%= form_for user do |f| %>
+							<%= f.hidden_field :user_id, value: user.id %>
+							<%= f.hidden_field :deactivated, value: true %>
+							<%= f.hidden_field :role_id, value: nil %>
+							<%= f.hidden_field :team_id, value: nil %>
+							<%= f.submit "Deactivate", class: "dash_deactivate_button" %>
+						<% end %>
 					</div>
-				<% end %>
+				</div>
 			<% end %>
 		</div>
 	</div>

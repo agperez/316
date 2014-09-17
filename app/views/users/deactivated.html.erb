@@ -1,0 +1,9 @@
+<h1>Deactivated User Accounts</h1>
+<%= link_to "< Back to Dashboard", dashboard_path %>
+<% @deactivated_users.each do |user| %>
+  <%= form_for(user) do |f| %>
+    <h3><%= user.first_name + " " + user.last_name %></h3>
+    <%= f.hidden_field :deactivated, value: false %>
+    <%= f.submit "Activate This Account", class: "btn btn-large btn-primary" %>
+  <% end %>
+<% end %>

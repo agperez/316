@@ -33,6 +33,14 @@ class User < ActiveRecord::Base
   before_save { self.avatar_remote_url = avatar_url }
   #/paperclip
 
+  def self.active
+    where(deactivated: false)
+  end
+
+  def self.deactivated
+    where(deactivated: true)
+  end
+
   def fullname
     name = self.first_name + ' '
     name += self.last_name

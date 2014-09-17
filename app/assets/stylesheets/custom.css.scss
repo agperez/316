@@ -687,6 +687,15 @@ button.cupid-light-blue {
   margin-bottom: 30px;
 }
 
+.dash_deactivate {
+  margin-top: -26px;
+  margin-left: 75px;
+}
+
+.dash_deactivate_button {
+  color: #999;
+}
+
 .not_assigned {
   font-style: italic;
   font-size: 12px;
@@ -724,6 +733,12 @@ button.cupid-light-blue {
   height: 10px;
   margin-top: 0px;
   margin-bottom: 10px;
+}
+
+.dash_deactivated_link {
+  font-size: 11px;
+  font-style: normal;
+  padding-left: 5px;
 }
 
 .dash_names {

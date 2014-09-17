@@ -12,7 +12,7 @@ class StaticPagesController < ApplicationController
   def email
     @date1 = Time.now
     @date2 = @date1 + 6.days
-    @users_with_events = User.where(:reminders => true).joins(:events).where(:events => {:event_date => @date1..@date2})
+    @users_with_events = User.active.where(:reminders => true).joins(:events).where(:events => {:event_date => @date1..@date2})
     @user_names = @users_with_events.map {|user| user.first_name + ' ' + user.last_name}
     @users_with_events.each do |user|
       @next_event = user.events.where(:event_date => @date1..@date2).first
@@ -23,7 +23,7 @@ class StaticPagesController < ApplicationController
   end
 
   def dashboard
-    @users = User.order(:first_name)
+    @users = User.active.order(:first_name)
     @teams = Team.all
     @roles = Role.all
     @filters = Array.new
@@ -47,7 +47,7 @@ class StaticPagesController < ApplicationController
 
     def first_letters
       previous_letter = ""
-      @users.each do |user|
+      @users.active.each do |user|
         letter = user.first_name[0].downcase
         unless letter == previous_letter
           @filters.push letter
