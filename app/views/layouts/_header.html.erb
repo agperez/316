@@ -64,6 +64,7 @@
                     <li><%= link_to "My Profile", profile_user_path(current_user) %></li>
                     <li><%= link_to "My Schedule", current_user %></li>
                     <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+                    <li><%= link_to "Change My Picture", picture_user_path(current_user) %></li>
                     <li class="divider"></li>
                     <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
                   </ul>
