@@ -32,8 +32,10 @@ SampleApp::Application.routes.draw do
 
   match '/user', to: 'users#show', via: 'get'
   match '/signup', to: 'users#new', via: 'get'
+  match '/deactivated', to: 'users#deactivated', via: 'get'
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
+
 
   match '/help', to: 'static_pages#help', via: 'get'
   match '/contact', to: 'static_pages#contact', via: 'get'

@@ -13,6 +13,113 @@
 @-o-viewport        { width: device-width; }
 @viewport           { width: device-width; }
 
+// Photo Upload Page
+
+
+.Andy {
+  margin-top: 25px;
+  
+}
+
+.upload_photo_profile_link {
+  font-size: 12px;
+}
+
+.upload_photo_header {
+  margin-top: 60px;
+  font-size: 60px;
+  text-align: center;
+  font-style: italic;
+}
+.upload_photo {
+  text-align: center;
+  height: 200px;
+}
+
+.up_fb {
+  padding-top: 46px;
+}
+
+.up_dev {
+  padding-top: 46px;
+}
+
+.up_url {
+  padding-top: 46px;
+}
+
+.up_fb_thumb {
+  margin-top: -8px;
+  padding-bottom: 7px;
+}
+
+.up_fb_error {
+  padding-bottom: 9px;
+}
+
+.upload_photo_note {
+  text-align: center;
+  margin-top: 75px;
+  font-size: 12px;
+}
+
+@media (min-width: 992px) and (max-width: 1209px) {
+  .upload_photo h2 {
+    font-size: 25px;
+  }
+
+}
+
+@media (min-width: 581px) and (max-width: 779px) {
+  .upload_photo_header {
+    font-size: 50px;
+  }
+  .upload_photo {
+    height: 175px;
+    padding-top: 20px;
+  }
+  .upload_photo_note {
+    margin-top: 30px;
+  }
+}
+
+@media (min-width: 492px) and (max-width: 580px) {
+  .upload_photo_header {
+    font-size: 40px;
+    margin-top: 10px;
+  }
+  .upload_photo h2 {
+    font-size: 25px;
+  }
+  .upload_photo {
+    height: 175px;
+    padding-top: 20px;
+  }
+  .upload_photo_note {
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 491px) {
+  .upload_photo_header {
+    font-size: 25px;
+    margin-top: 10px;
+  }
+  .upload_photo h2 {
+    font-size: 22px;
+  }
+  .upload_photo_note {
+    margin-top: 50px;
+  }
+  .upload_photo {
+    height: 150px;
+    padding-top: 20px;
+  }
+  .upload_photo_profile_link {
+    margin-bottom: 20px;
+  }
+}
+
 // Profile Page
 /*
 body, html {
@@ -28,9 +135,9 @@ body {
 }
 */
 
-
 .profile_header {
   //font-family: 'Open Sans', Arial, sans-serif;
+  min-height: 600px;
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -95,7 +202,7 @@ body {
   margin-bottom: 30px;
   font-size: 16px;
   font-weight: 400;
-  line-height: 23px;
+  line-height: 24px;
   display: block;
 }
 
@@ -128,6 +235,8 @@ body {
   overflow: hidden;
 }
 
+
+
 // .profile_boxes li:first-child:after {
 //   content: '';
 //   position: absolute;
@@ -140,12 +249,14 @@ body {
 //   background: rgba(255,255,255,0.15);
 // }
 
-.profile_boxes li span.profile_phone {
+.profile_boxes li span.profile_contact {
   display: block;
-  margin-bottom: 15px;
+  margin: 6px 0 6px 0;
   font-size: 40px;
   font-weight: 300;
   line-height: 40px;
+  font-style: italic;
+  cursor: pointer;
 }
 
 .profile_boxes li span.profile_email {
@@ -154,6 +265,21 @@ body {
   font-size: 40px;
   font-weight: 300;
   line-height: 40px;
+}
+
+#profile_send_email {
+  margin: 0;
+  padding-bottom: 40px;
+  display: none;
+  background-color: white;
+  height: 700px;
+}
+
+.profile_send_email_back {
+  font-size: 14px;
+  color: #999;
+  margin-top: 15px;
+  cursor: pointer;
 }
 
 // .profile_boxes li:last-child:before {
@@ -168,11 +294,7 @@ body {
 //   background: rgba(255,255,255,0.15);
 // }
 
-@media (max-width: 720px) {
-  .profile_title {
-    padding: 0 10px;
-  }
-}
+
 
 @media (max-width: 580px) {
   .profile_title {
@@ -191,7 +313,9 @@ body {
   .profile_info {
     margin-bottom: 20px;
   }
-
+  .profile_boxes li span.profile_contact {
+    font-size: 20px;
+  }
 }
 
 /* Us page */
@@ -566,6 +690,15 @@ button.cupid-light-blue {
   margin-bottom: 30px;
 }
 
+.dash_deactivate {
+  margin-top: -26px;
+  margin-left: 75px;
+}
+
+.dash_deactivate_button {
+  color: #999;
+}
+
 .not_assigned {
   font-style: italic;
   font-size: 12px;
@@ -603,6 +736,12 @@ button.cupid-light-blue {
   height: 10px;
   margin-top: 0px;
   margin-bottom: 10px;
+}
+
+.dash_deactivated_link {
+  font-size: 11px;
+  font-style: normal;
+  padding-left: 5px;
 }
 
 .dash_names {
@@ -755,6 +894,11 @@ tr:nth-child(even), tr:nth-child(even) a {
 
 .s_elements a {
 
+}
+
+#the_church_link {
+  font-style: italic;
+  color: #2EB043;
 }
 
 /* Social Media Icons: Sermon View */

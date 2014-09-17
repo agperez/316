@@ -7,7 +7,7 @@
 <div id="select_add_dialog">
   <form>
     <fieldset>
-      Select a User: 
+      Select a User:
       <select name="Users" id="addUser" class="form-control">
         <% @users.each do |user| %>
         <option value="<%= user.id %>"><%= user.first_name + ' ' + user.last_name %></option>
@@ -18,7 +18,7 @@
       <select name="Exception" id="addException" class="form-control">
         <option value="0">Yes</option>
         <option value="1">No</option>
-      </select>   
+      </select>
       <br>
       <div id="role_exception" style="display:none">This is text
         <select name="Roles" id="addRole" class="form-control">
@@ -61,13 +61,13 @@
     var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();
-    var y = date.getFullYear(); 
+    var y = date.getFullYear();
 
     var global_start_date = "";
 
-    <% @teams.each do |team| %>  
-      var <%= team.name.downcase.tr(" ", "_") %>_users = [       
-        <% team.users.each do |user| %>
+    <% @teams.each do |team| %>
+      var <%= team.name.downcase.tr(" ", "_") %>_users = [
+        <% team.users.active.each do |user| %>
           <% unless user.role.blank? || user.role.nil? %>
           {
             userID: <%= user.id %>,
@@ -75,7 +75,7 @@
             color: '<%= user.role.color %>',
             textColor: '<%= user.role.text_color %>',
             roleID: <%= user.role.id %>,
-            order: <%= user.role.order %>     
+            order: <%= user.role.order %>
           },
           <% end %>
         <% end %>
@@ -84,7 +84,7 @@
       $('#external-events').append("<div class='external-event' id='<%=team.name.downcase.tr(" ", "_")%>_users'><%= team.name %></div>");
 
       $('#<%=team.name.downcase.tr(" ", "_")%>_users').each(function() {
-        
+
         // make the event draggable using jQuery UI
         $(this).draggable({
           zIndex: 999,
@@ -97,7 +97,7 @@
     <% end %>
 
     var select_add_event = function() {
-      var user = $('#addUser').val(); 
+      var user = $('#addUser').val();
       var except = $('#addException').val();
       var exceptVal = "";
       var userRole = "";
@@ -135,13 +135,13 @@
 
                     eval("role"+userRole).push(created_event);
                     $('#calendar').fullCalendar( 'refetchEvents' );
-          });  
+          });
         });
       });
       $( this ).dialog( "close" );
     }
 
-    $( "#event_click_dialog" ).dialog({ 
+    $( "#event_click_dialog" ).dialog({
       autoOpen: false,
       width: 400,
       buttons: [
@@ -155,14 +155,14 @@
             $.destroy({
               url: '/events/' + globalevent_id
             });
-            
+
             // 2. Removes the event object from the CALENDAR.
 
             $( this ).dialog( "close" );
             for (var i=0; i<eval("role"+globalevent_role).length; i++) {
               if (eval("role"+globalevent_role)[i].id == globalevent_id) {
                 eval("role"+globalevent_role).splice(i, 1);
-              }   
+              }
             }
             $('#calendar').fullCalendar( 'refetchEvents' );
 
@@ -191,8 +191,8 @@
       droppable: true,
 
       // Action for when a team is dropped on the calendar:
-      drop: function(date, allDay) { 
-        
+      drop: function(date, allDay) {
+
         // Name of the calling element. e.g. TeamA_users
         var teamArray = eval(this.id);
 
@@ -208,13 +208,13 @@
       select: function(start, end, allDay) {
         global_start_date = start;
         $('#select_add_dialog').dialog("open");
-      },      
+      },
 
       // Action for when an event is drag-and-dropped on a new date:
       eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) {
         var event_id = parseInt(event.id);
         var event_start = $.fullCalendar.formatDate(event.start, 'yyyy-MM-dd');
-        
+
         // Update the event date in the RAILS DATABASE via $.update (jquery.rest.js)
         $.update(
             '/events/' + event_id,
@@ -247,7 +247,7 @@
     <% @roles.each do |role| %>
       var roleColor = '<%= role.color %>';
       var roleTextColor = '<%= role.text_color %>';
-      var role<%= role.id %> = [       
+      var role<%= role.id %> = [
         <% role.events.each do |event| %>
           {
             // When creating a new event, store SERMON ATTRIBUTES in the attributes of the CALENDAR EVENT OBJECT...
@@ -255,22 +255,22 @@
             id: '<%= event.id %>',
             title: '<%= event.user.first_name + ' ' + event.user.last_name %>',
             start: new Date(<%= event.event_date.strftime("%Y") %>, <%= event.event_date.strftime("%m") %>-1, <%= event.event_date.strftime("%d") %>),
-            color: roleColor,  
+            color: roleColor,
             textColor: roleTextColor,
             role: <%= role.id %>,
             order: <%= role.order %>
-          }, 
-        <% end %>   
+          },
+        <% end %>
       ]
       add_set(role<%= role.id %>);
 
       <% @role_button_id = role.name.downcase.tr(" ", "_") %>
 
       $('<button/>', {
-        text: "<%= role.name %>", 
+        text: "<%= role.name %>",
         id: 'btn_<%= @role_button_id %>_off',
         class: '<% case role.color %><% when "#59BA53" %>cupid-green<% when "#9FE1E7" %>cupid-light-blue<% when "#F8B0C8" %>cupid-pink<% when "#D5BB2A" %>cupid-yellow<% when "#9FC6E7" %>cupid-blue-gray<% when "#4986E7" %>cupid-blue<% when "#9A9CFF" %>cupid-purple<% when "#FFAD46" %>cupid-orange<% when "#D06B64" %>cupid-red<% else %>cupid-gray<% end %>',
-        click: function () { 
+        click: function () {
           $('#btn_<%= @role_button_id %>_off').toggle(0, function() {
             $('#btn_<%= @role_button_id %>_on').toggle(0);
             $("#calendar").fullCalendar( 'removeEventSource', role<%= role.id %> );
@@ -279,20 +279,20 @@
       }).prependTo('.toggleButtons');
 
       $('<button/>', {
-        text: "<%= role.name %>", 
+        text: "<%= role.name %>",
         id: 'btn_<%= @role_button_id %>_on',
         class: '<% case role.color %><% when "#59BA53" %>cupid-green<% when "#9FE1E7" %>cupid-light-blue<% when "#F8B0C8" %>cupid-pink<% when "#D5BB2A" %>cupid-yellow<% when "#9FC6E7" %>cupid-blue-gray<% when "#4986E7" %>cupid-blue<% when "#9A9CFF" %>cupid-purple<% when "#FFAD46" %>cupid-orange<% when "#D06B64" %>cupid-red<% else %>cupid-gray<% end %>',
-        click: function () { 
+        click: function () {
           $('#btn_<%= @role_button_id %>_on').toggle(0, function() {
             $('#btn_<%= @role_button_id %>_off').toggle(0);
             $("#calendar").fullCalendar( 'addEventSource', role<%= role.id %> );
           });
         }
-      }).prependTo('.toggleButtons').hide();       
+      }).prependTo('.toggleButtons').hide();
     <% end %>
 
     var drop_team = function(date, id, title, role, color, order, textColor) {
-        
+
       $.create('/events',
         { event: { event_date: date, user_id: id, role_id: role } },
         function (response) {

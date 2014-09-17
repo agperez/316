@@ -9,23 +9,6 @@ class TeamsController < ApplicationController
     @teams = Team.all
   end
 
-  def calendar
-    @teams = Team.all
-    @users = User.all
-  end
-
-
-  def calendar2
-    @teams = Team.all
-    @users = User.all
-  end
-
-  def assign_events
-    @team = Team.find(params[:id])
-    @users = @team.users
-  end
-
-
   # GET /teams/1
   # GET /teams/1.json
   def show
@@ -35,7 +18,7 @@ class TeamsController < ApplicationController
       format.html {redirect_to dashboard_path}
       format.xml  { render :xml => @team }
       format.js { render :json => @team.to_json }
-    end    
+    end
   end
 
   # GET /teams/new
@@ -54,9 +37,9 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       if @team.save
-        format.html { 
+        format.html {
           redirect_to dashboard_path
-          flash[:success] = @team.name+' was successfully created.' 
+          flash[:success] = @team.name+' was successfully created.'
         }
         format.json { render action: 'show', status: :created, location: @team }
       else

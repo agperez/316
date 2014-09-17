@@ -1,5 +1,6 @@
 class EmailContentsController < ApplicationController
   before_action :set_email_content, only: [:show, :edit, :update, :destroy]
+  before_action :admin_user, 		    only: [:index, :destroy, :update, :show]
 
   # GET /email_contents
   # GET /email_contents.json
@@ -66,40 +67,38 @@ class EmailContentsController < ApplicationController
   def schedule_email
     @date1 = Time.now
     @date2 = @date1 + 1.years
-    @users_with_events = User.joins(:events).where(events: {event_date: @date1..@date2})
+    @users_with_events = User.active.joins(:events).where(events: {event_date: @date1..@date2})
     @users_with_events.uniq.each do |user|
       @eventsall = user.events.where(events: {event_date: @date1..@date2})
       ScheduleMailer.schedule_email(user, @eventsall).deliver
     end
-      flash[:success] = 'Your email has been sent.'
+      flash[:success] = 'Your message has been sent.'
       redirect_to dashboard_path
   end
 
   def return_email
     ReturnMailer.return_email(current_user).deliver
-    flash[:success] = 'Your email has been sent.'
+    flash[:success] = 'Your message has been sent.'
     redirect_to(current_user)
   end
 
   def contact_email
     ContactMailer.contact_email(current_user).deliver
-    flash[:success] = 'Your email has been sent.'
+    flash[:success] = 'Your message has been sent.'
     redirect_to(current_user)
   end
 
   def prayer_email
     PrayerMailer.prayer_email(current_user).deliver
-    flash[:success] = 'Your email has been sent.'
+    flash[:success] = 'Your message has been sent.'
     redirect_to(current_user)
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_email_content
       @email_content = EmailContent.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def email_content_params
       params.require(:email_content).permit(:email, :text, :recipient, :origin)
     end

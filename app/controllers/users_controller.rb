@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-  before_action :signed_in_user, 	only: [:index, :edit, :update, :destroy, :profile, :picture]
+  before_action :signed_in_user, 	only: [:index, :edit, :update, :destroy, :profile,
+                                         :picture, :us, :deactivated]
+  before_action :admin_user, 		  only: [:index, :destroy, :import, :deactivated]                                         
   before_action :correct_user, 		only: [:show, :edit, :update, :picture]
-  before_action :not_signed_in,   only: [:new]
-
-  # prevent anyone except admins from using the delete method
-  before_action :admin_user, 		  only: [:index, :destroy, :import]
+  before_action :not_signed_in,   only:  :new
+  before_action :admin_user, 		  only: [:index, :destroy, :import, :deactivated]
 
   def new
   	@user = User.new
@@ -20,8 +20,8 @@ class UsersController < ApplicationController
 
 
   def us
-    @users = User.order(:first_name)
-    @users2 = User.order(:last_name)
+    @users = User.active.order(:first_name)
+    @users2 = User.active.order(:last_name)
     @filters = Array.new
     @last_filters = Array.new
     first_letters
@@ -52,8 +52,9 @@ class UsersController < ApplicationController
   def create
   	@user = User.new(user_params)
     if @user.save
-      flash[:success] = "Account for "+@user.first_name+" created."
-      redirect_to dashboard_path
+      sign_in @user
+      flash[:success] = "Your account has been created!"
+      redirect_to picture_user_path(@user)
     else
       render 'new'
     end
@@ -72,6 +73,10 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def deactivated
+    @deactivated_users = User.deactivated
+  end
+
   def update
     if user_params[:password].blank?
       user_params.delete(:password)
@@ -79,14 +84,19 @@ class UsersController < ApplicationController
     end
   	if @user.update_attributes(user_params)
       if current_user.admin?
-        #flash[:success] = @user.first_name + " has been updated"
-		    redirect_to profile_user_path(@user)
+        if @user.deactivated?
+          flash[:success] = @user.first_name + " has been deactivated"
+          redirect_to dashboard_path
+        else
+          flash[:success] = @user.first_name + " has been updated"
+  		    redirect_to profile_user_path(@user)
+        end
   	  else
         flash[:success] = "Profile updated"
         redirect_to profile_user_path(@user)
       end
     else
-      redirect_to dashboard_path
+      render 'edit'
     end
   end
 
@@ -98,10 +108,12 @@ class UsersController < ApplicationController
 
   private
   	def user_params
-  		params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation,
-                                   :reminders, :facebook, :team_id, :role_id, :gender, :birth_date,
-                                   :phone, :address1, :city, :state, :zip, :twitter,
-                                   :spouse, :photo_link, :avatar, :avatar_remote_url, :avatar_url,
+  		params.require(:user).permit(:first_name, :last_name, :email, :password,
+                                   :password_confirmation, :reminders, :facebook,
+                                   :team_id, :role_id, :gender, :birth_date, :phone,
+                                   :address1, :city, :state, :zip, :twitter,
+                                   :spouse, :photo_link, :avatar, :avatar_remote_url,
+                                   :avatar_url, :deactivated,
                                     events_attributes: [:user_id, :role_id])
   	end
 
@@ -131,10 +143,7 @@ class UsersController < ApplicationController
       redirect_to(current_user) unless current_user?(@user) || current_user.admin?
   	end
 
-  	# Checks if the user's admin-boolean = true.
-  	def admin_user
-  		redirect_to(root_url) unless current_user.admin?
-  	end
+
 
     def first_letters
       previous_letter = ""
