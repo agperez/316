@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :signed_in_user, 	only: [:index, :edit, :update, :destroy, :profile]
-  before_action :correct_user, 		only: [:show, :edit, :update]
+  before_action :signed_in_user, 	only: [:index, :edit, :update, :destroy, :profile, :picture]
+  before_action :correct_user, 		only: [:show, :edit, :update, :picture]
   before_action :not_signed_in,   only: [:new]
 
   # prevent anyone except admins from using the delete method
@@ -14,6 +14,10 @@ class UsersController < ApplicationController
     User.import(params[:file])
     redirect_to users_path, notice: "Users Updated."
   end
+
+  def picture
+  end
+
 
   def us
     @users = User.order(:first_name)
@@ -75,11 +79,11 @@ class UsersController < ApplicationController
     end
   	if @user.update_attributes(user_params)
       if current_user.admin?
-        flash[:success] = @user.first_name + " has been updated"
-		    redirect_to dashboard_path
+        #flash[:success] = @user.first_name + " has been updated"
+		    redirect_to profile_user_path(@user)
   	  else
         flash[:success] = "Profile updated"
-        redirect_to @user
+        redirect_to profile_user_path(@user)
       end
     else
       redirect_to dashboard_path
@@ -96,8 +100,8 @@ class UsersController < ApplicationController
   	def user_params
   		params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation,
                                    :reminders, :facebook, :team_id, :role_id, :gender, :birth_date,
-                                   :phone, :address1, :address2, :twitter, :spouse, :photo_link,
-                                   :avatar, :avatar_remote_url, :avatar_url,
+                                   :phone, :address1, :city, :state, :zip, :twitter,
+                                   :spouse, :photo_link, :avatar, :avatar_remote_url, :avatar_url,
                                     events_attributes: [:user_id, :role_id])
   	end
 

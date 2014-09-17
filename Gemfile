@@ -13,10 +13,13 @@ gem 'rake', '~> 10.3.1'
 gem 'paperclip'
 gem 'aws-sdk'
 
+
+
 # Use sqlite3 as the database for Active Record
 group :development, :test do
 	gem 'sqlite3', '1.3.8'
 	gem 'rspec-rails', '2.13.1'
+	gem 'certified'
 end
 
 group :test do

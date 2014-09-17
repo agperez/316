@@ -1,0 +1,28 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-error">
+        The form contains <%= pluralize(@user.errors.count, "error") %>.
+      </div>
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li>* <%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :avatar, "Upload a picture from your computer / device..." %>
+    <%= f.file_field :avatar, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :avatar_remote_url, "... or upload a picture from a URL" %>
+    <%= f.text_field :avatar_remote_url, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :photo_link %>
+    <%= f.text_field :photo_link, class: "form-control" %>
+  </div>
+  <%= f.submit @type, class: "btn btn-large btn-primary" %>
+<% end %>

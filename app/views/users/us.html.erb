@@ -13,14 +13,11 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <h3 class="dash_heading">Users by Firstname</h3>
-  </div>
-  <div class="col-lg-12">
-    <div id='filters'>
-      <span class="filter_title">Filter Names:</span>
-      <a href='#' id="show_all" class="filter_buttons">All</a>
+    <div id='filters' class="filter_first_names" style='border: none;'>
+      <span class="us_filter_title">Filter First Names:</span><Br>
+      <a href='#' id="show_all" class="filter_buttons us_filters">All</a>
       <% @filters.each do |filter| %>
-        <a href='#' id="alpha_<%=filter%>" class="filter_buttons"><%=filter.upcase%></a>
+        <a href='#' id="alpha_<%=filter%>" class="filter_buttons us_filters"><%=filter.upcase%></a>
       <% end %>
     </div>
   </div>
@@ -28,14 +25,11 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <h3 class="dash_heading">Users by Lastname</h3>
-  </div>
-  <div class="col-lg-12">
-    <div id='filters'>
-      <span class="filter_title">Filter Names:</span>
-      <a href='#' id="show_all" class="filter_buttons">All</a>
+    <div id='filters' class="filter_last_names" style='border: none;'>
+      <span class="us_filter_title">Filter Last Names:</span><Br>
+      <a href='#' id="show_all" class="filter_buttons us_filters">All</a>
       <% @last_filters.each do |filter| %>
-        <a href='#' id="beta_<%=filter%>" class="filter_buttons"><%=filter.upcase%></a>
+        <a href='#' id="beta_<%=filter%>" class="filter_buttons us_filters"><%=filter.upcase%></a>
       <% end %>
     </div>
   </div>
@@ -44,7 +38,7 @@
       <% @users.each do |user| %>
         <% @first_letter = 'alpha_'+user.first_name[0].downcase %>
         <% @first_letter_last = 'beta_'+user.last_name[0].downcase %>
-        <div class="<%= @first_letter %> <%= @first_letter_last %> front_page_images col-lg-2 col-md-3 col-sm-3 col-xs-4">
+        <div class="<%= @first_letter %> <%= @first_letter_last %> front_page_images col-lg-2 col-md-3 col-sm-3 col-xs-6">
           <%= link_to(profile_user_path(user), class: "profile_link") do %>
             <div class="us_box <%= @first_letter %> <%= @first_letter_last %>">
               <div class="userbox <%= @first_letter %> <%= @first_letter_last %>">
@@ -65,6 +59,7 @@
     </div>
   </div>
 </div>
+
 
 
 <script type="text/javascript">
