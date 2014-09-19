@@ -15,10 +15,9 @@
 
 // Photo Upload Page
 
-
 .Andy {
   margin-top: 25px;
-  
+
 }
 
 .upload_photo_profile_link {
@@ -514,6 +513,25 @@ a.profile_link {
   .upcoming_events {
     font-size: 20px;
   }
+}
+
+/* User Edit Page */
+
+.checkbox.privacy_container {
+  margin-bottom: 20px;
+}
+
+.privacy_checkbox {
+  font-weight: normal;
+  font-size: 11px;
+  margin-top: -4px;
+}
+
+/* Inactive User Page */
+.inactive_message {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 10%;
 }
 
 /* Calendar */

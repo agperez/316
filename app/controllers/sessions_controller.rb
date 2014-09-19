@@ -5,16 +5,18 @@ class SessionsController < ApplicationController
 	def create
 		user = User.find_by(email: params[:session][:email].downcase)
 		if user && user.authenticate(params[:session][:password])
-			#sign in the user, redirect to the user's show page
-			sign_in user
-			if user.admin?
-				redirect_to dashboard_url
+			if user.deactivated?
+				redirect_to inactive_path(id: user.id)
 			else
-				redirect_back_or user
+				sign_in user
+				if user.admin?
+					redirect_to dashboard_url
+				else
+					redirect_back_or user
+				end
 			end
 		else
-			#error message, re-render the signin form
-			flash.now[:error] = 'Invalid email/password combination' 
+			flash.now[:error] = 'Invalid email/password combination'
 			render 'new'
 		end
 	end

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :signed_in_user, 	only: [:index, :edit, :update, :destroy, :profile,
                                          :picture, :us, :deactivated]
-  before_action :admin_user, 		  only: [:index, :destroy, :import, :deactivated]                                         
+  before_action :admin_user, 		  only: [:index, :destroy, :import, :deactivated]
   before_action :correct_user, 		only: [:show, :edit, :update, :picture]
   before_action :not_signed_in,   only:  :new
   before_action :admin_user, 		  only: [:index, :destroy, :import, :deactivated]
@@ -47,6 +47,10 @@ class UsersController < ApplicationController
       format.xml  { render :xml => @user }
       format.js { render :json => @user.to_json }
     end
+  end
+
+  def inactive
+    @user = User.find(params[:id])
   end
 
   def create
@@ -113,13 +117,11 @@ class UsersController < ApplicationController
                                    :team_id, :role_id, :gender, :birth_date, :phone,
                                    :address1, :city, :state, :zip, :twitter,
                                    :spouse, :photo_link, :avatar, :avatar_remote_url,
-                                   :avatar_url, :deactivated,
+                                   :avatar_url, :deactivated, :hide_email,
+                                   :hide_phone, :hide_address,
                                     events_attributes: [:user_id, :role_id])
   	end
 
-  	# Checks if a user is signed in when they attempt to view a particular page.
-  	# If not, it stores the location of the page they were attempting to visit and redirects
-  	#   to the sign-in page.
   	def signed_in_user
   		unless signed_in?
   			store_location
@@ -128,7 +130,6 @@ class UsersController < ApplicationController
   		end
   	end
 
-    # Checks if the user is already signed-up
     def not_signed_in
       if signed_in?
         unless current_user.admin?
@@ -137,13 +138,10 @@ class UsersController < ApplicationController
       end
     end
 
-  	# Checks if the user is the same as the user for who's action they are trying to access.
   	def correct_user
   		@user = User.find(params[:id])
       redirect_to(current_user) unless current_user?(@user) || current_user.admin?
   	end
-
-
 
     def first_letters
       previous_letter = ""

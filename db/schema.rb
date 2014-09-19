@@ -11,13 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140916193110) do
+ActiveRecord::Schema.define(version: 20140919185223) do
 
   create_table "email_contents", force: true do |t|
-    t.string "email"
-    t.text   "text"
-    t.string "origin"
-    t.string "recipient"
+    t.string   "email"
+    t.text     "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "origin"
+    t.string   "recipient"
   end
 
   create_table "events", force: true do |t|
@@ -119,6 +121,9 @@ ActiveRecord::Schema.define(version: 20140916193110) do
     t.string   "state"
     t.integer  "zip"
     t.boolean  "deactivated",         default: false
+    t.boolean  "hide_email",          default: false
+    t.boolean  "hide_phone",          default: false
+    t.boolean  "hide_address",        default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
