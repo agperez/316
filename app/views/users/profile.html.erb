@@ -37,7 +37,7 @@
         <%= image_tag("box_male_large.gif", alt: @user.fullname) %>
       </div>
     <% end %>
-    <div class="profile_text" <% unless @user.avatar_file_size? || @user.facebook? %>style="margin: 0;"<% end %>>
+    <div class="profile_text">
       <div class="profile_name"><%= @user.first_name + ' ' + @user.last_name %></div>
       <div class="profile_info">
         <% unless @user.hide_email? %>
