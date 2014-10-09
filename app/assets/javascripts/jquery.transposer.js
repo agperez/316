@@ -12,9 +12,9 @@
 
   $.fn.transpose = function(options) {
     var opts = $.extend({}, $.fn.transpose.defaults, options);
-    
+
     var currentKey = null;
-    
+
     var keys = [
       { name: 'Ab',  value: 0,   type: 'F' },
       { name: 'A',   value: 1,   type: 'N' },
@@ -32,9 +32,10 @@
       { name: 'F#',  value: 10,  type: 'S' },
       { name: 'Gb',  value: 10,  type: 'F' },
       { name: 'G',   value: 11,  type: 'N' },
-      { name: 'G#',  value: 0,   type: 'S' }
+      { name: 'G#',  value: 0,   type: 'S' },
+      { name: '-',   value: 99,  type: 'N' }
     ];
-  
+
     var getKeyByName = function (name) {
         if (name.charAt(name.length-1) == "m") {
           name = name.substring(0, name.length-1);
@@ -54,14 +55,18 @@
     };
 
     var getNewKey = function (oldKey, delta, targetKey) {
-        var keyValue = getKeyByName(oldKey).value + delta;
+        var keyValue = getKeyByName(oldKey).value;
 
-        if (keyValue > 11) {
+        if (keyValue < 99) {
+          keyValue += delta;
+        }
+
+        if (keyValue > 11 && keyValue < 99) {
             keyValue -= 12;
         } else if (keyValue < 0) {
             keyValue += 12;
         }
-        
+
         var i=0;
         if (keyValue == 0 || keyValue == 2 || keyValue == 5 || keyValue == 7 || keyValue == 10) {
             // Return the Flat or Sharp Key
@@ -90,6 +95,7 @@
                   }
             }
         }
+
         else {
             // Return the Natural Key
             for (;i<keys.length;i++) {
@@ -128,11 +134,11 @@
         }
 
         var delta = getDelta(currentKey.value, newKey.value);
-        
+
         $("span.c", target).each(function (i, el) {
             transposeChord(el, delta, newKey);
         });
-        
+
         currentKey = newKey;
     };
 
@@ -145,7 +151,8 @@
         el.text(newChord);
 
         var sib = el[0].nextSibling;
-        if (sib && sib.nodeType == 3 && sib.nodeValue.length > 0 && sib.nodeValue.charAt(0) != "/") {
+
+        if (sib && sib.nodeType == 3 && sib.nodeValue.length > 0 && sib.nodeValue.charAt(0) != "/" && sib.nodeValue.charAt(0) != ")" && sib.nodeValue.charAt(sib.nodeValue.length-1) != "(") {
             var wsLength = getNewWhiteSpaceLength(oldChord.length, newChord.length, sib.nodeValue.length);
             sib.nodeValue = makeString(" ", wsLength);
         }
@@ -165,8 +172,8 @@
         for (var i = 0; i < repeat; i++) o.push(s);
         return o.join("");
     }
-    
-    
+
+
     var isChordLine = function (input) {
         var tokens = input.replace(/\s+/, " ").split(" ");
 
@@ -178,14 +185,14 @@
         }
         return true;
     };
-    
+
     var wrapChords = function (input) {
-        return input.replace(opts.chordReplaceRegex, "<span class='c'>$1</span>");
+        return input.replace(opts.chordReplaceRegex, "<span class='c' style='color: red;'>$1</span>");
     };
-    
-    
+
+
     return $(this).each(function() {
-    
+
       var startKey = $(this).attr("data-key");
       if (!startKey || $.trim(startKey) == "") {
         startKey = opts.key;
@@ -195,16 +202,16 @@
         throw("Starting key not defined.");
         return this;
       }
-      
+
       currentKey = getKeyByName(startKey);
 
       // Build tranpose links ===========================================
       var keyLinks = [];
       $(keys).each(function(i, key) {
           if (currentKey.name == key.name)
-              keyLinks.push("<a href='#' class='selected'>" + key.name + "</a>");
-          else
-              keyLinks.push("<a href='#'>" + key.name + "</a>");
+              keyLinks.push("<span class='key-container' id='selected'><a href='#' class='selected'>" + key.name + "</a></span>");
+          else if (key.name != "-")
+              keyLinks.push("<span class='key-container'><a href='#'>" + key.name + "</a></span>");
       });
 
 
@@ -215,10 +222,12 @@
           e.preventDefault();
           transposeSong($this, $(this).text());
           $(".transpose-keys a").removeClass("selected");
+          $(".transpose-keys a").parent().removeAttr("id");
           $(this).addClass("selected");
+          $(this).parent().attr('id', 'selected');
           return false;
       });
-      
+
       $(this).before(keysHtml);
 
       var output = [];
@@ -240,8 +249,8 @@
 
 
   $.fn.transpose.defaults = {
-    chordRegex: /^[A-G][b\#]?(2|5|6|7|9|11|13|6\/9|7\-5|7\-9|7\#5|7\#9|7\+5|7\+9|7b5|7b9|7sus2|7sus4|add2|add4|add9|aug|dim|dim7|m\/maj7|m6|m7|m7b5|m9|m11|m13|maj7|maj9|maj11|maj13|mb5|m|sus|sus2|sus4)*(\/[A-G][b\#]*)*$/,
-    chordReplaceRegex: /([A-G][b\#]?(2|5|6|7|9|11|13|6\/9|7\-5|7\-9|7\#5|7\#9|7\+5|7\+9|7b5|7b9|7sus2|7sus4|add2|add4|add9|aug|dim|dim7|m\/maj7|m6|m7|m7b5|m9|m11|m13|maj7|maj9|maj11|maj13|mb5|m|sus|sus2|sus4)*)/g
+    chordRegex: /^(\()*[A-G][b\#]?(2|5|6|7|9|11|13|6\/9|7\-5|7\-9|7\#5|7\#9|7\+5|7\+9|7b5|7b9|7sus2|7sus4|add2|add4|add9|aug|dim|dim7|m\/maj7|m6|m7|m7b5|m9|m11|m13|maj7|maj9|maj11|maj13|mb5|m|sus|sus2|sus4)*(\))*(\-)*(\/[A-G][b\#]*(\))*(\-)*)*$/,
+    chordReplaceRegex: /([A-G][b\#]?(2|5|6|7|9|11|13|6\/9|7\-5|7\-9|7\#5|7\#9|7\+5|7\+9|7b5|7b9|7sus2|7sus4|add2|add4|add9|aug|dim|dim7|m\/maj7|m6|m7|m7b5|m9|m11|m13|maj7|maj9|maj11|maj13|mb5|m|sus|sus2|sus4|)*(\-)*)/g
   };
 
 })(jQuery);

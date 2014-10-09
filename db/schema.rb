@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140919185223) do
+ActiveRecord::Schema.define(version: 20141007230936) do
 
   create_table "email_contents", force: true do |t|
     t.string   "email"
@@ -69,6 +69,14 @@ ActiveRecord::Schema.define(version: 20140919185223) do
     t.integer  "chapter_last"
     t.string   "announcements"
     t.boolean  "published"
+  end
+
+  create_table "setlist_songs", force: true do |t|
+    t.integer  "setlist_id"
+    t.integer  "song_id"
+    t.datetime "setlist_songs_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "setlists", force: true do |t|

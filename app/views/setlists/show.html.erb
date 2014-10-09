@@ -1,9 +1,58 @@
 <p id="notice"><%= notice %></p>
+<div style='text-align:center;padding-top:20px;'>
 
-<p>
-  <strong>Date:</strong>
-  <%= @setlist.date %>
-</p>
+  <button onclick='mySwipe.prev()'>prev</button>
+  <button onclick='mySwipe.next()'>next</button>
+
+</div>
+<div id='mySwipe' style='margin:0 auto' class='swipe'>
+  <div class='swipe-wrap'>
+    <% i = 1 %>
+    <% @setlist.songs.each do |song| %>
+      <div>
+        <h1>
+          <em>Song #<%=i%>: </em><%= song.name %>
+        </h1>
+
+
+        <p>
+          <strong>Default Key:</strong>
+          <%= song.key %>
+        </p>
+
+        <pre class="test_pre" data-key="<%= song.key %>">
+          <%= simple_format(song.chart) %>
+        </pre>
+
+        <% i+=1 %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
 
 <%= link_to 'Edit', edit_setlist_path(@setlist) %> |
 <%= link_to 'Back', setlists_path %>
+
+  <script type="text/javascript">
+
+    var elem = document.getElementById('mySwipe');
+    window.mySwipe = Swipe(elem, {
+      // startSlide: 4,
+      // auto: 3000,
+      // continuous: true,
+      // disableScroll: true,
+      // stopPropagation: true,
+      // callback: function(index, element) {},
+      // transitionEnd: function(index, element) {}
+    });
+
+    $(function() {
+      $(".test_pre").transpose();
+    });
+
+    $(function() {
+      $(".test_pre2").transpose();
+    });
+  </script>
