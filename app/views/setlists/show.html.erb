@@ -5,54 +5,47 @@
   <button onclick='mySwipe.next()'>next</button>
 
 </div>
+<% i = 1 %>
 <div id='mySwipe' style='margin:0 auto' class='swipe'>
   <div class='swipe-wrap'>
-    <% i = 1 %>
     <% @setlist.songs.each do |song| %>
+
       <div>
         <h1>
           <em>Song #<%=i%>: </em><%= song.name %>
         </h1>
-
-
         <p>
           <strong>Default Key:</strong>
           <%= song.key %>
         </p>
-
-        <pre class="test_pre" data-key="<%= song.key %>">
+        <pre class="test_pre" id="chart_<%=song.id%>"data-key="<%= song.key %>">
           <%= simple_format(song.chart) %>
         </pre>
-
-        <% i+=1 %>
       </div>
+
+      <% i+=1 %>
     <% end %>
   </div>
 </div>
-
-
-
 <%= link_to 'Edit', edit_setlist_path(@setlist) %> |
 <%= link_to 'Back', setlists_path %>
 
-  <script type="text/javascript">
-
-    var elem = document.getElementById('mySwipe');
-    window.mySwipe = Swipe(elem, {
-      // startSlide: 4,
-      // auto: 3000,
-      // continuous: true,
-      // disableScroll: true,
-      // stopPropagation: true,
-      // callback: function(index, element) {},
-      // transitionEnd: function(index, element) {}
-    });
-
+<script type="text/javascript">
+  var elem = document.getElementById('mySwipe');
+  window.mySwipe = Swipe(elem, {
+    // startSlide: 4,
+    // auto: 3000,
+    // continuous: true,
+    // disableScroll: true,
+    // stopPropagation: true,
+    // callback: function(index, element) {},
+    // transitionEnd: function(index, element) {}
+  });
+  <% @setlist.songs.each do |song| %>
     $(function() {
-      $(".test_pre").transpose();
+      $("#chart_<%=song.id%>").transpose();
     });
+  <% end %>
 
-    $(function() {
-      $(".test_pre2").transpose();
-    });
-  </script>
+
+</script>
