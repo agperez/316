@@ -14,12 +14,10 @@
 ActiveRecord::Schema.define(version: 20141007230936) do
 
   create_table "email_contents", force: true do |t|
-    t.string   "email"
-    t.text     "text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "origin"
-    t.string   "recipient"
+    t.string "email"
+    t.text   "text"
+    t.string "origin"
+    t.string "recipient"
   end
 
   create_table "events", force: true do |t|
@@ -34,6 +32,12 @@ ActiveRecord::Schema.define(version: 20141007230936) do
 
   add_index "events", ["role_id"], name: "index_events_on_role_id"
   add_index "events", ["team_id"], name: "index_events_on_team_id"
+
+  create_table "ministries", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "notes", force: true do |t|
     t.text     "content"

@@ -466,7 +466,11 @@ a.profile_link {
   border-radius: 3px;
 }
 
-@media (min-width: 1px) and (max-width: 991px) {
+@media (min-width: 630px) and (max-width: 991px) {
+
+  .desktop_only {
+    display: none;
+  }
   .container {
 
   }
@@ -484,6 +488,38 @@ a.profile_link {
 
   .test_pre {
     font-size: 16px;
+  }
+}
+
+@media (min-width: 1px) and (max-width: 629px) {
+
+  .desktop_only {
+    display: none;
+  }
+  .song_title {
+    font-size: 20px;
+  }
+  .container {
+
+  }
+  .transpose-keys {
+    height: 40px;
+  }
+  .key-container {
+    margin: 3px 2px 2px 0;
+    padding: 3px 2px 2px 2px;
+    width: 30px;
+  }
+  .transpose-keys a {
+    font-size: 12px;
+  }
+
+  .test_pre {
+    font-size: 12px;
+    margin-top: 20px;
+  }
+  .key-container#selected {
+    border: none;
   }
 }
 
