@@ -1,9 +1,11 @@
 <p id="notice"><%= notice %></p>
-<div style='text-align:center;padding-top:20px;'>
+<div class="desktop_only">
+  <div style='text-align:right;padding-top:20px;'>
 
-  <button onclick='mySwipe.prev()'>prev</button>
-  <button onclick='mySwipe.next()'>next</button>
+    <button onclick='mySwipe.prev()'>prev</button>
+    <button onclick='mySwipe.next()'>next</button>
 
+  </div>
 </div>
 <% i = 1 %>
 <div id='mySwipe' style='margin:0 auto' class='swipe'>
@@ -11,7 +13,7 @@
     <% @setlist.songs.each do |song| %>
 
       <div>
-        <h1>
+        <h1 class="song_title">
           <em>Song #<%=i%>: </em><%= song.name %>
         </h1>
         <p>
