@@ -1,0 +1,56 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-error">
+        The form contains <%= pluralize(@user.errors.count, "error") %>.
+      </div>
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li>* <%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+  <% if signed_in? %>
+    <% if current_user.admin? %>
+    <hr class="divider col-lg-12">
+      <div class="form-group col-lg-6">
+        <%= f.label :role_id %>
+        <%= f.collection_select :role_id, Role.all, :id, :name, {:include_blank => "Choose a Role"}, {class: "form-control"} %>
+      </div>
+      <div class="form-group col-lg-6">
+        <%= f.label :team_id %>
+        <%= f.collection_select :team_id, Team.all, :id, :name, {:include_blank => "Choose a Team"}, {class: "form-control"} %>
+      </div>
+    <% end %>
+  <% end %>
+  <hr class="divider col-lg-12">
+    <div class="form-group col-lg-6">
+      <%= f.label :first_name, "First Name" %>
+      <%= f.text_field :first_name, class: "form-control" %>
+    </div>
+    <div class="form-group col-lg-6">
+      <%= f.label :last_name, "Last Name" %>
+      <%= f.text_field :last_name, class: "form-control" %>
+    </div>
+    <div class="form-group col-lg-6">
+      <%= f.label :email %>
+      <%= f.text_field :email, class: "form-control" %>
+    </div>
+    <div class="form-group col-lg-6">
+      <%= f.label :password %>
+      <%= f.password_field :password, class: "form-control" %>
+    </div>
+    <div class="form-group col-lg-6 col-lg-offset-6">
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation, class: "form-control" %>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <center><%= f.submit @type, class: "btn btn-large btn-primary col-lg-2 col-lg-offset-5" %></center>
+      </div>
+    </div>
+<% end %>
+</div>

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :signed_in_user, 	only: [:index, :edit, :update, :destroy, :profile,
                                          :picture, :us, :deactivated]
-  before_action :admin_user, 		  only: [:index, :destroy, :import, :deactivated]                                         
+  before_action :admin_user, 		  only: [:index, :destroy, :import, :deactivated]
   before_action :correct_user, 		only: [:show, :edit, :update, :picture]
   before_action :not_signed_in,   only:  :new
   before_action :admin_user, 		  only: [:index, :destroy, :import, :deactivated]
@@ -71,6 +71,9 @@ class UsersController < ApplicationController
   end
 
   def edit
+  end
+
+  def editpersonal
   end
 
   def deactivated
