@@ -93,6 +93,11 @@
 
   <!-- clearfix -->
   <div style='clear:both'></div>
+	<div class="user_role_container">
+		<% @roles.each do |role| %>
+			<span class="user_role_names" style="color: <%=role.color%>;"><%=role.name%></span>
+		<% end %>
+	</div>
 </div>
 
 <div class="row">

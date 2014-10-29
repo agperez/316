@@ -585,6 +585,15 @@ a.profile_link {
   min-height: 0px;
 }
 
+.user_role_container {
+  text-align: right;
+  font-weight: bold;
+}
+
+.user_role_names {
+  padding-left: 10px;
+}
+
 @media (min-width: 501px) and (max-width: 650px) {
   .user_name {
     font-size: 35px;
