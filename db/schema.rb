@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140916193110) do
+ActiveRecord::Schema.define(version: 20141007230936) do
 
   create_table "email_contents", force: true do |t|
     t.string "email"
@@ -32,6 +32,12 @@ ActiveRecord::Schema.define(version: 20140916193110) do
 
   add_index "events", ["role_id"], name: "index_events_on_role_id"
   add_index "events", ["team_id"], name: "index_events_on_team_id"
+
+  create_table "ministries", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "notes", force: true do |t|
     t.text     "content"
@@ -67,6 +73,14 @@ ActiveRecord::Schema.define(version: 20140916193110) do
     t.integer  "chapter_last"
     t.string   "announcements"
     t.boolean  "published"
+  end
+
+  create_table "setlist_songs", force: true do |t|
+    t.integer  "setlist_id"
+    t.integer  "song_id"
+    t.datetime "setlist_songs_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "setlists", force: true do |t|
@@ -119,6 +133,9 @@ ActiveRecord::Schema.define(version: 20140916193110) do
     t.string   "state"
     t.integer  "zip"
     t.boolean  "deactivated",         default: false
+    t.boolean  "hide_email",          default: false
+    t.boolean  "hide_phone",          default: false
+    t.boolean  "hide_address",        default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

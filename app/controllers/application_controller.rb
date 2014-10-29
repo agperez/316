@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
 
-  	def set_xhr_flash
+  def set_xhr_flash
 	  flash.discard if request.xhr?
 	end
 

@@ -37,24 +37,28 @@
         <%= image_tag("box_male_large.gif", alt: @user.fullname) %>
       </div>
     <% end %>
-    <div class="profile_text" <% unless @user.avatar_file_size? || @user.facebook? %>style="margin: 0;"<% end %>>
+    <div class="profile_text">
       <div class="profile_name"><%= @user.first_name + ' ' + @user.last_name %></div>
       <div class="profile_info">
-        <% if @user.email? %>
+        <% unless @user.hide_email? %>
           <%= @user.email %><br>
         <% end %>
-        <% if @user.address1? %>
-          <br><%= @user.address1 %><br>
-        <% end %>
-        <% if @user.city? && @user.state? %>
-          <%= @user.city %>, <%= @user.state %>
-          <% if @user.zip? %>
-            <%= @user.zip %>
+        <% unless @user.hide_address? %>
+          <% if @user.address1? %>
+            <br><%= @user.address1 %><br>
           <% end %>
-          <br>
+          <% if @user.city? && @user.state? %>
+            <%= @user.city %>, <%= @user.state %>
+            <% if @user.zip? %>
+              <%= @user.zip %>
+            <% end %>
+            <br>
+          <% end %>
         <% end %>
-        <% if @user.phone? %>
-          <%= @user.phone %><br>
+        <% unless @user.hide_phone? %>
+          <% if @user.phone? %>
+            <%= @user.phone %><br>
+          <% end %>
         <% end %>
 
 

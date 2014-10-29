@@ -13,12 +13,28 @@
 @-o-viewport        { width: device-width; }
 @viewport           { width: device-width; }
 
-// Photo Upload Page
+// Swiped Page
 
+.swipe {
+  overflow: hidden;
+  visibility: hidden;
+  position: relative;
+}
+.swipe-wrap {
+  overflow: hidden;
+  position: relative;
+}
+.swipe-wrap > div {
+  float:left;
+  width:100%;
+  position: relative;
+}
+
+// Photo Upload Page
 
 .Andy {
   margin-top: 25px;
-  
+
 }
 
 .upload_photo_profile_link {
@@ -424,11 +440,88 @@ a.profile_link {
   width: 796px;
 }
 
-/* Songs Show Page */
+/* Songs & Setlists Show Pages */
 .test_pre {
   font-size: 20px;
 }
 
+.transpose-keys {
+  height: 60px;
+}
+
+.key-container {
+  text-align: center;
+  margin: 5px 5px 5px 0;
+  padding: 10px 5px 5px 5px;
+  float: left;
+  width: 50px;
+}
+
+.transpose-keys a {
+  font-size: 20px;
+}
+
+.key-container#selected {
+  border: gray solid 1px;
+  border-radius: 3px;
+}
+
+@media (min-width: 630px) and (max-width: 991px) {
+
+  .desktop_only {
+    display: none;
+  }
+  .container {
+
+  }
+  .transpose-keys {
+    height: 40px;
+  }
+  .key-container {
+    margin: 2px 2px 2px 0;
+    padding: 5px 3px 3px 3px;
+    width: 30px;
+  }
+  .transpose-keys a {
+    font-size: 15px;
+  }
+
+  .test_pre {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1px) and (max-width: 629px) {
+
+  .desktop_only {
+    display: none;
+  }
+  .song_title {
+    font-size: 20px;
+  }
+  .container {
+
+  }
+  .transpose-keys {
+    height: 40px;
+  }
+  .key-container {
+    margin: 3px 2px 2px 0;
+    padding: 3px 2px 2px 2px;
+    width: 30px;
+  }
+  .transpose-keys a {
+    font-size: 12px;
+  }
+
+  .test_pre {
+    font-size: 12px;
+    margin-top: 20px;
+  }
+  .key-container#selected {
+    border: none;
+  }
+}
 
 /* User Show Page */
 
@@ -514,6 +607,25 @@ a.profile_link {
   .upcoming_events {
     font-size: 20px;
   }
+}
+
+/* User Edit Page */
+
+.checkbox.privacy_container {
+  margin-bottom: 20px;
+}
+
+.privacy_checkbox {
+  font-weight: normal;
+  font-size: 11px;
+  margin-top: -4px;
+}
+
+/* Inactive User Page */
+.inactive_message {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 10%;
 }
 
 /* Calendar */
