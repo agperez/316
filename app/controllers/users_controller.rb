@@ -39,7 +39,6 @@ class UsersController < ApplicationController
     role_ids = @user.events.where("event_date > ?", Time.now-50.days).pluck(:role_id)
     @roles = Role.where(:id => role_ids)
 
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user }
