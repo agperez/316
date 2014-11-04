@@ -15,6 +15,7 @@ SampleApp::Application.routes.draw do
     get 'picture', on: :member
   end
 
+
   resources :sessions, only: [:new, :create, :destroy]
   root 'sermons#index'
 

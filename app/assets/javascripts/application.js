@@ -19,3 +19,10 @@ $.ajaxSetup({
     xhr.setRequestHeader("Accept", "text/javascript");
   }
 });
+
+$(function () {
+   $('#sermon-search').submit(function () {
+    $.get(this.action, $(this).serialize(), null, 'script');
+   return false;
+  });
+});

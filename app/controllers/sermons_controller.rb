@@ -10,7 +10,7 @@ class SermonsController < ApplicationController
   end
 
   def archive
-    @ordered_sermons = Sermon.ordered(params)
+    @ordered_sermons = Sermon.text_search(params[:query]).ordered(params)
   end
 
   def manage
