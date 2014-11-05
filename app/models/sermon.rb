@@ -3,7 +3,7 @@ class Sermon < ActiveRecord::Base
 	validates :book, :s_date, :chapter, :verse_first, :verse_last, presence: true
 
 	include PgSearch
-	pg_search_scope :search, against: [:book, :outline],
+	pg_search_scope :search, against: [:book, :chapter],
 		using: {tsearch: {dictionary: "english"}}
 
 	def self.recent
