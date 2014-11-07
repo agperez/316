@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141007230936) do
+ActiveRecord::Schema.define(version: 20141107041332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 20141007230936) do
     t.integer  "chapter_last"
     t.string   "announcements"
     t.boolean  "published"
+    t.string   "tags"
   end
 
   create_table "setlist_songs", force: true do |t|

@@ -44,6 +44,7 @@ class SermonsController < ApplicationController
 
   def update
     respond_to do |format|
+      binding.pry
       if @sermon.update(sermon_params)
         format.html { redirect_to @sermon }
         format.json { head :no_content }
@@ -81,7 +82,7 @@ class SermonsController < ApplicationController
     def sermon_params
       params.require(:sermon).permit(:book, :chapter, :chapter_last, :verse_first,
                                      :verse_last, :video, :audio, :speaker, :s_date,
-                                     :outline, :link, :announcements, :published)
+                                     :outline, :link, :announcements, :published, :tags)
     end
 
     def signed_in_user
