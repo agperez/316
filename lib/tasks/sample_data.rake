@@ -11,7 +11,8 @@ def make_users
     name  = Faker::Name.name
     email = "example-#{n+1}@railstutorial.org"
     password  = "password"
-    User.create!(name:     name,
+    User.create!(first_name:     name,
+                 last_name: name,
                  email:    email,
                  password: password,
                  password_confirmation: password)
