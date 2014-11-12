@@ -16,6 +16,8 @@ gem 'pry-rails'
 gem 'paperclip'
 gem 'aws-sdk'
 
+gem 'acts_as_list'
+
 group :test do
 	gem 'selenium-webdriver', '2.35.1'
 	gem 'rspec-rails', '2.13.1'

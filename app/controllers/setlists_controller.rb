@@ -10,6 +10,8 @@ class SetlistsController < ApplicationController
   # GET /setlists/1
   # GET /setlists/1.json
   def show
+    @songs     = Song.select("id, name").order('name ASC')
+    @set_songs = @setlist.setlist_songs.order('setlist_songs.position ASC')
   end
 
   # GET /setlists/new

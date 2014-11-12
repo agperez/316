@@ -10,9 +10,16 @@ SampleApp::Application.routes.draw do
   resources :roles
   resources :teams
   resources :users do
-    collection { post :import }
-    get 'profile', on: :member
-    get 'picture', on: :member
+    post :import, on: :collection
+    #collection { post :import }
+    member do
+      get 'profile'
+      get 'picture'
+    end
+  end
+
+  resources :setlist_songs do
+    post :sort, on: :collection
   end
 
 

@@ -10,7 +10,7 @@
       Select a User:
       <select name="Users" id="addUser" class="form-control">
         <% @users.each do |user| %>
-        <option value="<%= user.id %>"><%= user.first_name + ' ' + user.last_name %></option>
+          <option value="<%= user.id %>"><%= user.first_name + ' ' + user.last_name %></option>
         <% end %>
       </select>
       <br>

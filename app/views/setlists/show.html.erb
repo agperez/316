@@ -1,14 +1,48 @@
-<p id="notice"><%= notice %></p>
-<div class="desktop_only">
-  <div style='text-align:right;padding-top:20px;'>
+<h1>
+  <div class="book-title"><strong><center><%= @setlist.date.strftime("%b %d, %Y") %></center></strong></div>
+</h1>
+<center>
+  <div id="setlist_toggle">
+    Adjust Songs
+  </div>
+  <div class="setlist_adjust" style="display: none;">
+    <ul id="setlist_songs">
+      <% if @set_songs %>
+        <% @set_songs.each do |setlist_song| %>
+          <li id="setlist_song_<%= setlist_song.id %>"><%= setlist_song.song.name %><span class="delete fa fa-times" onclick="delete_song(<%= setlist_song.id %>)"></span></li>
+        <% end %>
+      <% end %>
+    </ul>
+    <div class="setlist_buttons">
+      <span id="setlist_add" onclick="add_song()" class="fa fa-plus-square-o fa-3x"></span>
+      <span id="setlist_refresh" onclick="refresh()" class="fa fa-refresh fa-2x"></span>
+    </div>
+  </div>
+</center>
 
-    <button onclick='mySwipe.prev()'>prev</button>
-    <button onclick='mySwipe.next()'>next</button>
+<div id="select_add_dialog">
+  <form>
+    <fieldset>
+      Select a Song:
+      <select name="Songs" id="addSong" class="form-control">
+        <% @songs.each do |song| %>
+          <option value="<%= song.id %>"><%= song.name %></option>
+        <% end %>
+      </select>
+    </fieldset>
+  </form>
+</div>
+
+<div class="desktop_only">
+  <div class="setlist_advance">
+
+    <span onclick='mySwipe.prev()' class="setlist_arrow_left fa fa-angle-left fa-3x"></span>
+    <span onclick='mySwipe.next()' class="setlist_arrow_right fa fa-angle-right fa-3x"></span>
 
   </div>
 </div>
 <% i = 1 %>
-<div id='mySwipe' style='margin:0 auto' class='swipe'>
+<div id='mySwipe' style='margin: 0 auto' class='swipe'>
   <div class='swipe-wrap'>
     <% @setlist.songs.each do |song| %>
 
@@ -33,6 +67,68 @@
 <%= link_to 'Back', setlists_path %>
 
 <script type="text/javascript">
+  var sort_list = function(){
+    $('#setlist_songs').sortable({
+      axis: 'y',
+      dropOnEmpty: false,
+      cursor: 'crosshair',
+      items: 'li',
+      opacity: 0.4,
+      scroll: true,
+      update: function(){
+        $.ajax({
+          type: 'post',
+          data: $('#setlist_songs').sortable('serialize'),
+          dataType: 'script',
+          complete: function(request){
+            $('#setlist_songs').effect('highlight');
+            document.getElementById('setlist_refresh').style.visibility="visible";
+          },
+        url: '/setlist_songs/sort'})
+      }
+    });
+  }
+
+  var select_add_song = function() {
+    var song_id = $('#addSong').val();
+    var song_name = $("#addSong option[value="+ song_id +"]").text();
+    $.create('/setlist_songs',
+            { setlist_song: {song_id: song_id, setlist_id: <%= @setlist.id %>} },
+            function (response) {
+              var new_song = "<li id='setlist_song_" + response.id + "'>" + song_name + "<span class='delete fa fa-times' onclick='delete_song(" + response.id + ")'></span></li>"
+              $("#setlist_songs").append( new_song );
+              document.getElementById('setlist_refresh').style.visibility="visible";
+            });
+
+    $(this).dialog("close");
+  }
+
+  $("#select_add_dialog").dialog({
+    autoOpen: false,
+    title: "Add a Song to this Setlist",
+    modal: true,
+    width: 400,
+    buttons: {
+      "Add Song": select_add_song
+    }
+  });
+
+  function refresh() {
+    location.reload();
+  }
+
+  function add_song() {
+    $('#select_add_dialog').dialog("open");
+  }
+
+  function delete_song(id) {
+    $.destroy({
+      url: '/setlist_songs/' + id
+    });
+    $("#setlist_song_" + id).remove();
+    document.getElementById('setlist_refresh').style.visibility="visible";
+  }
+
   var elem = document.getElementById('mySwipe');
   window.mySwipe = Swipe(elem, {
     // startSlide: 4,
@@ -49,5 +145,12 @@
     });
   <% end %>
 
+  $('#setlist_toggle').click(function(e){
+    e.preventDefault();
+    $('.setlist_adjust').toggle();
+
+  });
+
+  $(document).ready(sort_list);
 
 </script>
