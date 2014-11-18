@@ -10,7 +10,8 @@
  */
 (function($) {
 
-  $.fn.transpose = function(options) {
+  $.fn.transpose = function(options, xKey) {
+
     var opts = $.extend({}, $.fn.transpose.defaults, options);
 
     var currentKey = null;
@@ -208,7 +209,9 @@
       // Build tranpose links ===========================================
       var keyLinks = [];
       $(keys).each(function(i, key) {
-          if (currentKey.name == key.name)
+          if (xKey == key.name)
+              keyLinks.push("<span class='key-container' id='selected'><a href='#' class='selected'>" + xKey + "</a></span>");
+          else if (currentKey.name == key.name && !xKey)
               keyLinks.push("<span class='key-container' id='selected'><a href='#' class='selected'>" + key.name + "</a></span>");
           else if (key.name != "-")
               keyLinks.push("<span class='key-container'><a href='#'>" + key.name + "</a></span>");
@@ -244,6 +247,8 @@
       };
 
       $(this).html(output.join("\n"));
+
+      transposeSong($(this), xKey);
     });
   };
 

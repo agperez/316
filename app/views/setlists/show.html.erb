@@ -1,25 +1,26 @@
 <h1>
   <div class="book-title"><strong><center><%= @setlist.date.strftime("%b %d, %Y") %></center></strong></div>
 </h1>
-<center>
-  <div id="setlist_toggle">
-    Adjust Songs
-  </div>
-  <div class="setlist_adjust" style="display: none;">
-    <ul id="setlist_songs">
-      <% if @set_songs %>
-        <% @set_songs.each do |setlist_song| %>
-          <li id="setlist_song_<%= setlist_song.id %>"><%= setlist_song.song.name %><span class="delete fa fa-times" onclick="delete_song(<%= setlist_song.id %>)"></span></li>
-        <% end %>
-      <% end %>
-    </ul>
-    <div class="setlist_buttons">
-      <span id="setlist_add" onclick="add_song()" class="fa fa-plus-square-o fa-3x"></span>
-      <span id="setlist_refresh" onclick="refresh()" class="fa fa-refresh fa-2x"></span>
+<% if current_user.admin? %>
+  <center>
+    <div id="setlist_toggle">
+      Adjust Songs
     </div>
-  </div>
-</center>
-
+    <div class="setlist_adjust" style="display: none;">
+      <ul id="setlist_songs">
+        <% if @set_songs %>
+          <% @set_songs.each do |setlist_song| %>
+            <li id="setlist_song_<%= setlist_song.id %>"><%= setlist_song.song.name %><span class="delete fa fa-times" onclick="delete_song(<%= setlist_song.id %>)"></span></li>
+          <% end %>
+        <% end %>
+      </ul>
+      <div class="setlist_buttons">
+        <span id="setlist_add" onclick="add_song()" class="fa fa-plus-square-o fa-3x"></span>
+        <span id="setlist_refresh" onclick="refresh()" class="fa fa-refresh fa-2x"></span>
+      </div>
+    </div>
+  </center>
+<% end %>
 <div id="select_add_dialog">
   <form>
     <fieldset>
@@ -28,6 +29,33 @@
         <% @songs.each do |song| %>
           <option value="<%= song.id %>"><%= song.name %></option>
         <% end %>
+      </select>
+    </fieldset>
+  </form>
+</div>
+
+<div id="set_altkey_dialog">
+  <form>
+    <fieldset>
+      Select a Key:
+      <select name="Keys" id="pickKey" class="form-control">
+        <option value="Ab">Ab</option>
+        <option value="A">A</option>
+        <option value="A#">A#</option>
+        <option value="Bb">Bb</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="C#">C#</option>
+        <option value="Db">Db</option>
+        <option value="D">D</option>
+        <option value="D#">D#</option>
+        <option value="Eb">Eb</option>
+        <option value="E">E</option>
+        <option value="F">F</option>
+        <option value="Fb">Fb</option>
+        <option value="Gb">Gb</option>
+        <option value="G">G</option>
+        <option value="G#">G#</option>
       </select>
     </fieldset>
   </form>
@@ -44,21 +72,28 @@
 <% i = 1 %>
 <div id='mySwipe' style='margin: 0 auto' class='swipe'>
   <div class='swipe-wrap'>
-    <% @setlist.songs.each do |song| %>
 
+    <% @set_songs.each do |set_song| %>
+      <% song = set_song.song %>
       <div>
         <h1 class="song_title">
           <em>Song #<%=i%>: </em><%= song.name %>
         </h1>
-        <p>
-          <strong>Default Key:</strong>
-          <%= song.key %>
-        </p>
-        <pre class="test_pre" id="chart_<%=song.id%>"data-key="<%= song.key %>">
+
+        <% if current_user.admin? %>
+          <p>
+            <strong>Default Key:</strong>
+            <%= song.key %>
+          </p>
+          <p>
+            <span class="set_altkey" onclick="set_altkey(<%= set_song.id %>)">Set Transpose Key</span> (Currently: <%=set_song.altkey%>)
+          </p>
+        <% end %>
+        
+        <pre class="test_pre" id="chart_<%=song.id%>"data-key="<%=song.key%>">
           <%= simple_format(song.chart) %>
         </pre>
       </div>
-
       <% i+=1 %>
     <% end %>
   </div>
@@ -67,6 +102,9 @@
 <%= link_to 'Back', setlists_path %>
 
 <script type="text/javascript">
+
+  var this_ssID
+
   var sort_list = function(){
     $('#setlist_songs').sortable({
       axis: 'y',
@@ -103,6 +141,17 @@
     $(this).dialog("close");
   }
 
+  var select_altkey = function () {
+    var new_key = $('#pickKey').val();
+    $.update(
+        '/setlist_songs/' + this_ssID,
+        { setlist_song: {altkey: new_key, id: this_ssID} },
+        function (response) {
+          location.reload();
+        }
+    );
+  }
+
   $("#select_add_dialog").dialog({
     autoOpen: false,
     title: "Add a Song to this Setlist",
@@ -113,12 +162,28 @@
     }
   });
 
+  $("#set_altkey_dialog").dialog({
+    autoOpen:false,
+    title: "Set the Transpose Key (this setlist only)",
+    modal: true,
+    width: 400,
+    buttons: {
+      "Set Transpose Key": select_altkey
+    }
+  });
+
+
   function refresh() {
     location.reload();
   }
 
   function add_song() {
     $('#select_add_dialog').dialog("open");
+  }
+
+  function set_altkey(id) {
+    this_ssID = id
+    $('#set_altkey_dialog').dialog("open");
   }
 
   function delete_song(id) {
@@ -139,9 +204,11 @@
     // callback: function(index, element) {},
     // transitionEnd: function(index, element) {}
   });
-  <% @setlist.songs.each do |song| %>
+
+
+  <% @set_songs.each do |setlist_song| %>
     $(function() {
-      $("#chart_<%=song.id%>").transpose();
+      $("#chart_<%=setlist_song.song_id%>").transpose("", "<%=setlist_song.altkey%>");
     });
   <% end %>
 

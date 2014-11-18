@@ -451,6 +451,9 @@ a.profile_link {
 
 #setlist_toggle {
   margin-bottom: 10px;
+}
+
+.set_altkey, #setlist_toggle {
   color: #428bca;
   &:hover {
     color: #2a6496;

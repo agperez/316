@@ -25,10 +25,13 @@
 
   <script type="text/javascript">
     $(function() {
-    	$(".test_pre").transpose();
+    	$(".test_pre").transpose("", <%=@song.key%>);
     });
 
     $(function() {
-    	$(".test_pre2").transpose();
+    	$(".test_pre2").transpose("", <%=@song.key%>);
     });
+
+    $(document).ready();
+
   </script>

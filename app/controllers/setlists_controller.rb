@@ -1,4 +1,5 @@
 class SetlistsController < ApplicationController
+  before_action :signed_in_user
   before_action :set_setlist, only: [:show, :edit, :update, :destroy]
 
   # GET /setlists

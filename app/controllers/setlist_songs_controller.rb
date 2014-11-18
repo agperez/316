@@ -1,5 +1,5 @@
 class SetlistSongsController < ApplicationController
-  before_action :set_setlist_song, only: :destroy
+  before_action :set_setlist_song, only: [:update, :destroy]
 
   def index
     @setlist_songs = SetlistSong.where(setlist_id: 2).order('setlist_songs.position ASC')
@@ -45,7 +45,7 @@ class SetlistSongsController < ApplicationController
     respond_to do |format|
       if @setlist_song.update(setlist_song_params)
         format.html { redirect_to @setlist_song, notice: 'Setlist song was successfully updated.' }
-        format.json { render :show, status: :ok, location: @setlist_song }
+        format.json { head :no_content }
       else
         format.html { render :edit }
         format.json { render json: @setlist_song.errors, status: :unprocessable_entity }
@@ -69,6 +69,6 @@ class SetlistSongsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def setlist_song_params
-      params.require(:setlist_song).permit(:song_id, :setlist_id)
+      params.require(:setlist_song).permit(:song_id, :setlist_id, :altkey)
     end
 end
