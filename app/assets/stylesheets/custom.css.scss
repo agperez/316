@@ -13,6 +13,10 @@
 @-o-viewport        { width: device-width; }
 @viewport           { width: device-width; }
 
+.handle:hover {
+  cursor: move;
+}
+
 // Swiped Page
 
 .swipe {
@@ -445,6 +449,90 @@ a.profile_link {
   font-size: 20px;
 }
 
+#setlist_toggle {
+  margin-bottom: 10px;
+}
+
+.set_altkey, #setlist_toggle {
+  color: #428bca;
+  &:hover {
+    color: #2a6496;
+    cursor: pointer;
+  }
+}
+
+.setlist_adjust {
+  //display: none;
+}
+
+#setlist_songs .delete {
+  float: right;
+  margin-top: 3px;
+  color: lightgray;
+  &:hover {
+    cursor: pointer;
+    color: gray;
+  }
+}
+
+#setlist_songs {
+  width: 400px;
+  padding: 0;
+  text-align: left;
+}
+
+#setlist_songs li {
+  list-style-type: none;
+  border: solid 1px gray;
+  border-radius: 5px;
+  padding: 6px;
+  margin-bottom: 5px;
+  text-align: left;
+  &:hover {
+    cursor: move;
+  }
+}
+
+.setlist_buttons {
+  width: 400px;
+  text-align: left;
+}
+
+#setlist_add {
+  color: lightgray;
+  &:hover {
+    color: gray;
+    cursor: pointer;
+  }
+}
+#setlist_refresh {
+  visibility: hidden;
+  color: lightgray;
+  float: right;
+  margin-top: 5px;
+  &:hover {
+    color: gray;
+    cursor: pointer;
+  }
+}
+
+.desktop_only {
+  position: relative;
+  bottom: -60px;
+  z-index: 1;
+}
+
+.setlist_advance {
+  text-align: right;
+  color: lightgray;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.setlist_arrow_left {
+  margin-right: 25px;
+}
 .transpose-keys {
   height: 60px;
 }
@@ -583,6 +671,15 @@ a.profile_link {
 
 .checkbox .checkbox_edit {
   min-height: 0px;
+}
+
+.user_role_container {
+  text-align: right;
+  font-weight: bold;
+}
+
+.user_role_names {
+  padding-left: 10px;
 }
 
 @media (min-width: 501px) and (max-width: 650px) {

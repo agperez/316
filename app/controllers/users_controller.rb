@@ -36,11 +36,8 @@ class UsersController < ApplicationController
     @current_user = current_user
   	@user = User.find(params[:id])
     @future_events = @user.events.where("event_date > ?", Time.now).order("event_date ASC")
-    @user_roles = @future_events.map {|a| a.role_id}.uniq
-    @roles = Array.new
-    @user_roles.each do |id|
-      @roles << Role.find(id)
-    end
+    role_ids = @user.events.where("event_date > ?", Time.now-50.days).pluck(:role_id)
+    @roles = Role.where(:id => role_ids)
 
     respond_to do |format|
       format.html # show.html.erb

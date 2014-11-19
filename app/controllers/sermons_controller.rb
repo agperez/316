@@ -10,7 +10,7 @@ class SermonsController < ApplicationController
   end
 
   def archive
-    @ordered_sermons = Sermon.ordered(params)
+    @ordered_sermons = Sermon.text_search(params[:query]).ordered(params)
   end
 
   def manage
@@ -31,13 +31,13 @@ class SermonsController < ApplicationController
 
     respond_to do |format|
       if @sermon.save
-        format.html { redirect_to @sermon }
-        format.json { render action: 'show' }
-        flash[:success] = "Sermon successfully created"
+      format.html { redirect_to @sermon }
+      format.json { render action: 'show' }
+      flash[:success] = "Sermon successfully created"
 
       else
-        format.html { render action: 'new' }
-        format.json { render json: @sermon.errors, status: :unprocessable_entity }
+      format.html { render action: 'new' }
+      format.json { render json: @sermon.errors, status: :unprocessable_entity }
       end
     end
   end

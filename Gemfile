@@ -9,19 +9,18 @@ gem 'faker', '1.1.2'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem 'rake', '~> 10.3.1'
+gem 'pg'
+gem 'pg_search'
+gem 'pry-rails'
 
 gem 'paperclip'
 gem 'aws-sdk'
 
-# Use sqlite3 as the database for Active Record
-group :development, :test do
-	gem 'sqlite3', '1.3.8'
-	gem 'rspec-rails', '2.13.1'
-	gem 'certified'
-end
+gem 'acts_as_list'
 
 group :test do
 	gem 'selenium-webdriver', '2.35.1'
+	gem 'rspec-rails', '2.13.1'
 	gem 'capybara', '2.1.0'
 end
 
@@ -53,7 +52,6 @@ group :doc do
 end
 
 group :production do
-	gem 'pg', '0.15.1'
 	gem 'rails_12factor', '0.0.2'
 end
 # Use ActiveModel has_secure_password
