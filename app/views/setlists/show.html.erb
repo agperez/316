@@ -89,10 +89,19 @@
             <span class="set_altkey" onclick="set_altkey(<%= set_song.id %>)">Set Transpose Key</span> (Currently: <%=set_song.altkey%>)
           </p>
         <% end %>
-        
-        <pre class="test_pre" id="chart_<%=song.id%>"data-key="<%=song.key%>">
-          <%= simple_format(song.chart) %>
-        </pre>
+        <% if current_user.worship_role.name == "Instrumentalist" %>
+          <pre class="test_pre_alt" id="chart_<%=song.id%>" data-key="<%=song.key%>">
+            <%= simple_format(song.chart_alt) %>
+          </pre>
+        <% elsif current_user.worship_role.name == "Vocalist" %>
+          <pre class="test_pre_lyrics" id="chart_<%=song.id%>">
+            <%= simple_format(song.lyrics) %>
+          </pre>
+        <% else %>
+          <pre class="test_pre" id="chart_<%=song.id%>" data-key="<%=song.key%>">
+            <%= simple_format(song.chart) %>
+          </pre>
+        <% end %>
       </div>
       <% i+=1 %>
     <% end %>
@@ -207,9 +216,11 @@
 
 
   <% @set_songs.each do |setlist_song| %>
-    $(function() {
-      $("#chart_<%=setlist_song.song_id%>").transpose("", "<%=setlist_song.altkey%>");
-    });
+    <% unless current_user.worship_role.name == "Vocalist" %>
+      $(function() {
+        $("#chart_<%=setlist_song.song_id%>").transpose("", "<%=setlist_song.altkey%>");
+      });
+    <% end %>
   <% end %>
 
   $('#setlist_toggle').click(function(e){
