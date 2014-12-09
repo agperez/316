@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 20141119192007) do
     t.integer  "chapter_last"
     t.string   "announcements"
     t.boolean  "published"
+    t.string   "tags"
   end
 
   create_table "setlist_songs", force: true do |t|

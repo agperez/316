@@ -6,6 +6,9 @@ class Sermon < ActiveRecord::Base
 	pg_search_scope :search, against: [:book, :chapter],
 		using: {tsearch: {dictionary: "english"}}
 
+	pg_search_scope :search_by_tag, against: :tags,
+		using: {tsearch: {dictionary: "english"}}
+
 	def self.recent
 		where(published: [true, nil]).order("s_date DESC").limit(5)
 	end
@@ -23,8 +26,10 @@ class Sermon < ActiveRecord::Base
       search(query)
 			#where("to_tsvector('english', book) @@ :q or to_tsvector('english', outline) @@ :q", q: query)
     else
-      scoped
+      all
     end
 	end
+
+
 
 end

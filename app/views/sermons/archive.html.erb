@@ -8,13 +8,20 @@
           Sermon Archive:
         </em>
       </h2>
-
-      <%= form_tag archive_path, method: :get, id: "sermon-search" do %>
-        <p>
-          <%= text_field_tag :query, params[:query] %>
-          <%= submit_tag "Search", name: nil %>
-        </p>
-      <% end %>
+      <span>
+        <%= form_tag archive_path, method: :get, class: "sermon-search" do %>
+          <p>
+            <%= text_field_tag :book, params[:book] %>
+            <%= submit_tag "Search Book", name: nil %>
+          </p>
+        <% end %>
+        <%= form_tag archive_path, method: :get, class: "tag-search" do %>
+          <p>
+            <%= text_field_tag :tags, params[:tags] %>
+            <%= submit_tag "Search Topics", name: nil %>
+          </p>
+        <% end %>
+      </span>
 
       <%= will_paginate @ordered_sermons, :inner_window => 1 %>
     </center>

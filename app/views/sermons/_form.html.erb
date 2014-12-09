@@ -57,6 +57,11 @@
     <%= f.text_area :link, rows: "2", class: "form-control" %>
   </div>
   <br>
+  <div class="form-group" id="wrapper">
+    <%= f.label "Tags"%><br>
+    <%= f.text_field :tags, class: "form-control", id: "tag1" %>
+  </div>
+  <br>
   <div class="form-group">
     <%= f.label "Announcement Link" %><br>
     <%= f.text_field :announcements, class: "form-control" %>
