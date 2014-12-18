@@ -1,31 +1,35 @@
-<h1>Listing songs</h1>
+<body>
+  <div class="col-lg-offset-6">
+      <h1>Songs</h1>
+      <%= link_to 'New Song', new_song_path %>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Key</th>
-      <th>Chart</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @songs.each do |song| %>
-      <tr>
-        <td><%= song.name %></td>
-        <td><%= song.key %></td>
-        <td><%= song.chart %></td>
-        <td><%= link_to 'Show', song %></td>
-        <td><%= link_to 'Edit', edit_song_path(song) %></td>
-        <td><%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Song', new_song_path %>
+  <div class="col-lg-offset-2">
+    <div class="col-lg-6">
+      Name
+    </div>
+  </div>
+    <div class="col-lg-2">
+      Key
+    </div>
+    <div class="col-lg-1">
+      Options
+    </div>
+          <% @songs.order('name DESC').each do |song| %>
+            <div class="col-lg-5 col-lg-offset-2">
+              <%= song.name %>
+            </div>
+            <div class="col-lg-2">
+              <%= song.key %>
+            </div>
+            <div class="col-lg-2">
+              <%= link_to 'Show', song %>
+              <% if signed_in? %>
+                <% if current_user.admin? %>
+              <%= link_to 'Edit', edit_song_path(song) %>
+              <%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' } %></br>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+</body>
