@@ -25,5 +25,4 @@ doc/
 .idea
 .secret
 
-/config/environments/development.rb
-/config/initializers/setup_mail.rb
+.env
