@@ -17,6 +17,12 @@
   cursor: move;
 }
 
+// Tags
+
+#wrapper {
+ margin: 20px;
+}
+
 // Swiped Page
 
 .swipe {
@@ -445,8 +451,16 @@ a.profile_link {
 }
 
 /* Songs & Setlists Show Pages */
-.test_pre {
+.test_pre, .test_pre_alt, .test_pre_lyrics {
   font-size: 20px;
+}
+
+.test_pre2 {
+  font-size: 50px;
+}
+
+.test_pre_alt span span {
+  font-size: 60px;
 }
 
 #setlist_toggle {

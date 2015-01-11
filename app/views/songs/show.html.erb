@@ -18,18 +18,23 @@
   </pre>
 
   <pre class="test_pre2" data-key="<%= @song.key %>">
-<%= simple_format(@song.chart) %>
+<%= simple_format(@song.chart_alt) %>
   </pre>
+
+  <pre class="test_pre" data-key="<%= @song.key %>">
+<%= simple_format(@song.lyrics) %>
+  </pre>
+
 <%= link_to 'Edit', edit_song_path(@song) %> |
 <%= link_to 'Back', songs_path %>
 
   <script type="text/javascript">
     $(function() {
-    	$(".test_pre").transpose("", <%=@song.key%>);
+    	$(".test_pre").transpose("", "<%=@song.key%>");
     });
 
     $(function() {
-    	$(".test_pre2").transpose("", <%=@song.key%>);
+      $(".test_pre2").transpose("", "<%=@song.key%>");
     });
 
     $(document).ready();

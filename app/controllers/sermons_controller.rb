@@ -1,7 +1,7 @@
 class SermonsController < ApplicationController
   before_action :set_sermon,      only: [:show, :edit, :update, :destroy]
   before_action :all_sermons,     only: [:manage]
-  before_action :recent_sermons,  only: [:new, :create, :edit, :update, :destroy, :index]
+  before_action :recent_sermons,  only: [:new, :create, :edit, :update, :destroy, :index, :archive]
   before_action :signed_in_user,  only: [:manage, :new, :create, :edit, :update, :destroy]
   before_action :admin_user,      only: [:manage, :new, :create, :edit, :update, :destroy]
 
@@ -10,8 +10,15 @@ class SermonsController < ApplicationController
   end
 
   def archive
-    @ordered_sermons = Sermon.text_search(params[:query]).ordered(params)
+    if params[:book]
+      @ordered_sermons = Sermon.text_search(params[:book]).ordered(params)
+    elsif params[:tags]
+      @ordered_sermons = Sermon.search_by_tag(params[:tags]).ordered(params)
+    else
+      @ordered_sermons = Sermon.all.ordered(params)
+    end
   end
+
 
   def manage
   end
@@ -81,7 +88,7 @@ class SermonsController < ApplicationController
     def sermon_params
       params.require(:sermon).permit(:book, :chapter, :chapter_last, :verse_first,
                                      :verse_last, :video, :audio, :speaker, :s_date,
-                                     :outline, :link, :announcements, :published)
+                                     :outline, :link, :announcements, :published, :tags)
     end
 
     def signed_in_user

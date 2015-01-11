@@ -21,8 +21,24 @@ $.ajaxSetup({
 });
 
 $(function () {
-   $('#sermon-search').submit(function () {
+   $('.sermon-search').submit(function () {
     $.get(this.action, $(this).serialize(), null, 'script');
    return false;
   });
+});
+
+$(function () {
+   $('.tag-search').submit(function () {
+    $.get(this.action, $(this).serialize(), null, 'script');
+   return false;
+  });
+});
+
+
+$(function () {
+
+  $('#tag1').tagsInput({
+
+  });
+
 });

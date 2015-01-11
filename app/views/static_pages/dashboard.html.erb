@@ -99,6 +99,10 @@
 								<%= f.label "Team:" %><% unless user.team_id != nil %> <span class="not_assigned">(Not Assigned)</span><% end %>
 								<%= f.collection_select :team_id, Team.all, :id, :name, {:include_blank => "No Team"}, {class: "form-control"} %>
 							</div>
+							<div class="form-group <%= @first_letter %>">
+								<%= f.label "Worship Role:" %>
+								<%= f.collection_select :worship_role_id, WorshipRole.all, :id, :name, {:include_blank => "None"}, {class: "form-control"} %>
+							</div>
 							<%= f.hidden_field :user_id, value: user.id %>
 							<div class="actions <%= @first_letter %>">
 							<%= f.submit "Update" %>

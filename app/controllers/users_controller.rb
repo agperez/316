@@ -114,11 +114,11 @@ class UsersController < ApplicationController
   	def user_params
   		params.require(:user).permit(:first_name, :last_name, :email, :password,
                                    :password_confirmation, :reminders, :facebook,
-                                   :team_id, :role_id, :gender, :birth_date, :phone,
-                                   :address1, :city, :state, :zip, :twitter,
-                                   :spouse, :photo_link, :avatar, :avatar_remote_url,
-                                   :avatar_url, :deactivated, :hide_email,
-                                   :hide_phone, :hide_address,
+                                   :team_id, :role_id, :worship_role_id, :gender,
+                                   :birth_date, :phone, :address1, :city, :state,
+                                   :zip, :twitter, :spouse, :photo_link, :avatar,
+                                   :avatar_remote_url, :avatar_url, :deactivated,
+                                   :hide_email, :hide_phone, :hide_address,
                                     events_attributes: [:user_id, :role_id])
   	end
 

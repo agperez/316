@@ -2,22 +2,81 @@ namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
    make_sermons
-   #make_users
+   make_roles
+   make_teams
+   make_users
   end
 end
 
-def make_users
-  10.times do |n|
-    name  = Faker::Name.name
-    email = "example-#{n+1}@railstutorial.org"
-    password  = "password"
-    User.create!(first_name:     name,
-                 last_name: name,
-                 email:    email,
-                 password: password,
-                 password_confirmation: password)
-    end
+def make_roles
+  r = Role.new
+  r.name = "Worship"
+  r.save
+  r = Role.new
+  r.name = "Media"
+  r.save
 end
+
+def make_teams
+  t = Team.new
+  t.name = "Team A"
+  t.save
+  t = Team.new
+  t.name = "Team B"
+  t.save
+end
+
+def make_users
+  make_andy
+  make_matt
+  make_creighton
+end
+
+def make_andy
+  u = User.new
+  u.first_name = "Andy"
+  u.last_name = "Perez"
+  u.email = "agperez@gmail.com"
+  u.password = "caseyokeefe"
+  u.password_confirmation = "caseyokeefe"
+  u.admin = true
+  role = Role.find_by_name("Worship")
+  u.role_id = role.id
+  team = Team.find_by_name("Team A")
+  u.team_id = team.id
+  u.save
+end
+
+def make_matt
+  u = User.new
+  u.first_name = "Matt"
+  u.last_name = "Thompson"
+  u.email = "matt@mattathompson.org"
+  u.password = "caseyokeefe"
+  u.password_confirmation = "caseyokeefe"
+  u.admin = true
+  role = Role.find_by_name("Media")
+  u.role_id = role.id
+  team = Team.find_by_name("Team B")
+  u.team_id = team.id
+  u.save
+end
+
+def make_creighton
+  u = User.new
+  u.first_name = "Creighton"
+  u.last_name = "Vaughn"
+  u.email = "creightonvaughn@gmail.com"
+  u.password = "caseyokeefe"
+  u.password_confirmation = "caseyokeefe"
+  u.admin = true
+  role = Role.find_by_name("Media")
+  u.role_id = role.id
+  team = Team.find_by_name("Team B")
+  u.team_id = team.id
+  u.save
+end
+
 def make_sermons
   500.times do
     book = ["Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy",

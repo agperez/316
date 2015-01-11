@@ -20,8 +20,16 @@
     <%= f.text_field :key %>
   </div>
   <div class="field">
-    <%= f.label :chart %><br>
+    <%= f.label :chart, "Standard Song Chart" %><br>
     <%= f.text_area :chart, class: "chart_edit" %>
+  </div>
+  <div class="field">
+    <%= f.label :chart_alt, "Large-Chord Chart" %><br>
+    <%= f.text_area :chart_alt, class: "chart_edit" %>
+  </div>
+  <div class="field">
+    <%= f.label :chart_alt, "Lyrics-Only Chart" %><br>
+    <%= f.text_area :lyrics, class: "chart_edit" %>
   </div>
   <div class="actions">
     <%= f.submit %>

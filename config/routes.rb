@@ -26,6 +26,7 @@ SampleApp::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   root 'sermons#index'
 
+  match '/tag_search', to: 'sermons#tag_search', via: 'get'
   match '/archive', to: 'sermons#archive', via: 'get'
   match '/manage', to: 'sermons#manage', via: 'get'
 
