@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'puma'
-gem 'unicorn', '~> 4.8'
+#gem 'puma'
+#gem 'unicorn', '~> 4.8'
 gem 'foreman', '0.63', require: false
 gem 'rails', '4.0.1'
 gem 'bootstrap-sass', '2.3.2.0'
