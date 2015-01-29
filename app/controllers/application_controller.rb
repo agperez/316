@@ -4,11 +4,16 @@ class ApplicationController < ActionController::Base
   before_filter :correct_safari_and_ie_accept_headers
   after_filter :set_xhr_flash
   protect_from_forgery with: :exception
+  before_action :recent_sermons
   include SessionsHelper
 
   def set_xhr_flash
 	  flash.discard if request.xhr?
 	end
+
+  def recent_sermons
+    @sermons_recent = Sermon.recent
+  end
 
 	def correct_safari_and_ie_accept_headers
 	  ajax_request_types = ['text/javascript', 'application/json', 'text/xml']

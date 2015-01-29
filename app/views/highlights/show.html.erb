@@ -1,0 +1,27 @@
+<div class="col-lg-8 col-lg-offset-2">
+  <center>
+    <% if signed_in? %>
+    <% if current_user.admin?  %>
+    <%= link_to '(Edit)', edit_highlight_path %>
+    <%= link_to '(delete)', highlight_path, method: :delete %>
+    <% end %>
+    <% end %>
+  </center>
+</div>
+
+<h2>
+  <div class="book-title"><strong><center><%= @highlight.title %></center></strong></div>
+</h2>
+
+<p>
+  <div class="video">
+
+    <iframe src="http://player.vimeo.com/video/<%= @highlight.video %>?title=0&amp;byline=0&amp;portrait=0" width="400" height="225" frameborder="0"></iframe>
+
+  </div>
+</p>
+
+<%= link_to "Download Audio", @highlight.audio, type: "button", class: "btn btn-primary btn-lg btn-block" %>
+<%= link_to "Access the full study", @highlight.sermon_link, type: "button", class: "btn btn-primary btn-lg btn-block" %>
+
+<br />
