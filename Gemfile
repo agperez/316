@@ -15,6 +15,8 @@ gem 'rake', '~> 10.4.2'
 gem 'pg'
 gem 'pg_search'
 gem 'pry-rails'
+gem 'better_errors'
+gem 'binding_of_caller'
 
 gem 'paperclip'
 gem 'aws-sdk'
