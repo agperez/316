@@ -14,9 +14,12 @@ gem 'bootstrap-will_paginate', '0.0.9'
 gem 'rake', '~> 10.4.2'
 gem 'pg'
 gem 'pg_search'
-gem 'pry-rails'
-gem 'better_errors'
-gem 'binding_of_caller'
+
+group :development do
+	gem 'pry-rails'
+	gem 'better_errors'
+	gem 'binding_of_caller'
+end 
 
 gem 'paperclip'
 gem 'aws-sdk'
