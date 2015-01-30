@@ -9,5 +9,8 @@ class Highlight < ActiveRecord::Base
     order("created_at DESC").paginate(page: params[:page])
   end
 
+  def should_generate_new_friendly_id?
+    title_changed?
+  end
 
 end

@@ -72,7 +72,7 @@ class HighlightsController < ApplicationController
   private
 
   def find_highlight
-    @highlight = Highlight.find params[:id]
+    @highlight = Highlight.friendly.find params[:id]
   end
 
   def strong_params
