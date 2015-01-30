@@ -19,17 +19,18 @@ group :development do
 	gem 'pry-rails'
 	gem 'better_errors'
 	gem 'binding_of_caller'
-end 
+end
 
 gem 'paperclip'
 gem 'aws-sdk'
 
 gem 'acts_as_list'
 
-group :test do
+group :test, :development do
 	gem 'selenium-webdriver', '2.35.1'
-	gem 'rspec-rails', '2.13.1'
+	gem 'rspec-rails', '~> 3.0'
 	gem 'capybara', '2.1.0'
+	gem 'simplecov', :require => false
 end
 
 # Use SCSS for stylesheets
