@@ -1,8 +1,9 @@
 <% provide(:bodyid, "sermon_listing_page") %>
 <div class="row">
+  <center><%= image_tag 'highlightsC316.png', id: "highlights_logo" %></center>
+
   <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
-    <center><%= image_tag 'highlightsC316.png', width: "100%", height: "100%" %></center>
-    
+
     <div id="highlights" class="sort_paginate_ajax">
       <%= render 'highlights' %>
     </div>
