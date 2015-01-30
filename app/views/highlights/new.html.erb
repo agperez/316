@@ -22,6 +22,11 @@
       </div>
       <br>
       <div class="form-group">
+        <%= f.label :sermon_link %><br>
+        <%= f.text_field :sermon_link, class: "form-control" %>
+      </div>
+      <br>
+      <div class="form-group">
         <%= f.label "Highlight Date" %><br>
         <%= f.date_field :created_at, class: "form-control", id: "datepicker" %>
       </div>

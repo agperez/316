@@ -2043,6 +2043,9 @@ pre code {
   }
 }
 
+
+
+
 .row {
   margin-right: -15px;
   margin-left: -15px;
@@ -4855,6 +4858,41 @@ input[type="button"].btn-block {
   margin-bottom: 1px;
 }
 
+@media (max-width: 450px) {
+  #index_list_name em {
+    font-size: 90%;
+
+  }
+  #highlights_logo {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+
+@media (min-width: 650px) {
+  #highlights_logo {
+    width: 85%;
+    height: 85%;
+  }
+}
+
+@media (min-width: 992px) {
+  #highlights_logo {
+    width: 65%;
+    height: 65%;
+  }
+}
+
+
+
+
+@media (min-width: 1200px) {
+  #highlights_logo {
+    width: 50%;
+    height: 50%;
+  }
+}
 @media (min-width: 768px) {
   .navbar-right .dropdown-menu {
     right: 0;
@@ -7916,6 +7954,7 @@ td.visible-xs {
   td.visible-xs.visible-lg {
     display: table-cell !important;
   }
+
 }
 
 .visible-sm,
