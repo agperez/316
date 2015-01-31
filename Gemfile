@@ -8,6 +8,7 @@ gem 'foreman', '0.63', require: false
 gem 'rails', '4.0.1'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'bcrypt-ruby'
+gem 'friendly_id'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem 'rake', '~> 10.4.2'

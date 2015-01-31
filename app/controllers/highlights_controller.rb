@@ -11,7 +11,9 @@ class HighlightsController < ApplicationController
 
 
   def show
-
+    if request.path != highlight_path(@highlight)
+      redirect_to @highlight, status: :moved_permanently
+    end
   end
 
 
@@ -72,7 +74,7 @@ class HighlightsController < ApplicationController
   private
 
   def find_highlight
-    @highlight = Highlight.find params[:id]
+    @highlight = Highlight.friendly.find params[:id]
   end
 
   def strong_params
