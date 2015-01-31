@@ -29,14 +29,14 @@ group :test, :development do
 	gem 'selenium-webdriver', '2.35.1'
 	gem 'rspec-rails', '~> 3.0'
 	gem 'factory_girl_rails', require: false
-	gem 'faker', '1.1.2'
+	gem 'faker'
 end
 
 group :test do
 	# SimpleCov reports on the amount your app is tested
 	gem 'simplecov', :require => false
 	# Capybara works with Rspec for feature testing
-	gem 'capybara', '2.1.0'
+	gem 'capybara'
 	# Launchy allows for the use of the method "save_and_open_page" during feature testing
 	gem 'launchy'
 end
