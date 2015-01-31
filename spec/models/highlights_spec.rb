@@ -6,6 +6,4 @@ describe Highlight do
       expect( highlight.valid? ).to be false
     end
   end
-
-  
 end

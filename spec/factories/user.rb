@@ -1,8 +1,11 @@
+password = Faker::Internet.password
+
 FactoryGirl.define do
   factory :user do
     first_name Faker::Name.first_name
     email Faker::Internet.email
-    password Faker::Internet.password
+    password password
+    password_confirmation password
     last_name Faker::Name.last_name
     gender ['male','female'].sample
     birth_date Faker::Date.backward
@@ -35,7 +38,7 @@ FactoryGirl.define do
     trait :hides_address do
       hide_address true
     end
-    
+
   end
 
 
