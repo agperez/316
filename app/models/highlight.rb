@@ -13,9 +13,6 @@ class Highlight < ActiveRecord::Base
     title_changed?
   end
 
-  def tinyurl(url)
-    t = Tinyurl.new
-    t.shorten(url)
-  end
+
 
 end

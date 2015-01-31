@@ -10,9 +10,8 @@
   </center>
 </div>
 
-<div class="col-lg-12" style="float: left;"><a href="https://twitter.com/share" class="twitter-share-button" data-text="<%= @highlight.title %>" data-via="calvary316" data-size="large" data-url="<%= @highlight.tinyurl(highlight_url)%>" data-count="none" data-hashtags="Highlights">Tweet</a></div>
+<div class="col-lg-12" style="float: left;"><a href="https://twitter.com/share" class="twitter-share-button" data-text="<%= @highlight.title %>" data-via="calvary316" data-size="large" data-url="<%=highlights_url + "/" + @highlight.id.to_s %>" data-count="none" data-hashtags="Highlights">Tweet</a></div>
 <br />
-
 <h2>
   <div class="book-title" >
     <strong><center><%= @highlight.title %></center></strong>
