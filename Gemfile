@@ -8,12 +8,15 @@ gem 'foreman', '0.63', require: false
 gem 'rails', '4.0.1'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'bcrypt-ruby'
-gem 'faker', '1.1.2'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem 'rake', '~> 10.4.2'
 gem 'pg'
 gem 'pg_search'
+gem 'paperclip'
+gem 'aws-sdk'
+gem 'acts_as_list'
+
 
 group :development do
 	gem 'pry-rails'
@@ -21,16 +24,20 @@ group :development do
 	gem 'binding_of_caller'
 end
 
-gem 'paperclip'
-gem 'aws-sdk'
-
-gem 'acts_as_list'
-
 group :test, :development do
 	gem 'selenium-webdriver', '2.35.1'
 	gem 'rspec-rails', '~> 3.0'
-	gem 'capybara', '2.1.0'
+	gem 'factory_girl_rails', require: false
+	gem 'faker', '1.1.2'
+end
+
+group :test do
+	# SimpleCov reports on the amount your app is tested
 	gem 'simplecov', :require => false
+	# Capybara works with Rspec for feature testing
+	gem 'capybara', '2.1.0'
+	# Launchy allows for the use of the method "save_and_open_page" during feature testing
+	gem 'launchy'
 end
 
 # Use SCSS for stylesheets
