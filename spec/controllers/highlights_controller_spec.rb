@@ -34,4 +34,23 @@ describe HighlightsController, type: :controller do
   end
 
 
+  describe "GET SHOW" do
+
+    it "Responds & Redirects with a status of 301 when given a short url" do
+      highlight = create :highlight
+      get :show, id: highlight.id
+      expect(response).to redirect_to(highlight_url(highlight))
+      expect(response).to have_http_status(301)
+    end
+
+    focus "Respons with a status of 200 when givin a friendly url" do
+      highlight = create :highlight
+      get :show, id: highlight.slug
+
+      expect(response).to be_success
+      expect(response).to have_http_status(200)
+    end
+
+  end
+
 end
