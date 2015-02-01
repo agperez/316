@@ -3,6 +3,7 @@ require 'rails_helper'
 feature "Highlights" do
 
   context "Signed in as Admin" do
+
     before :each do
       user = create :user, :admin
       signin(user)
@@ -33,6 +34,21 @@ feature "Highlights" do
       expect( page ).to have_content("Edit")
     end
 
+    it "Allows for admins to view delete button for a highlight" do
+      highlight = create :highlight
+      visit highlight_path(highlight)
+      expect( page ).not_to have_content("Delete")
+    end
+
+    focus "Allows for admins to delete highlights" do
+      highlight = create :highlight
+      visit highlight_path(highlight)
+
+      click_link "Delete"
+      expect( page ).to have_content("Highlight successfully removed")
+      
+    end
+
     it "Allows for admins to edit a highlight" do
       old_highlight = create :highlight
       new_highlight = build :highlight
@@ -60,6 +76,12 @@ feature "Highlights" do
       highlight = create :highlight
       visit highlight_path(highlight)
       expect( page ).not_to have_content("Edit")
+    end
+
+    it "should normal users see the delete button for highlights" do
+      highlight = create :highlight
+      visit highlight_path(highlight)
+      expect( page ).not_to have_content("Delete")
     end
 
     it "should display a list of highlight objects" do

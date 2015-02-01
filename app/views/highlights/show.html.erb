@@ -4,7 +4,7 @@
     <% if signed_in? %>
     <% if current_user.admin?  %>
     <%= link_to '(Edit)', edit_highlight_path %>
-    <%= link_to '(delete)', highlight_path, method: :delete %>
+    <%= link_to '(Delete)', highlight_path, method: :delete %>
     <% end %>
     <% end %>
   </center>
