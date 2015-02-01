@@ -40,13 +40,13 @@ feature "Highlights" do
       expect( page ).not_to have_content("Delete")
     end
 
-    focus "Allows for admins to delete highlights" do
+    it "Allows for admins to delete highlights" do
       highlight = create :highlight
       visit highlight_path(highlight)
 
       click_link "Delete"
       expect( page ).to have_content("Highlight successfully removed")
-      
+
     end
 
     it "Allows for admins to edit a highlight" do
