@@ -56,6 +56,12 @@ feature "Highlights" do
       visit highlights_path
     end
 
+    it "should normal users see the edit button for highlights" do
+      highlight = create :highlight
+      visit highlight_path(highlight)
+      expect( page ).not_to have_content("Edit")
+    end
+
     it "should display a list of highlight objects" do
       visit highlights_path
       expect( page ).to have_css(".highlight", count: 2)
