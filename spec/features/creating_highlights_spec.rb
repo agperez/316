@@ -37,7 +37,7 @@ feature "Highlights" do
     it "Allows for admins to view delete button for a highlight" do
       highlight = create :highlight
       visit highlight_path(highlight)
-      expect( page ).not_to have_content("Delete")
+      expect( page ).to have_content("Delete")
     end
 
     it "Allows for admins to delete highlights" do
@@ -85,8 +85,13 @@ feature "Highlights" do
     end
 
     it "should display a list of highlight objects" do
+
+      5.times do
+        create :highlight
+      end
+
       visit highlights_path
-      expect( page ).to have_css(".highlight", count: 2)
+      expect( page ).to have_css(".highlight", count: 5)
     end
 
     it "Should not let you see create highlight" do

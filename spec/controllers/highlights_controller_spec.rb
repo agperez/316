@@ -32,4 +32,6 @@ describe HighlightsController, type: :controller do
       expect(assigns(:highlights).length).to eq(5)
     end
   end
+
+
 end
