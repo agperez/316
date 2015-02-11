@@ -3,7 +3,7 @@ class Highlight < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: :slugged
 
-  self.per_page = 5
+  self.per_page = 10
 
   def self.ordered(params)
     order("created_at DESC").paginate(page: params[:page])
