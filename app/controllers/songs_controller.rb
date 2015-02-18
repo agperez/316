@@ -1,5 +1,6 @@
 class SongsController < ApplicationController
   before_action :set_song, only: [:show, :edit, :update]
+  before_action :signed_in_user, only: [:destroy]
   before_action :admin_user,  only: [:new, :create, :edit, :destroy, :update]
 
   # GET /songs

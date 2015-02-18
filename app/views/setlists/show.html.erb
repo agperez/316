@@ -95,7 +95,6 @@
               <pre class="test_pre" id="chart_<%=song.id%>" data-key="<%=song.key%>">
               <%= simple_format(song.chart) %>
               </pre>
-            <% end %>
 
             <% elsif current_user.worship_role.name == "Instrumentalist" %>
               <pre class="test_pre_alt" id="chart_<%=song.id%>" data-key="<%=song.key%>">
@@ -111,6 +110,8 @@
               <pre class="test_pre" id="chart_<%=song.id%>" data-key="<%=song.key%>">
                 <%= simple_format(song.chart) %>
               </pre>
+            <% end %>
+
 
             <% end %>
 
