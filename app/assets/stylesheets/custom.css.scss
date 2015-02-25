@@ -13,6 +13,8 @@
 @-o-viewport        { width: device-width; }
 @viewport           { width: device-width; }
 
+
+
 .handle:hover {
   cursor: move;
 }
@@ -724,6 +726,10 @@ a.profile_link {
 
 .checkbox.privacy_container {
   margin-bottom: 20px;
+}
+
+.add_facebook_gif {
+  max-width: 360px;
 }
 
 .privacy_checkbox {
