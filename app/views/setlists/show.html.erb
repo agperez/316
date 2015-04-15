@@ -10,8 +10,7 @@
       <ul id="setlist_songs">
         <% if @set_songs %>
           <% @set_songs.each do |setlist_song| %>
-          <%= binding.pry %>
-            <li id="setlist_song_<%= setlist_song.id %>"><%= setlist_song.song.name %><span class="delete fa fa-times" onclick="delete_song(<%= setlist_song.id %>)"></span></li>
+            <li id="setlist_song_<%= setlist_song.id %>"><%= setlist_song.song.name %> <%= link_to 'Edit', edit_song_path(setlist_song.song) %><span class="delete fa fa-times" onclick="delete_song(<%= setlist_song.id %>)"></span></li>
           <% end %>
         <% end %>
       </ul>

@@ -66,20 +66,20 @@
 	<div class="email_content col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
 		<% if signed_in? %>
 			<% if current_user.admin? %>
-		<div class="user_heading">
-			Send the Church a prayer request
-		</div>
-		<%= form_for(EmailContent.new) do |f| %>
-		<%= f.hidden_field :email, :value => current_user.email %>
-		<%= f.hidden_field :origin, :value => "prayeremail" %>
-		<div class="form-group">
-			<%= f.text_area :text, {class: "form-control"} %>
-		</div>
-		<%= f.submit "Send", class: "btn btn-large btn-primary" %>
-		</div>
+				<div class="user_heading">
+					Send the Church a prayer request
+				</div>
+					<%= form_for(EmailContent.new) do |f| %>
+						<%= f.hidden_field :email, :value => current_user.email %>
+						<%= f.hidden_field :origin, :value => "prayeremail" %>
+							<div class="form-group">
+								<%= f.text_area :text, {class: "form-control"} %>
+							</div>
+						<%= f.submit "Send", class: "btn btn-large btn-primary" %>
+						</div>
+					<% end %>
+			<% end %>
 		<% end %>
-		<% end %>
-	<% end %>
 	</div>
 </div>
 

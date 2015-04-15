@@ -14,7 +14,7 @@ class Sermon < ActiveRecord::Base
 	end
 
 	def self.ordered(params)
-		where(published: [true, nil]).order("s_date DESC").paginate(page: params[:page])
+		where(published: [true, nil]).order("s_date DESC, verse_first ASC").paginate(page: params[:page])
 	end
 
 	def self.all_sermons
