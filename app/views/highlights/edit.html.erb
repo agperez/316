@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
+    <h1>Edit Highlight</h1>
+
+    <%= form_for(@highlight) do |f| %>
+
+    <%= render 'shared/error_messages', object: f.object %>
+
+    <div class="form-group">
+      <%= f.label :title %><br>
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
+    <br>
+    <div class="form-group">
+      <%= f.label :audio %><br>
+      <%= f.text_field :audio, class: "form-control" %>
+    </div>
+    <br>
+    <div class="form-group">
+      <%= f.label :video %><br>
+      <%= f.text_field :video, class: "form-control" %>
+    </div>
+    <br>
+    <div class="form-group">
+      <%= f.label :sermon_link %><br>
+      <%= f.text_field :sermon_link, class: "form-control" %>
+    </div>
+    <br>
+    <div class="form-group">
+      <%= f.label "Highlight Date" %><br>
+      <%= f.date_field :created_at, class: "form-control", id: "datepicker" %>
+    </div>
+    <br>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+    <% end %>
+    <br />
+    <%= link_to 'Back', highlight_path %>
+  </div>
+</div>
