@@ -1,4 +1,3 @@
-
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -12,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141209160011) do
+ActiveRecord::Schema.define(version: 20150130224151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +35,30 @@ ActiveRecord::Schema.define(version: 20141209160011) do
 
   add_index "events", ["role_id"], name: "index_events_on_role_id", using: :btree
   add_index "events", ["team_id"], name: "index_events_on_team_id", using: :btree
+
+  create_table "friendly_id_slugs", force: true do |t|
+    t.string   "slug",                      null: false
+    t.integer  "sluggable_id",              null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope"
+    t.datetime "created_at"
+  end
+
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "highlights", force: true do |t|
+    t.string   "title"
+    t.string   "video"
+    t.string   "audio"
+    t.datetime "created_at"
+    t.string   "sermon_link"
+    t.string   "slug"
+  end
+
+  add_index "highlights", ["slug"], name: "index_highlights_on_slug", using: :btree
 
   create_table "ministries", force: true do |t|
     t.string   "name"
@@ -159,124 +182,3 @@ ActiveRecord::Schema.define(version: 20141209160011) do
   end
 
 end
-=======
-# encoding: UTF-8
-# This file is auto-generated from the current state of the database. Instead
-# of editing this file, please use the migrations feature of Active Record to
-# incrementally modify your database, and then regenerate this schema definition.
-#
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
-#
-# It's strongly recommended that you check this file into your version control system.
-
-ActiveRecord::Schema.define(version: 20150130224151) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "email_contents", force: true do |t|
-    t.string "email"
-    t.text   "text"
-    t.string "origin"
-    t.string "recipient"
-  end
-
-  create_table "events", force: true do |t|
-    t.integer  "user_id"
-    t.datetime "event_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "team_id"
-    t.integer  "role_id"
-    t.boolean  "exception"
-  end
-
-  add_index "events", ["role_id"], name: "index_events_on_role_id", using: :btree
-  add_index "events", ["team_id"], name: "index_events_on_team_id", using: :btree
-
-  create_table "friendly_id_slugs", force: true do |t|
-    t.string   "slug",                      null: false
-    t.integer  "sluggable_id",              null: false
-    t.string   "sluggable_type", limit: 50
-    t.string   "scope"
-    t.datetime "created_at"
-  end
-
-  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
-  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
-
-  create_table "highlights", force: true do |t|
-    t.string   "title"
-    t.string   "video"
-    t.string   "audio"
-    t.datetime "created_at"
-    t.string   "sermon_link"
-    t.string   "slug"
-  end
-
-  add_index "highlights", ["slug"], name: "index_highlights_on_slug", using: :btree
-
-  create_table "ministries", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "notes", force: true do |t|
-    t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
-    t.integer  "sermon_id"
-  end
-
-  add_index "notes", ["sermon_id"], name: "index_notes_on_sermon_id", using: :btree
-  add_index "notes", ["user_id"], name: "index_notes_on_user_id", using: :btree
-
-  create_table "roles", force: true do |t|
-    t.string  "name"
-    t.string  "color"
-    t.integer "order"
-    t.string  "text_color"
-  end
-
-  create_table "sermons", force: true do |t|
-    t.string   "book"
-    t.integer  "chapter"
-    t.integer  "verse_first"
-    t.integer  "verse_last"
-    t.string   "video"
-    t.string   "audio"
-    t.string   "speaker"
-    t.date     "s_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.text     "outline"
-    t.text     "link"
-    t.integer  "chapter_last"
-    t.string   "announcements"
-    t.boolean  "published"
-    t.string   "tags"
-  end
-
-  create_table "setlist_songs", force: true do |t|
-    t.integer  "setlist_id"
-    t.integer  "song_id"
-    t.datetime "setlist_songs_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "position"
-    t.string   "altkey"
-  end
-
-  create_table "setlists", force: true do |t|
-    t.date     "date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
