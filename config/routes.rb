@@ -4,7 +4,7 @@ SampleApp::Application.routes.draw do
   resources :setlists
   resources :songs
   resources :email_contents
-
+  resources :highlights
   resources :sermons
   resources :events
   resources :roles
