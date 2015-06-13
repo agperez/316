@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <p style="font-size: 18px">
+      Hi <%= @user.first_name %>,<br>
+      You are scheduled to serve at Calvary316 on the following dates.<br>
+    </p>
   </head>
   <body>
     <div>
-      <h1>
         <div class="upcoming_events">
           <% @events.each do |event| %>
             <div class="user_upcoming_dates">
-              <%=event.event_date.strftime("%B %d, %Y")%> - <span style="color:<%=event.role.color%>;"><%= event.role.name %></span>
+              <p style="font-size: 18px">
+              <%=event.event_date.strftime("%B %d, %Y")%> - on the <span style="color:<%=event.role.color%>;"><%= event.role.name %></span>
+              </p>
             </div>
           <% end %>
         </div>
-      </h1>
+      <p style="font-size: 18px">
+        If you need to reschedule please feel free to let me know!
+      </p>
     </div>
   </body>
 </html>

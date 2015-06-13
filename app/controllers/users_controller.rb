@@ -74,6 +74,9 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def editpersonal
+  end
+
   def deactivated
     @deactivated_users = User.deactivated
   end

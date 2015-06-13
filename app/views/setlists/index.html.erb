@@ -10,18 +10,30 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @setlists.each do |setlist| %>
-      <tr>
-        <td><%= setlist.date %></td>
-        <td><%= link_to 'Show', setlist %></td>
-        <td><%= link_to 'Edit', edit_setlist_path(setlist) %></td>
-        <td><%= link_to 'Destroy', setlist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
+    <tbody>
+      <% @setlists.each do |setlist| %>
+        <tr>
+          <td><%= setlist.date %></td>
+            <% if setlist == Setlist.last %>
+              <% setlist.songs.each do |song| %>
+                <td><%= song.name %></td>
+              <% end %>
+            <% end %>
+          <td><%= link_to 'Show', setlist %></td>
+          <% if signed_in? %>
+            <% if current_user.admin? %>
+          <td><%= link_to 'Edit', edit_setlist_path(setlist) %></td>
+          <td><%= link_to 'Destroy', setlist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Setlist', new_setlist_path %>
+<% if signed_in? %>
+  <% if current_user.admin? %>
+    <%= link_to 'New Setlist', new_setlist_path %>
+  <% end %>
+<% end %>
