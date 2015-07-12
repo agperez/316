@@ -5,6 +5,7 @@
     <h4><%= link_to song.name, song %></h4>
   <% end %>
   <% if signed_in? && current_user.admin? %>
-      <h5><%= link_to 'New Setlist', new_setlist_path %></h5>
+    <br>
+    <h5><%= link_to 'New Setlist', new_setlist_path %> | <%= link_to 'Archive', setlist_archive_path %></h5>
   <% end %>
 </div>
