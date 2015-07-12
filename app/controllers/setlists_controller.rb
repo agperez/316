@@ -1,7 +1,7 @@
 class SetlistsController < ApplicationController
   before_action :signed_in_user
   before_action :setlists_by_date, only: [:index, :archive]
-  before_action :set_setlist, only: [:show, :edit, :update]
+  before_action :set_setlist, only: [:show, :edit, :update, :destroy]
   before_action :admin_user,  only: [:new, :create, :destroy]
 
 
