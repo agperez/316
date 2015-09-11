@@ -1,13 +1,18 @@
 class SetlistsController < ApplicationController
   before_action :signed_in_user
-  before_action :set_setlist, only: [:show, :edit, :update]
+  before_action :setlists_by_date, only: [:index, :archive]
+  before_action :set_setlist, only: [:show, :edit, :update, :destroy]
   before_action :admin_user,  only: [:new, :create, :destroy]
 
 
   # GET /setlists
   # GET /setlists.json
   def index
-    @setlists = Setlist.all
+    @setlist = @setlists.last
+    @songs = @setlist.songs
+  end
+
+  def archive
   end
 
   # GET /setlists/1
@@ -67,6 +72,10 @@ class SetlistsController < ApplicationController
   end
 
   private
+
+    def setlists_by_date
+      @setlists = Setlist.order(:date)
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_setlist
       @setlist = Setlist.find(params[:id])

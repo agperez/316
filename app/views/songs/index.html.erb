@@ -3,33 +3,25 @@
       <h1>Songs</h1>
       <%= link_to 'New Song', new_song_path %>
   </div>
-
-  <div class="col-lg-offset-2">
-    <div class="col-lg-6">
-      Name
-    </div>
+  <div class="row">
+  <div class="col-lg-4 col-lg-offset-2">
   </div>
-    <div class="col-lg-2">
-      Key
+  <div class="col-lg-4">
+    Song
+  </div>
+  </div>
+  <div class="row">
+  <% @songs.each do |song| %>
+    <div class="song_options col-lg-4 col-lg-offset-2">
+      <%= link_to 'Show', song %>
+      <% if signed_in? && current_user.admin? %>
+        <%= link_to 'Edit', edit_song_path(song) %>
+        <%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
     </div>
-    <div class="col-lg-1">
-      Options
+    <div class="col-lg-4">
+      <%= song.name %>
     </div>
-          <% @songs.order('name DESC').each do |song| %>
-            <div class="col-lg-5 col-lg-offset-2">
-              <%= song.name %>
-            </div>
-            <div class="col-lg-2">
-              <%= song.key %>
-            </div>
-            <div class="col-lg-2">
-              <%= link_to 'Show', song %>
-              <% if signed_in? %>
-                <% if current_user.admin? %>
-              <%= link_to 'Edit', edit_song_path(song) %>
-              <%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' } %></br>
-                <% end %>
-              <% end %>
-            </div>
-          <% end %>
+  <% end %>
+  </div>
 </body>

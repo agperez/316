@@ -1,0 +1,10 @@
+<center>
+  <%= will_paginate @highlights, :inner_window => 1 %>
+</center>
+<% @highlights.each do |highlight| %>
+  <%= link_to(highlight) do %>
+    <button type="button" class="btn btn-default btn-lg btn-block">
+      <span id="index_list_name"> <em><%= highlight.title %></em></span>
+    </button>
+  <% end %>
+<% end %>

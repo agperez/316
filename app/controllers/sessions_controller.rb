@@ -9,11 +9,7 @@ class SessionsController < ApplicationController
 				redirect_to inactive_path(id: user.id)
 			else
 				sign_in user
-				if user.admin?
-					redirect_to dashboard_url
-				else
-					redirect_back_or user
-				end
+				redirect_back_or user
 			end
 		else
 			flash.now[:error] = 'Invalid email/password combination'

@@ -8,6 +8,7 @@ gem 'foreman', '0.63', require: false
 gem 'rails', '4.0.1'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'bcrypt-ruby'
+gem 'friendly_id'
 gem 'faker', '1.1.2'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
@@ -15,7 +16,9 @@ gem 'rake', '~> 10.4.2'
 gem 'pg'
 gem 'pg_search'
 gem 'pry-rails'
-
+gem 'better_errors'
+gem 'binding_of_caller'
+gem 'rollbar', '~> 1.5.3'
 gem 'paperclip'
 gem 'aws-sdk'
 

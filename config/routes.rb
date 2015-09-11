@@ -4,7 +4,7 @@ SampleApp::Application.routes.draw do
   resources :setlists
   resources :songs
   resources :email_contents
-
+  resources :highlights
   resources :sermons
   resources :events
   resources :roles
@@ -29,6 +29,8 @@ SampleApp::Application.routes.draw do
   match '/tag_search', to: 'sermons#tag_search', via: 'get'
   match '/archive', to: 'sermons#archive', via: 'get'
   match '/manage', to: 'sermons#manage', via: 'get'
+
+  match '/setlist_archive', to: 'setlists#archive', via: 'get'
 
   match '/us', to: 'users#us', via: 'get'
   match '/notesmail', to: 'notes#notes_email', via: 'get'
