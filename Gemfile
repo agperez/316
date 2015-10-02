@@ -20,7 +20,8 @@ gem 'better_errors'
 gem 'binding_of_caller'
 gem 'rollbar', '~> 1.5.3'
 gem 'paperclip'
-gem 'aws-sdk'
+gem 'aws-sdk', '~> 1'
+gem 'aws-sdk-resources', '~> 2'
 
 gem 'acts_as_list'
 

@@ -1,6 +1,8 @@
 class StaticPagesController < ApplicationController
   before_action :signed_in_user, only: :dashboard
-  before_action :admin_user,    only: :dashboard
+  before_action :director_user,  only: :dashboard 
+  #before_action :admin_user,     only: :dashboard
+
 
   def email
     @date1 = Time.now
@@ -38,15 +40,15 @@ class StaticPagesController < ApplicationController
 
   private
 
-    def first_letters
-      previous_letter = ""
-      @users.active.each do |user|
-        letter = user.first_name[0].downcase
-        unless letter == previous_letter
-          @filters.push letter
-        end
-        previous_letter = letter
+  def first_letters
+    previous_letter = ""
+    @users.active.each do |user|
+      letter = user.first_name[0].downcase
+      unless letter == previous_letter
+        @filters.push letter
       end
+      previous_letter = letter
     end
+  end
 
 end

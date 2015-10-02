@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   before_action :admin_user, 		  only: [:index, :destroy, :import, :deactivated]
   before_action :correct_user, 		only: [:show, :edit, :update, :picture]
   before_action :not_signed_in,   only:  :new
-  before_action :admin_user, 		  only: [:index, :destroy, :import, :deactivated]
 
   def new
   	@user = User.new

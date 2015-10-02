@@ -2,7 +2,7 @@ class RolesController < ApplicationController
   before_action :set_role,        only: [:show, :edit, :update, :destroy]
   before_action :set_calendar,    only: [:calendar2, :calendarAll]
   before_action :signed_in_user,  only: [:index, :show, :new, :calendar2, :edit, :create, :update, :destroy]
-  before_action :admin_user,      only: [:index, :show, :new, :calendar2, :edit, :create, :update, :destroy]
+  before_action :director_user,      only: [:index, :show, :new, :calendar2, :edit, :create, :update, :destroy]
 
   # GET /roles
   # GET /roles.json
