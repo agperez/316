@@ -11,8 +11,10 @@ class SermonsController < ApplicationController
   def archive
     if params[:book]
       @ordered_sermons = Sermon.text_search(params[:book]).ordered(params)
+      @url = url_helper
     elsif params[:tags]
-      @ordered_sermons = Sermon.search_by_tag(params[:tags]).ordered(params)
+      @ordered_sermons = Sermon.search_by_tag(params[:tags].gsub("-", " ")).ordered(params)
+      @url = url_helper
     else
       @ordered_sermons = Sermon.all.ordered(params)
     end
@@ -75,6 +77,13 @@ class SermonsController < ApplicationController
       @sermon = Sermon.find(params[:id])
     end
 
+    def url_helper
+      if params[:tags]
+        return request.env["HTTP_HOST"] + request.path + "?tags=#{params[:tags].parameterize}"
+      else
+        return request.env["HTTP_HOST"] + request.path + "?book=#{params[:book].parameterize}"
+      end
+    end
 
     def all_sermons
       @sermons = Sermon.all_sermons
