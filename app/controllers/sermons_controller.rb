@@ -10,10 +10,10 @@ class SermonsController < ApplicationController
 
   def archive
     if params[:book]
-      @ordered_sermons = Sermon.text_search(params[:book]).ordered(params).order("s_date DESC")
+      @ordered_sermons = Sermon.text_search(params[:book]).ordered(params)
       @url = url_helper
     elsif params[:tags]
-      @ordered_sermons = Sermon.search_by_tag(params[:tags].gsub("-", " ")).ordered(params).order("s_date DESC")
+      @ordered_sermons = Sermon.search_by_tag(params[:tags].gsub("-", " ")).ordered(params)
       @url = url_helper
     else
       @ordered_sermons = Sermon.all.ordered(params)
