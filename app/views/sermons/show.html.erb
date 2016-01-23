@@ -8,9 +8,9 @@
 </h1>
 <p>
   <div class="video">
-    
+
     <iframe src="http://player.vimeo.com/video/<%= @sermon.video %>?title=0&amp;byline=0&amp;portrait=0" width="400" height="225" frameborder="0"></iframe>
-    
+
   </div>
 </p>
 
@@ -35,9 +35,9 @@
       <div class="audio">
         <center><em>
           <%= link_to "Announcements", @sermon.announcements %>
-        </em></center>      
+        </em></center>
       </div>
-    </h2> 
+    </h2>
   <% end %>
 <% else %>
   <h4>
@@ -76,7 +76,7 @@
   </center>
 </div>
 <br>
-<div class="aboutme col-lg-8 col-lg-offset-2">
+<div class="aboutme col-lg-8 col-lg-offset-2" id="outline">
   <p>
     <%= simple_format(@sermon.outline) %>
   </p>
