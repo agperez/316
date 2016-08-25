@@ -3,6 +3,6 @@ class ScheduleMailer < ActionMailer::Base
   def schedule_email(user, events)
   	@user = user
   	@events = events
-  	mail(to: @user.email, subject: "Up coming service dates")
+  	mail(to: @user.email, subject: "Upcoming service dates")
   end
 end
