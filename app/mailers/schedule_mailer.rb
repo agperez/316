@@ -1,5 +1,5 @@
 class ScheduleMailer < ActionMailer::Base
-  default from: "creightonvaughn@gmail.com"
+  default from: "zachgadams@gmail.com"
   def schedule_email(user, events)
   	@user = user
   	@events = events
