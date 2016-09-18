@@ -244,6 +244,19 @@
 
   });
 
+  // Arrow keyboard shortcuts for swipe
+  document.onkeyup=function(e){
+		var e = e || window.event; // for IE to cover IEs window object
+    if(e.which == 37) {
+         mySwipe.prev();
+         return false;
+    }
+    if(e.which == 39) {
+         mySwipe.next();
+         return false;
+    }
+  }
+
   $(document).ready(sort_list);
 
 </script>
