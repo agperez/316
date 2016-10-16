@@ -27,7 +27,6 @@ class SongsController < ApplicationController
   # POST /songs.json
   def create
     @song = Song.new(song_params)
-
     respond_to do |format|
       if @song.save
         format.html { redirect_to @song }
@@ -38,6 +37,7 @@ class SongsController < ApplicationController
         format.json { render json: @song.errors, status: :unprocessable_entity }
       end
     end
+    chartregex(@song)
   end
 
   # PATCH/PUT /songs/1
@@ -64,6 +64,22 @@ class SongsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def chartregex(song)
+      splitlyrics = @song.chart.split("\r")
+      chords = []
+      chordregex = /([A-G][b\#]?(2|5|6|7|9|11|13|6\/9|7\-5|7\-9|7\#5|7\#9|7\+5|7\+9|7b5|7b9|7sus2|7sus4|add2|add4|add9|aug|dim|dim7|m\/maj7|m6|m7|m7b5|m9|m11|m13|maj7|maj9|maj11|maj13|mb5|m|sus|sus2|sus4|)*(\-)*)/
+      splitlyrics.each_with_index do |index|
+        if chordregex.match(index)
+            chords.push(index)
+            splitlyrics.delete(index)
+        end
+      end
+    @song.lyrics = splitlyrics.join
+    @song.chart_alt = chords.join
+    @song.save
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
