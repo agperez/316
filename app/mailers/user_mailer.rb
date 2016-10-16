@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "creightonvaughn@gmail.com"
+  default from: "zachgadams@gmail.com"
   def reminder_email(user, event)
   	@user = user
   	@event = event

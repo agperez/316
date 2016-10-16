@@ -1,5 +1,5 @@
 class ContactMailer < ActionMailer::Base
-  default from: "creightonvaughn@gmail.com"
+  default from: "zachgadams@gmail.com"
   def contact_email(user)
     @email_content = EmailContent.last
     @recipient = User.find_by_email(@email_content.recipient)

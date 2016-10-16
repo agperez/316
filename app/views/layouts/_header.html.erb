@@ -28,6 +28,7 @@
             <% end %>
             <li><%= link_to "Sermon Archive", archive_path %></li>
             <li><%= link_to "Highlights", highlights_path %></li>
+            <li><%= link_to "Podcast", "https://itunes.apple.com/podcast/zach-adams/id331453358" %></li>
 
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -54,7 +55,7 @@
                     <li><%= link_to "Change My Picture", picture_user_path(current_user) %></li>
                   <% unless current_user.worship_role_id == nil %>
                     <li><%= link_to "Setlists", setlists_path %></li>
-                  <% end %>  
+                  <% end %>
                     <li class="divider"></li>
                     <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
                   </ul>

@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require highlight_and_share
 //= require_tree .
 
 $.ajaxSetup({
@@ -41,4 +42,7 @@ $(function () {
 
   });
 
+});
+$(document).ready(function(){
+  $("#outline").hish();
 });

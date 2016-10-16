@@ -5,16 +5,19 @@ class Sermon < ActiveRecord::Base
 	include PgSearch
 	pg_search_scope :search, against: [:book, :chapter],
 		using: {tsearch: {dictionary: "english"}}
+		# ranked_by: "sermons.s_date DESC"
+		# order_within_rank: "sermons.s_date DESC"
 
 	pg_search_scope :search_by_tag, against: :tags,
 		using: {tsearch: {dictionary: "english"}}
+
 
 	def self.recent
 		where(published: [true, nil]).order("s_date DESC").limit(5)
 	end
 
 	def self.ordered(params)
-		where(published: [true, nil]).order("s_date DESC, verse_first ASC").paginate(page: params[:page])
+		where(published: [true, nil]).reorder("s_date DESC").paginate(page: params[:page])
 	end
 
 	def self.all_sermons

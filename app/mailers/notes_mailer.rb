@@ -1,5 +1,5 @@
 class NotesMailer < ActionMailer::Base
-  default from: "creightonvaughn@gmail.com"
+  default from: "zachgadams@gmail.com"
   def notes_mailer(user)
   	@user = user
   	@note = @user.notes.last
