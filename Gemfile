@@ -21,6 +21,7 @@ gem 'aws-sdk', '~> 1'
 gem 'aws-sdk-resources', '~> 2'
 
 gem 'acts_as_list'
+gem "recaptcha", require: "recaptcha/rails"
 
 group :test do
 	gem 'selenium-webdriver', '2.35.1'
