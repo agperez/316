@@ -5,8 +5,6 @@ class Sermon < ActiveRecord::Base
 	include PgSearch
 	pg_search_scope :search, against: [:book, :chapter],
 		using: {tsearch: {dictionary: "english"}}
-		# ranked_by: "sermons.s_date DESC"
-		# order_within_rank: "sermons.s_date DESC"
 
 	pg_search_scope :search_by_tag, against: :tags,
 		using: {tsearch: {dictionary: "english"}}
@@ -27,12 +25,9 @@ class Sermon < ActiveRecord::Base
 	def self.text_search(query)
     if query.present?
       search(query)
-			#where("to_tsvector('english', book) @@ :q or to_tsvector('english', outline) @@ :q", q: query)
     else
       all
     end
 	end
-
-
 
 end
