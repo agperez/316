@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150130224151) do
+ActiveRecord::Schema.define(version: 20161207042739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,26 @@ ActiveRecord::Schema.define(version: 20150130224151) do
   end
 
   add_index "highlights", ["slug"], name: "index_highlights_on_slug", using: :btree
+
+  create_table "media", force: true do |t|
+    t.string   "book"
+    t.integer  "chapter"
+    t.integer  "verse_first"
+    t.integer  "verse_last"
+    t.string   "video"
+    t.string   "audio"
+    t.string   "speaker"
+    t.date     "s_date"
+    t.text     "outline"
+    t.text     "link"
+    t.integer  "chapter_last"
+    t.string   "announcements"
+    t.boolean  "published"
+    t.string   "tags"
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "ministries", force: true do |t|
     t.string   "name"
