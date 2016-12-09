@@ -1,5 +1,6 @@
 SampleApp::Application.routes.draw do
 
+  resources :outlaw, controller: :media
   resources :notes
   resources :setlists
   resources :songs
