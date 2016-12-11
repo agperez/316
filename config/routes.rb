@@ -1,6 +1,6 @@
 SampleApp::Application.routes.draw do
 
-  resources :outlaw_radio, controller: :radio
+  resources :outlaw_radio, controller: :radio, as: :radio
   resources :notes
   resources :setlists
   resources :songs

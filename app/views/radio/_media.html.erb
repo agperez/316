@@ -2,7 +2,7 @@
   <%= will_paginate @media, :inner_window => 1 %>
 </center>
 <% @media.each do |medium| %>
-  <%= link_to(medium) do %>
+  <%= link_to(radio_path(medium)) do %>
     <button type="button" class="btn btn-default btn-lg btn-block">
       <span id="index_list_name"> <em><%= medium.title %></em></span>
     </button>
