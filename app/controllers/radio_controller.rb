@@ -17,7 +17,7 @@ class RadioController < ApplicationController
   end
 
   def update
-    if @medium.update_attributes(medium_radio_params)
+    if medium.update_attributes(medium_radio_params)
       render :show
       flash[:success] = "Radio successfully updated"
     else
@@ -27,12 +27,12 @@ class RadioController < ApplicationController
   end
 
   def destroy
-    if @medium.delete
-      render :show
+    if medium.delete
+      render :index
       flash[:success] = "Radio successfully deleted"
     else
       flash[:success] = @medium.errors.full_messages
-      redirect_to edit_radio_path(@medium)
+      redirect_to radio_path(@medium)
     end
   end
 

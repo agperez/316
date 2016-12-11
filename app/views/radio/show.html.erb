@@ -4,7 +4,7 @@
     <% if signed_in? %>
       <% if current_user.admin?  %>
         <%= link_to '(Edit)', edit_radio_path(@medium) %>
-        <%= link_to '(delete)', radio_path, method: :delete %>
+        <%= link_to '(delete)', radio_path(@medium), method: :delete %>
       <% end %>
     <% end %>
   </center>
