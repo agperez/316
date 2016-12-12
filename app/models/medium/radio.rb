@@ -1,7 +1,7 @@
 class Medium::Radio < Medium
 
   def title
-    "Episode 0#{episode_number}"
+    "Episode #{episode_number}"
   end
 
   def self.ordered(params)
