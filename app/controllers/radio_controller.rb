@@ -39,7 +39,7 @@ class RadioController < ApplicationController
   private
 
   def medium
-    @medium ||= Medium::Radio.find params[:id]
+    @medium ||= Medium::Radio.friendly.find params[:id]
   end
 
   def medium_radio_params
