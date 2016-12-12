@@ -43,7 +43,7 @@ class RadioController < ApplicationController
   end
 
   def medium_radio_params
-    params[:medium_radio].permit(:s_date, :outline, :title, :audio)
+    params[:medium_radio].permit(:s_date, :outline, :title, :audio, :episode_number)
   end
 
 
