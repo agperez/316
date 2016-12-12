@@ -13,6 +13,4 @@ class Highlight < ActiveRecord::Base
     title_changed?
   end
 
-
-
 end

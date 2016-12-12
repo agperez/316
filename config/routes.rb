@@ -1,5 +1,6 @@
 SampleApp::Application.routes.draw do
 
+  resources :outlaw_radio, controller: :radio, as: :radio
   resources :notes
   resources :setlists
   resources :songs
@@ -21,7 +22,6 @@ SampleApp::Application.routes.draw do
   resources :setlist_songs do
     post :sort, on: :collection
   end
-
 
   resources :sessions, only: [:new, :create, :destroy]
   root 'sermons#index'
