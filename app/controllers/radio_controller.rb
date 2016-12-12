@@ -28,7 +28,7 @@ class RadioController < ApplicationController
 
   def destroy
     if medium.delete
-      render :index
+      redirect_to radio_index_path
       flash[:success] = "Radio successfully deleted"
     else
       flash[:success] = @medium.errors.full_messages
