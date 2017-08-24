@@ -23,10 +23,6 @@ gem 'aws-sdk-resources', '~> 2'
 gem 'acts_as_list'
 gem "recaptcha", require: "recaptcha/rails"
 
-group :development do
-  gem 'rails_real_favicon'
-end
-
 group :test do
 	gem 'selenium-webdriver', '2.35.1'
 	gem 'rspec-rails', '2.13.1'
