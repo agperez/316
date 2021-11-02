@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
 ruby '2.2.0'
 
-gem 'foreman', '0.61'
-gem 'rails', '4.0.1'
+gem 'foreman'
+gem 'rails', '4.2.11.3'
+gem 'nokogiri', "1.7.1"
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'bcrypt-ruby'
 gem 'friendly_id'
