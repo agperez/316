@@ -17,8 +17,10 @@ gem 'better_errors'
 gem 'binding_of_caller'
 gem 'rollbar', '~> 1.5.3'
 gem 'paperclip'
-gem 'aws-sdk', '1.66.0'
-gem 'aws-sdk-resources', '2.0.23'
+gem 'aws-sdk'
+gem 'aws-sdk-core'
+gem 'aws-sdk-s3'
+gem 'aws-sdk-resources'
 
 gem 'acts_as_list'
 gem "recaptcha", require: "recaptcha/rails"
