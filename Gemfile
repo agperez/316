@@ -3,7 +3,7 @@ ruby '2.6.0'
 
 gem 'foreman'
 gem 'rails', '4.2.11.3'
-gem 'nokogiri', "1.7.1"
+gem 'nokogiri'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'bcrypt-ruby'
 gem 'friendly_id'
@@ -13,7 +13,6 @@ gem 'bootstrap-will_paginate', '0.0.9'
 gem 'rake', '~> 10.4.2'
 gem 'pg', '0.18.4'
 gem 'pg_search'
-gem 'pry-rails'
 gem 'better_errors'
 gem 'binding_of_caller'
 gem 'rollbar', '~> 1.5.3'
@@ -25,6 +24,7 @@ gem 'acts_as_list'
 gem "recaptcha", require: "recaptcha/rails"
 
 group :development do
+  gem 'pry-rails'
   gem 'rails_real_favicon'
 end
 
@@ -38,7 +38,7 @@ gem 'sass-rails', '4.0.1'
 gem 'uglifier', '2.1.1'
 gem 'coffee-rails', '4.0.1'
 gem 'jquery-rails', '3.0.4'
-gem 'turbolinks', '1.1.1'
+gem 'turbolinks'
 gem 'jquery-turbolinks'
 
 gem 'jbuilder', '1.0.2'
