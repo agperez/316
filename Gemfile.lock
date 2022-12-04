@@ -1623,37 +1623,37 @@ DEPENDENCIES
   bcrypt-ruby
   better_errors
   binding_of_caller
-  bootstrap-sass (= 2.3.2.0)
-  bootstrap-will_paginate (= 0.0.9)
-  capybara (= 2.1.0)
-  coffee-rails (= 4.0.1)
-  faker (= 1.1.2)
+  bootstrap-sass
+  bootstrap-will_paginate
+  capybara
+  coffee-rails
+  faker
   foreman
   friendly_id
-  jbuilder (= 1.0.2)
-  jquery-rails (= 3.0.4)
+  jbuilder
+  jquery-rails
   jquery-turbolinks
   nokogiri
   paperclip
-  pg (= 0.18.4)
+  pg
   pg_search
   pry-rails
   rails (~> 4.2.11.3)
-  rails_12factor (= 0.0.2)
+  rails_12factor
   rails_real_favicon
-  rake (~> 10.4.2)
+  rake
   recaptcha
-  rollbar (~> 1.5.3)
-  rspec-rails (= 2.13.1)
-  sass-rails (= 4.0.1)
-  sdoc (= 0.3.20)
-  selenium-webdriver (= 2.35.1)
+  rollbar
+  rspec-rails
+  sass-rails
+  sdoc
+  selenium-webdriver
   turbolinks
-  uglifier (= 2.1.1)
-  will_paginate (= 3.0.4)
+  uglifier
+  will_paginate
 
 RUBY VERSION
    ruby 3.1.0p0
 
 BUNDLED WITH
-   1.17.2
+   2.3.26
