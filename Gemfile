@@ -1,21 +1,22 @@
 source 'https://rubygems.org'
-ruby '2.6.0'
+ruby '3.1.0'
+
+plugin 'bootboot'
 
 gem 'foreman'
-gem 'rails', '4.2.11.3'
 gem 'nokogiri'
-gem 'bootstrap-sass', '2.3.2.0'
+gem 'bootstrap-sass'
 gem 'bcrypt-ruby'
 gem 'friendly_id'
-gem 'faker', '1.1.2'
-gem 'will_paginate', '3.0.4'
-gem 'bootstrap-will_paginate', '0.0.9'
-gem 'rake', '~> 10.4.2'
-gem 'pg', '0.18.4'
+gem 'faker'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
+gem 'rake'
+gem 'pg'
 gem 'pg_search'
 gem 'better_errors'
 gem 'binding_of_caller'
-gem 'rollbar', '~> 1.5.3'
+gem 'rollbar'
 gem 'paperclip'
 gem 'aws-sdk'
 gem 'aws-sdk-core'
@@ -31,24 +32,36 @@ group :development do
 end
 
 group :test do
-	gem 'selenium-webdriver', '2.35.1'
-	gem 'rspec-rails', '2.13.1'
-	gem 'capybara', '2.1.0'
+	gem 'selenium-webdriver'
+	gem 'rspec-rails'
+	gem 'capybara'
 end
 
-gem 'sass-rails', '4.0.1'
-gem 'uglifier', '2.1.1'
-gem 'coffee-rails', '4.0.1'
-gem 'jquery-rails', '3.0.4'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
+gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jquery-turbolinks'
 
-gem 'jbuilder', '1.0.2'
+gem 'jbuilder'
 
 group :doc do
-  gem 'sdoc', '0.3.20', require: false
+  gem 'sdoc', require: false
 end
 
 group :production do
-	gem 'rails_12factor', '0.0.2'
+	gem 'rails_12factor'
+end
+
+Plugin.send(:load_plugin, 'bootboot') if Plugin.installed?('bootboot')
+
+if ENV['DEPENDENCIES_NEXT']
+  enable_dual_booting if Plugin.installed?('bootboot')
+  gem "rails", "~> 5.2.0"
+  # Add any gem you want here, they will be loaded only when running
+  # bundler command prefixed with `DEPENDENCIES_NEXT=1`.
+
+else 
+	gem "rails", "~> 4.2.11.3"
 end
